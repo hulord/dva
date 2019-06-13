@@ -31,6 +31,8 @@ import CSSAnimate from './UI/CSSAnimate';
 import Alerts from './UI/Alerts';
 import Button from './UI/Button';
 import CRUD from './Business/CRUD';
+/**首页 */
+import Index from './Index/index';
 
 /**
  *     主路由配置
@@ -55,6 +57,15 @@ const routesConfig = app => [
   },
   {
     path: '/',
+    title: '前台页面',
+    indexRoute: '/index',
+    component: UserLayout,
+    childRoutes: [
+      Index(app),
+    ]
+  },
+  {
+    path: '/admin',
     title: '系统中心',
     component: BasicLayout,
     indexRoute: '/dashboard',
