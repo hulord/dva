@@ -3,7 +3,7 @@ import dva from 'dva';
 import dynamic from 'dva/dynamic';
 import createLoading from 'dva-loading';
 import { Router } from 'dva/router';
-import createHistory from 'history/createHashHistory';
+import createHistory from 'history/createBrowserHistory';
 import request from 'cmn-utils/lib/request';
 import createRoutes from '@/routes';
 import 'assets/styles/index.less';
@@ -16,9 +16,7 @@ import * as serviceWorker from './serviceWorker';
 
 // -> 初始化
 const app = dva({
-  history: createHistory({
-    basename: homepage
-  })
+  history: createHistory()
 });
 
 // -> 插件
