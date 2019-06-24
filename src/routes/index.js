@@ -32,7 +32,7 @@ import Alerts from './UI/Alerts';
 import Button from './UI/Button';
 import CRUD from './Business/CRUD';
 /**首页 */
-import Index from './Index/index';
+import Index from './Index/Home';
 
 /**
  *     主路由配置
@@ -58,8 +58,8 @@ const routesConfig = app => [
   {
     path: '/',
     title: '前台页面',
-    indexRoute: '/index',
-    component: UserLayout,
+    indexRoute: '',
+    component: BasicLayout,
     childRoutes: [
       Index(app),
     ]
