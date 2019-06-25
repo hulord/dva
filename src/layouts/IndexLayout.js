@@ -206,6 +206,7 @@ export default class IndexLayout extends PureComponent {
 
     return (
       <Layout className={classnames}>
+        <Layout className="container">
         <Header>
           <NavBar2
               collapsed={collapsedLeftSide}
@@ -217,8 +218,8 @@ export default class IndexLayout extends PureComponent {
               isMobile={isMobile}
             />
         </Header>      
-        <Layout>
-          <Content>
+        <Layout >
+          <Content style={{ padding: '0 50px' }}>
             {theme.layout.indexOf('tabLayout') >= 0 ? (
               <TabsLayout childRoutes={childRoutes} location={location} />
             ) : (
@@ -236,6 +237,7 @@ export default class IndexLayout extends PureComponent {
           />
         </Layout>
         <SkinToolbox onChangeTheme={this.onChangeTheme} theme={theme} />
+        </Layout>
       </Layout>
     );
   }

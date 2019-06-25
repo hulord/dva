@@ -1,2 +1,88 @@
 body {font-family: -apple-system, BlinkMacSystemFont, 'Microsoft YaHei', sans-serif;font-size: 16px;color: #333;line-height: 1.75;}
-.background-pink {background: url("../../assets/images/bg.png")!important;background-repeat: repeat-y;}
+.ant-layout.background-pink {background-image: url("../../assets/images/bg.png");background-size:100% 100%;background-repeat: no-repeat;display: flex;justify-content: center;}
+//width
+.smallest(@width){
+  @media (min-width: 300px)and (max-width: 767px){
+      width:@width;
+  }
+};
+.smaller(@width){
+  @media (min-width: 768px)and (max-width: 1023px){
+      width:@width;
+  }
+};
+.small(@width){
+  @media (min-width: 1024px)and (max-width: 1279px){
+      width:@width;
+  }
+};
+.normal(@width){
+  @media (min-width: 1280px)and (max-width: 1679px){
+      width:@width;
+  }
+};
+.large(@width){
+  @media (min-width: 1680px){
+      width:@width;
+  }
+};
+//height
+.smallestHeight(@height){
+  @media (min-width: 300px)and (max-width: 767px){
+      height:@height;
+  }
+};
+.smallerHeight(@heighth){
+  @media (min-width: 768px)and (max-width: 1023px){
+      height:@height;
+  }
+};
+.smallHeight(@height){
+  @media (min-width: 1024px)and (max-width: 1279px){
+      height:@height;
+  }
+};
+.normalHeight(@height){
+  @media (min-width: 1280px)and (max-width: 1679px){
+      height:@height;
+  }
+};
+.largeHeight(@height){
+  @media (min-width: 1680px){
+      height:@height;
+  }
+};
+//picURL
+.smallestUrl(@url){
+  @media (min-width: 300px)and (max-width: 767px){
+      background-image: url($url);
+  }
+};
+.smallerUrl(@url){
+  @media (min-width: 768px)and (max-width: 1023px){
+      background-image: url($url);
+  }
+};
+.smallUrl(@url){
+  @media (min-width: 1024px)and (max-width: 1279px){
+      background-image: url($url);
+  }
+};
+.normalUrl(@url){
+  @media (min-width: 1280px)and (max-width: 1679px){
+      background-image: url($url);
+  }
+};
+.largeUrl(@url){
+  @media (min-width: 1680px){
+      background-image: url($url);
+  }
+};
+.container{
+  margin:0 auto;
+  .smallest(100%);
+  .smaller(100%);
+  .small(1000px);
+  .normal(1200px);
+  .large(1200px);
+}
