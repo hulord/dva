@@ -19,7 +19,7 @@ class NavBar extends PureComponent {
     fixed: true,
     theme: '' //'bg-dark',
   };
-
+  
   toggleFullScreen() {
     if (
       !document.fullscreenElement &&
@@ -75,7 +75,6 @@ class NavBar extends PureComponent {
       user,
       isMobile
     } = this.props;
-
     const classnames = cx('navbar', {
       'navbar-fixed-top': !!fixed,
       'navbar-sm': isMobile ? true : collapsed,

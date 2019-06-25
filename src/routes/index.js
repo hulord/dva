@@ -1,5 +1,6 @@
 import { createRoutes } from '@/utils/core';
 import BasicLayout from '@/layouts/BasicLayout';
+import IndexLayout from '@/layouts/IndexLayout';
 import UserLayout from '@/layouts/UserLayout';
 import Page403 from './Pages/403';
 import NotFound from './Pages/404';
@@ -15,6 +16,7 @@ import Dashboard from './Dashboard';
 import Blank from './Blank';
 import Toolbar from './Widgets/Toolbar';
 import BaseComponent from './Widgets/BaseComponent';
+
 import Column from './Widgets/Column';
 import TransferTree from './Widgets/TransferTree';
 import SearchBar from './Widgets/SearchBar';
@@ -59,7 +61,7 @@ const routesConfig = app => [
     path: '/',
     title: '前台页面',
     indexRoute: '',
-    component: BasicLayout,
+    component: IndexLayout,
     childRoutes: [
       Index(app),
     ]

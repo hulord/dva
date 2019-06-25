@@ -20,6 +20,7 @@ export default class TabsLayout extends BaseComponent {
     } = props;
     super(props);
     this.state = this.setCurPanes(pathname, []);
+    console.log(this.state);
   }
 
   componentWillReceiveProps(nextProps) {

@@ -180,7 +180,6 @@ class LeftSideBar extends PureComponent {
       user,
       isMobile
     } = this.props;
-
     const classnames = cx('sidebar-left', 'sidebar-default', {
       affix: !!fixed,
       'sidebar-left-sm': collapsed,

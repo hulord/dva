@@ -5,12 +5,16 @@ import BaseComponent from 'components/BaseComponent';
 import './index.less';
 const { Content } = Layout;
 
-@connect(({ dashboard }) => ({
-  dashboard
+@connect(({global}) => ({
+global
 }))
+
 export default class Index extends BaseComponent {
+  constructor(props) {
+    super(props);
+  }
+
   render() {
-    const { dashboard } = this.props;
     return (
       <Layout className="full-layout page dashboard-page">
         <Content>

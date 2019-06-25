@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 import { Layout } from 'antd';
 import { Switch, routerRedux } from 'dva/router';
-import NavBar from 'components/NavBar';
+import NavBar2 from 'components/NavBar2';
 import { LeftSideBar, RightSideBar } from 'components/SideBar';
 import TopBar from 'components/TopBar';
 import SkinToolbox from 'components/SkinToolbox';
@@ -10,6 +10,7 @@ import pathToRegexp from 'path-to-regexp';
 import { enquireIsMobile } from '@/utils/enquireScreen';
 import TabsLayout from './TabsLayout';
 import './styles/basic.less';
+import './styles/global.less';
 import $$ from 'cmn-utils';
 import cx from 'classnames';
 const { Content, Header } = Layout;
@@ -18,26 +19,26 @@ const { Content, Header } = Layout;
  * 基本部局
  * 可设置多种皮肤 theme: [light, grey, primary, info, warning, danger, alert, system, success, dark]
  * 可设置多种布局 [header(固定头), sidebar(固定边栏), breadcrumb(固定面包蟹), tabLayout(标签布局)]
- * @author weiq
+ * 头部需要可以切换（主页头部|其他页面头部）
  */
 @connect(({ global }) => ({ global }))
-export default class BasicLayout extends React.PureComponent {
+export default class IndexLayout extends PureComponent {
   constructor(props) {
     super(props);
     const user = $$.getStore('user', []);
     const theme = $$.getStore('theme', {
       leftSide: 'darkgrey', // 左边
-      navbar: 'light' // 顶部
+      navbar: 'light', // 顶部
     });
+
     if (!theme.layout) {
       theme.layout = [
         'fixedHeader',
         'fixedSidebar',
         'fixedBreadcrumbs'
-        // 'hidedBreadcrumbs',
-        // 'tabLayout',
       ];
     }
+    
     this.state = {
       collapsedLeftSide: false, // 左边栏开关控制
       leftCollapsedWidth: 60, // 左边栏宽度
@@ -49,7 +50,6 @@ export default class BasicLayout extends React.PureComponent {
       currentMenu: {},
       isMobile: false
     };
-
     props.dispatch({
       type: 'global/getMenu'
     });
@@ -194,6 +194,7 @@ export default class BasicLayout extends React.PureComponent {
     const { menu, flatMenu } = global;
     const { childRoutes } = routerData;
     const classnames = cx('basic-layout', 'full-layout', {
+      "background-pink":true,
       fixed: theme.layout && theme.layout.indexOf('fixedSidebar') !== -1,
       'fixed-header':
         theme.layout && theme.layout.indexOf('fixedHeader') !== -1,
@@ -206,47 +207,22 @@ export default class BasicLayout extends React.PureComponent {
     return (
       <Layout className={classnames}>
         <Header>
-          <NavBar
-            collapsed={collapsedLeftSide}
-            onCollapseLeftSide={this.onCollapseLeftSide}
-            onExpandTopBar={this.onExpandTopBar}
-            toggleSidebarHeader={this.toggleSidebarHeader}
-            theme={theme.navbar}
-            user={user}
-            isMobile={isMobile}
-          />
-        </Header>
+          <NavBar2
+              collapsed={collapsedLeftSide}
+              onCollapseLeftSide={this.onCollapseLeftSide}
+              onExpandTopBar={this.onExpandTopBar}
+              toggleSidebarHeader={this.toggleSidebarHeader}
+              theme={theme.navbar}
+              user={user}
+              isMobile={isMobile}
+            />
+        </Header>      
         <Layout>
-          <LeftSideBar
-            collapsed={collapsedLeftSide}
-            leftCollapsedWidth={leftCollapsedWidth}
-            showHeader={showSidebarHeader}
-            onCollapse={this.onCollapseLeftSide}
-            onCollapseAll={this.onCollapseLeftSideAll}
-            location={location}
-            theme={theme.leftSide}
-            flatMenu={flatMenu}
-            currentMenu={currentMenu}
-            menu={menu}
-            user={user}
-            isMobile={isMobile}
-          />
           <Content>
             {theme.layout.indexOf('tabLayout') >= 0 ? (
               <TabsLayout childRoutes={childRoutes} location={location} />
             ) : (
               <Layout className="full-layout">
-                <Header>
-                  <TopBar
-                    expand={expandTopBar}
-                    toggleRightSide={this.toggleRightSide}
-                    collapsedRightSide={collapsedRightSide}
-                    onCollapse={this.onCollapseTopBar}
-                    currentMenu={currentMenu}
-                    location={location}
-                    theme={theme}
-                  />
-                </Header>
                 <Content className="router-page">
                   <Switch>{childRoutes}</Switch>
                 </Content>

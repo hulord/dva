@@ -24,7 +24,7 @@ export default class CardLayout extends React.PureComponent {
     const user = $$.getStore('user', []);
     const theme = $$.getStore('theme', {
       leftSide: 'darkgrey', // 左边
-      navbar: 'light' // 顶部
+      navbar: 'light', // 顶部
     });
     if (!theme.layout) {
       theme.layout = [
