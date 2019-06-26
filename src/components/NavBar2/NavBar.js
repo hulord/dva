@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import Icon from '../Icon';
-import { Popover, Badge, Avatar } from 'antd';
+import { Popover, Badge, Avatar,Carousel, Layout} from 'antd';
 import { Link } from 'dva/router';
 import cx from 'classnames';
 import './style/index.less';
@@ -76,6 +76,7 @@ class NavBar extends PureComponent {
       isMobile
     } = this.props;
     const classnames = cx('navbar', {
+      'is-index':true,
       'navbar-fixed-top': !!fixed,
       'navbar-sm': isMobile ? true : collapsed,
       ['bg-' + theme]: !!theme
@@ -83,93 +84,114 @@ class NavBar extends PureComponent {
 
     return (
       <header className={classnames}>
-        <div className="navbar-branding">
-          <Link className="navbar-brand" to="/">
-            <img src={logoImg} alt="logo" />
-            <b>LANIF</b>
-            Admin
-          </Link>
-          <span className="toggle_sidemenu_l" onClick={onCollapseLeftSide}>
-            <Icon type="lines" />
-          </span>
-        </div>
-        <ul className="nav navbar-nav navbar-left clearfix">
-          {collapsed || isMobile ? null : (
+        {true? (
+          <Layout style={{width:"70%"}}>
+            <Carousel autoplay  dotPosition="top"> 
+                <div>
+                  <h3>1</h3>
+                </div>
+                <div>
+                  <h3>2</h3>
+                </div>
+                <div>
+                  <h3>3</h3>
+                </div>
+                <div>
+                  <h3>4</h3>
+                </div>
+              </Carousel>
+          </Layout>
+        ):(
+          <Layout>
+            <div className="navbar-branding">
+            <Link className="navbar-brand" to="/">
+              <img src={logoImg} alt="logo" />
+              <b>LANIF</b>
+              Admin
+            </Link>
+            <span className="toggle_sidemenu_l" onClick={onCollapseLeftSide}>
+              <Icon type="lines" />
+            </span>
+          </div>
+          <ul className="nav navbar-nav navbar-left clearfix">
+            {collapsed || isMobile ? null : (
+              <li>
+                <a className="sidebar-menu-toggle" onClick={toggleSidebarHeader}>
+                  <Icon type="ruby" />
+                </a>
+              </li>
+            )}
             <li>
-              <a className="sidebar-menu-toggle" onClick={toggleSidebarHeader}>
-                <Icon type="ruby" />
+              <a onClick={onExpandTopBar}>
+                <Icon type="wand" />
               </a>
             </li>
+            {isMobile ? (
+              <li className="mini-search" onClick={this.onOpenSearchBox}>
+                <a>
+                  <Icon type="search" antd />
+                </a>
+              </li>
+            ) : (
+              <li onClick={this.toggleFullScreen}>
+                <a className="request-fullscreen">
+                  <Icon type="screen-full" />
+                </a>
+              </li>
+            )}
+          </ul>
+          {isMobile ? null : (
+            <form className="navbar-form navbar-search clearfix">
+              <div className="form-group">
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="全文检索"
+                  onClick={this.onOpenSearchBox}
+                />
+              </div>
+            </form>
           )}
-          <li>
-            <a onClick={onExpandTopBar}>
-              <Icon type="wand" />
-            </a>
-          </li>
-          {isMobile ? (
-            <li className="mini-search" onClick={this.onOpenSearchBox}>
-              <a>
-                <Icon type="search" antd />
+          <ul className="nav navbar-nav navbar-right clearfix">
+            <li>
+              <a href="https://github.com/LANIF-UI/dva-boot-admin">
+                <Icon type="github" antd />
               </a>
             </li>
-          ) : (
-            <li onClick={this.toggleFullScreen}>
-              <a className="request-fullscreen">
-                <Icon type="screen-full" />
-              </a>
+            <li className="dropdown">
+              <Popover
+                placement="bottomRight"
+                title={'通知'}
+                overlayClassName={cx('navbar-popup', { [theme]: !!theme })}
+                content={''}
+                trigger="click"
+              >
+                <a className="dropdown-toggle">
+                  <Icon type="radio-tower" />
+                </a>
+              </Popover>
             </li>
-          )}
-        </ul>
-        {isMobile ? null : (
-          <form className="navbar-form navbar-search clearfix">
-            <div className="form-group">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="全文检索"
-                onClick={this.onOpenSearchBox}
-              />
-            </div>
-          </form>
+            <li className="dropdown">
+              <Popover
+                placement="bottomRight"
+                title={`WELCOME ${user.userName}`}
+                overlayClassName={cx('navbar-popup', { [theme]: !!theme })}
+                content={<UserDropDown />}
+                trigger="click"
+              >
+                <a className="dropdown-toggle">
+                  <Badge dot>
+                    <Avatar src={require('assets/images/avatar.jpg')}>
+                      {user.userName}
+                    </Avatar>
+                  </Badge>
+                </a>
+              </Popover>
+            </li>
+          </ul>
+          <SearchBox visible={openSearchBox} onClose={this.onCloseSearchBox} />
+          </Layout>
         )}
-        <ul className="nav navbar-nav navbar-right clearfix">
-          <li>
-            <a href="https://github.com/LANIF-UI/dva-boot-admin">
-              <Icon type="github" antd />
-            </a>
-          </li>
-          <li className="dropdown">
-            <Popover
-              placement="bottomRight"
-              title={'通知'}
-              overlayClassName={cx('navbar-popup', { [theme]: !!theme })}
-              content={''}
-              trigger="click"
-            >
-              <a className="dropdown-toggle">
-                <Icon type="radio-tower" />
-              </a>
-            </Popover>
-          </li>
-          <li className="dropdown">
-            <Popover
-              placement="bottomRight"
-              title={`WELCOME ${user.userName}`}
-              overlayClassName={cx('navbar-popup', { [theme]: !!theme })}
-              content={<UserDropDown />}
-              trigger="click"
-            >
-              <a className="dropdown-toggle">
-                <Badge dot>
-                  <Avatar src={require('assets/images/avatar.jpg')}>
-                    {user.userName}
-                  </Avatar>
-                </Badge>
-              </a>
-            </Popover>
-          </li>
-        </ul>
-        <SearchBox visible={openSearchBox} onClose={this.onCloseSearchBox} />
       </header>
     );
   }
