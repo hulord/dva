@@ -6,6 +6,7 @@ import cx from 'classnames';
 import './style/index.less';
 import logoImg from 'assets/images/logo.png';
 import SearchBox from './SearchBox';
+import Header from 'antd/lib/calendar/Header';
 
 /**
  * 其本本局头部区域
@@ -85,6 +86,46 @@ class NavBar extends PureComponent {
     return (
       <header className={classnames}>
         {true? (
+        <Layout>
+          <Layout className="absHeader position-abs3 display-block margin-left-15">
+              <div className="navbar-branding">
+                <Link className="navbar-brand" to="/">
+                  <img src={logoImg} alt="logo" />
+                  <b>LANIF</b>
+                  Admin
+                </Link>
+                <span className="toggle_sidemenu_l" onClick={onCollapseLeftSide}>
+                  <Icon type="lines" />
+                </span>
+              </div>
+              <ul className="nav navbar-nav navbar-right clearfix">
+                {collapsed || isMobile ? null : (
+                  <li>
+                    <a className="sidebar-menu-toggle" onClick={toggleSidebarHeader}>
+                      <Icon type="ruby" />
+                    </a>
+                  </li>
+                )}
+                <li>
+                  <a onClick={onExpandTopBar}>
+                    <Icon type="wand" />
+                  </a>
+                </li>
+                {isMobile ? (
+                  <li className="mini-search" onClick={this.onOpenSearchBox}>
+                    <a>
+                      <Icon type="search" antd />
+                    </a>
+                  </li>
+                ) : (
+                  <li onClick={this.toggleFullScreen}>
+                    <a className="request-fullscreen">
+                      <Icon type="screen-full" />
+                    </a>
+                  </li>
+                )}
+              </ul>
+          </Layout>
           <Layout style={{width:"70%"}}>
             <Carousel autoplay  dotPosition="top"> 
                 <div>
@@ -101,6 +142,7 @@ class NavBar extends PureComponent {
                 </div>
               </Carousel>
           </Layout>
+        </Layout>
         ):(
           <Layout>
             <div className="navbar-branding">

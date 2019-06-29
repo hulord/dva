@@ -119,7 +119,7 @@ export default class IndexLayout extends PureComponent {
     this.setState({
       collapsedLeftSide,
       collapsedRightSide,
-      leftCollapsedWidth: 60
+      leftCollapsedWidth: 120
     });
   };
 
@@ -129,7 +129,7 @@ export default class IndexLayout extends PureComponent {
   onCollapseLeftSideAll = _ => {
     this.setState({
       collapsedLeftSide: true,
-      leftCollapsedWidth: 0
+      leftCollapsedWidth: 120
     });
   };
 
