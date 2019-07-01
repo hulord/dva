@@ -203,7 +203,10 @@ export default class IndexLayout extends PureComponent {
       'hided-breadcrumbs':
         theme.layout && theme.layout.indexOf('hidedBreadcrumbs') !== -1
     });
-
+    const is_DIV = true;
+    const content_layout = cx("router-page",{
+      "carousel-index-content" :is_DIV,
+    })
     return (
       <Layout className={classnames}>
         <Layout className="container">
@@ -224,7 +227,7 @@ export default class IndexLayout extends PureComponent {
               <TabsLayout childRoutes={childRoutes} location={location} />
             ) : (
               <Layout className="full-layout">
-                <Content className="router-page">
+                <Content className={content_layout}>
                   <Switch>{childRoutes}</Switch>
                 </Content>
               </Layout>

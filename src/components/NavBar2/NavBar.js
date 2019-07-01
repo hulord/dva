@@ -89,7 +89,7 @@ class NavBar extends PureComponent {
         <Layout>
           <Layout className="absHeader position-abs3 display-block margin-left-80">
               <div className="navbar-branding">
-                <Link className="navbar-brand" to="/">
+                <Link className="space0 navbar-brand" to="/">
                   <img src={logoImg} alt="logo" />
                   <b>LANIF</b>
                   Admin

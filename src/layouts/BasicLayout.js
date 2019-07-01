@@ -203,6 +203,7 @@ export default class BasicLayout extends React.PureComponent {
         theme.layout && theme.layout.indexOf('hidedBreadcrumbs') !== -1
     });
 
+
     return (
       <Layout className={classnames}>
         <Header>
@@ -247,7 +248,7 @@ export default class BasicLayout extends React.PureComponent {
                     theme={theme}
                   />
                 </Header>
-                <Content className="router-page">
+                <Content className="router-page carousel-index-content">
                   <Switch>{childRoutes}</Switch>
                 </Content>
               </Layout>
