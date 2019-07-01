@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'dva';
 import { Layout, Col, Row } from 'antd';
 import BaseComponent from 'components/BaseComponent';
+import cx from 'classnames';
 import './index.less';
 const { Content } = Layout;
 
@@ -13,14 +14,23 @@ export default class Index extends BaseComponent {
   constructor(props) {
     super(props);
   }
-
+  
   render() {
+    const contentLeft = cx("carousel-content-left");
+    const contentRight = cx("carousel-content-right");
     return (
       <Layout className="full-layout page dashboard-page">
         <Content>
-          <Row gutter={20}>
-            这是首页
-          </Row>
+          <Col span={4}>
+            <Layout className={contentLeft}>
+            这是左侧导航
+            </Layout>
+          </Col>
+          <Col span={20}>
+            <Layout className={contentRight}>
+
+            </Layout>
+          </Col>
         </Content>
       </Layout>
     );
