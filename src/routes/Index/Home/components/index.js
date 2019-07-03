@@ -20,7 +20,7 @@ export default class Index extends BaseComponent {
     const contentRight = cx("carousel-content-right");
     return (
       <Layout className="full-layout page dashboard-page">
-        <Content>
+        <Content className="space0">
           <Col span={4}>
             <Layout className={contentLeft}>
             这是左侧导航

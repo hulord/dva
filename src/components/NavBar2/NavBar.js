@@ -76,7 +76,7 @@ class NavBar extends PureComponent {
       user,
       isMobile
     } = this.props;
-    const classnames = cx('navbar', {
+    const classnames = cx('navbar','border0',{
       'is-index':true,
       'navbar-fixed-top': !!fixed,
       'navbar-sm': isMobile ? true : collapsed,
