@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'dva';
 import { Layout, Col, Row } from 'antd';
 import BaseComponent from 'components/BaseComponent';
+import User from 'components/User';
 import cx from 'classnames';
 import './index.less';
 const { Content } = Layout;
@@ -23,7 +24,7 @@ export default class Index extends BaseComponent {
         <Content className="space0">
           <Col span={4}>
             <Layout className={contentLeft}>
-            这是左侧导航
+              <User></User>
             </Layout>
           </Col>
           <Col span={20}>
