@@ -34,7 +34,7 @@ import Alerts from './UI/Alerts';
 import Button from './UI/Button';
 import CRUD from './Business/CRUD';
 /**首页 */
-import Index from './Index/Home';
+import Home from './Index/Home';
 
 /**
  *     主路由配置
@@ -63,7 +63,7 @@ const routesConfig = app => [
     indexRoute: '',
     component: IndexLayout,
     childRoutes: [
-      Index(app),
+      Home(app),
     ]
   },
   {

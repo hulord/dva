@@ -3,12 +3,12 @@ import dva from 'dva';
 import dynamic from 'dva/dynamic';
 import createLoading from 'dva-loading';
 import { Router } from 'dva/router';
-import createHistory from 'history/createBrowserHistory';
+import { createBrowserHistory } from "history";
 import request from 'cmn-utils/lib/request';
 import createRoutes from '@/routes';
 import 'assets/styles/index.less';
 import config from './config';
-import { LocaleProvider } from 'antd';
+import { ConfigProvider } from 'antd';
 import zh_CN from 'antd/lib/locale-provider/zh_CN';
 import 'moment/locale/zh-cn';
 import { homepage } from '../package.json';
@@ -16,7 +16,7 @@ import * as serviceWorker from './serviceWorker';
 
 // -> 初始化
 const app = dva({
-  history: createHistory()
+  history: createBrowserHistory()
 });
 
 // -> 插件
@@ -41,9 +41,9 @@ app.model(require('./models/global').default);
 
 // -> 初始化路由
 app.router(({ history, app }) => (
-  <LocaleProvider locale={zh_CN}>
+  <ConfigProvider  locale={zh_CN}>
     <Router history={history}>{createRoutes(app)}</Router>
-  </LocaleProvider>
+  </ConfigProvider >
 ));
 
 // -> Start

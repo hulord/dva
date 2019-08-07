@@ -1,16 +1,20 @@
 import modelEnhance from '@/utils/modelEnhance';
 
 export default modelEnhance({
-  namespace: 'index',
-
+  namespace: 'home',
   state: {
     bar1: [],
     bar2: [],
+    test: []
   },
 
   subscriptions: {
     setup({ history, dispatch }) {
       return history.listen(({ pathname }) => {
+        console.log(pathname);
+        if(pathname!="/"){
+            
+        };
         if (pathname.indexOf('/dashboard') !== -1) {
           dispatch({
             type: '@request',
@@ -32,4 +36,5 @@ export default modelEnhance({
       });
     }
   },
+  
 });

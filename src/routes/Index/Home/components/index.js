@@ -3,17 +3,20 @@ import { connect } from 'dva';
 import { Layout, Col, Row } from 'antd';
 import BaseComponent from 'components/BaseComponent';
 import User from 'components/User';
+import Vhistory from 'components/Vhistory';
 import cx from 'classnames';
 import './index.less';
 const { Content } = Layout;
 
-@connect(({global}) => ({
-global
+@connect(({ global, home }) => ({
+  global,
+  home
 }))
 
 export default class Index extends BaseComponent {
   constructor(props) {
     super(props);
+    console.log(home)
   }
   
   render() {
@@ -25,11 +28,12 @@ export default class Index extends BaseComponent {
           <Col span={4}>
             <Layout className={contentLeft}>
               <User></User>
+              <Vhistory></Vhistory>
             </Layout>
           </Col>
           <Col span={20}>
             <Layout className={contentRight}>
-
+               
             </Layout>
           </Col>
         </Content>

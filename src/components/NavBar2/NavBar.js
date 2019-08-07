@@ -127,7 +127,7 @@ class NavBar extends PureComponent {
               </ul>
           </Layout>
           <Layout style={{width:"70%"}}>
-            <Carousel autoplay  dotPosition="top"> 
+            <Carousel autoplay  dotPosition="bottom"> 
                 <div>
                   <h3>1</h3>
                 </div>

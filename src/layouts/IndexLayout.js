@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'dva';
-import { Layout } from 'antd';
+import { Layout,ConfigProvider } from 'antd';
 import { Switch, routerRedux } from 'dva/router';
 import NavBar2 from 'components/NavBar2';
 import { LeftSideBar, RightSideBar } from 'components/SideBar';

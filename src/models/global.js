@@ -7,6 +7,7 @@ export default modelEnhance({
   state: {
     menu: [],
     flatMenu: [],
+    vhistory:[]
   },
 
   effects: {
