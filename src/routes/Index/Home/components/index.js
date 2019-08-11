@@ -16,10 +16,10 @@ const { Content } = Layout;
 export default class Index extends BaseComponent {
   constructor(props) {
     super(props);
-    console.log(home)
   }
   
   render() {
+    const { home } = this.props;
     const contentLeft = cx("carousel-content-left");
     const contentRight = cx("carousel-content-right");
     return (

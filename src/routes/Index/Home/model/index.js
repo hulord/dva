@@ -11,7 +11,6 @@ export default modelEnhance({
   subscriptions: {
     setup({ history, dispatch }) {
       return history.listen(({ pathname }) => {
-        console.log(pathname);
         if(pathname!="/"){
             
         };
