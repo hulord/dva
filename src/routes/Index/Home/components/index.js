@@ -19,6 +19,7 @@ export default class Home extends BaseComponent {
   }
   
   render() {
+    const { home } = this.props;
     const contentLeft = cx("carousel-content-left");
     const contentRight = cx("carousel-content-right");
     return (
