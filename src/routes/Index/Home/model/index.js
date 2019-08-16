@@ -1,18 +1,21 @@
 import modelEnhance from '@/utils/modelEnhance';
 
 export default modelEnhance({
-  namespace: 'home1',
+  namespace: 'home',
   state: {
     bar1: [],
     bar2: [],
-    test: []
+    vhistory: []
   },
 
   subscriptions: {
     setup({ history, dispatch }) {
       return history.listen(({ pathname }) => {
         if(pathname!="/"){
-            
+           dispatch({
+             type: 'addHistory',
+             payload: pathname
+           })
         };
         if (pathname.indexOf('/dashboard') !== -1) {
           dispatch({
@@ -35,5 +38,12 @@ export default modelEnhance({
       });
     }
   },
-  
+  effects: {
+
+  },
+  reducers:{
+    addHistory(state,{ payload }){
+      return {...state,vhistory:[payload]}
+    }
+  },
 });

@@ -193,7 +193,7 @@ export default model => {
         }
       }
     },
-
+    
     reducers: {
       // get old reducers
       ...reducers,

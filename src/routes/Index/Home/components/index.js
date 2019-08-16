@@ -15,20 +15,24 @@ const { Content } = Layout;
 export default class Home extends BaseComponent {
   constructor(props) {
     super(props);
-    console.log(props);
   }
-  
+  static defaultProps = {
+    user: {name:"name"},
+  };
   render() {
-    const { home } = this.props;
+    const { home,user } = this.props;
+    const { vhistory } = home;
+
     const contentLeft = cx("carousel-content-left");
     const contentRight = cx("carousel-content-right");
+    
     return (
       <Layout className="full-layout page dashboard-page">
         <Content className="space0">
           <Col span={4}>
             <Layout className={contentLeft}>
-              <User></User>
-              <Vhistory></Vhistory>
+              <User Userinfo={user}></User>
+              <Vhistory visithis={vhistory}></Vhistory>
             </Layout>
           </Col>
           <Col span={20}>
