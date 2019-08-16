@@ -8,15 +8,14 @@ import cx from 'classnames';
 import './index.less';
 const { Content } = Layout;
 
-@connect(({ global, home }) => ({
-  global,
-  home
+@connect(({ home,global }) => ({
+  home,global
 }))
 
-export default class Index extends BaseComponent {
+export default class Home extends BaseComponent {
   constructor(props) {
     super(props);
-    console.log(home)
+    console.log(props);
   }
   
   render() {

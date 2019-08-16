@@ -1,7 +1,7 @@
 import modelEnhance from '@/utils/modelEnhance';
 
 export default modelEnhance({
-  namespace: 'home',
+  namespace: 'home1',
   state: {
     bar1: [],
     bar2: [],
