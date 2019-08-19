@@ -4,6 +4,7 @@ import { Layout, Col, Row } from 'antd';
 import BaseComponent from 'components/BaseComponent';
 import User from 'components/User';
 import Vhistory from 'components/Vhistory';
+import List from 'components/List';
 import cx from 'classnames';
 import './index.less';
 const { Content } = Layout;
@@ -18,9 +19,14 @@ export default class Home extends BaseComponent {
   }
   static defaultProps = {
     user: {name:"name"},
+    listData:[{
+      name:"title",
+      image:"",
+      description:""
+    }]
   };
   render() {
-    const { home,user } = this.props;
+    const { home,user,listData} = this.props;
     const { vhistory } = home;
 
     const contentLeft = cx("carousel-content-left");
@@ -37,7 +43,7 @@ export default class Home extends BaseComponent {
           </Col>
           <Col span={20}>
             <Layout className={contentRight}>
-               
+               <List search="ture" listType="ture" listData={listData}></List>
             </Layout>
           </Col>
         </Content>

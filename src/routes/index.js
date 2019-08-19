@@ -58,15 +58,6 @@ const routesConfig = app => [
     ]
   },
   {
-    path: '/',
-    title: '前台页面',
-    indexRoute: '',
-    component: IndexLayout,
-    childRoutes: [
-      Home(app),
-    ]
-  },
-  {
     path: '/admin',
     title: '系统中心',
     component: BasicLayout,
@@ -101,7 +92,16 @@ const routesConfig = app => [
       LevelRoute(app),
       NotFound()
     ]
-  }
+  },
+  {
+    path: '/',
+    title: '前台页面',
+    indexRoute: '/index',
+    component: IndexLayout,
+    childRoutes: [
+      Home(app),
+    ]
+  },
 ];
 
 export default app => createRoutes(app, routesConfig);

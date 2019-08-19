@@ -9,15 +9,7 @@ export default modelEnhance({
     flatMenu: [],
     vhistory:[]
   },
-  subscriptions: {
-    setup({ history, dispatch }) {
-      return history.listen(({ pathname }) => {
-        if(pathname!="/"){
-            
-        };
-      });
-    }
-  },
+
   effects: {
     *getMenu({ payload }, { call, put }) {
       const { status, data } = yield call(getMenu, payload);

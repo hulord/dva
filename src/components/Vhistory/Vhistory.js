@@ -1,8 +1,15 @@
 import React,{Component} from "react";
-import {Avatar,Icon} from "antd";
+import {Avatar,Icon,type,Button } from "antd";
 import './style/index.less';
 
 class Vhistory extends Component {
+
+  delhis(i){
+    let new_his = this.props.visithis.splice(i,1);
+    this.setState({
+      new_his
+    });
+  }
   render(){
     const { visithis } = this.props;
     return (<div className="site-list-box">
@@ -14,8 +21,8 @@ class Vhistory extends Component {
                         <span>this is website title!</span>
                     </div>
                     <div className="side-list-righ">
-                        <Icon></Icon>
-                        <Icon></Icon>
+                        <span> <Button type="link" icon="fullscreen"  href={his}></Button  ></span>
+                        <span> <Button type="link" icon="close"  onClick={()=>this.delhis(i)}></Button  ></span>
                     </div>
                   </li>
         })}
