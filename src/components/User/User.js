@@ -1,5 +1,5 @@
 import React,{Component} from "react";
-import {Avatar,Icon} from "antd";
+import {Avatar,Icon,type} from "antd";
 import './style/index.less';
 
 class User extends Component {

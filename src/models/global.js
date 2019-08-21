@@ -7,13 +7,17 @@ export default modelEnhance({
   state: {
     menu: [],
     flatMenu: [],
-    vhistory:[]
+    vhistory:[],
+    navigation:1
   },
   subscriptions: {
     setup({ history, dispatch }) {
       return history.listen(({ pathname }) => {
-        if(pathname!="/"){
-            
+        if(pathname!="/index/home"){
+          dispatch({
+            type: 'setNav',
+            payload: 2
+          }) 
         };
       });
     }
@@ -49,6 +53,9 @@ export default modelEnhance({
         menu: payload,
         flatMenu: getFlatMenu(payload),
       };
+    },
+    setNav(state,{ payload }){
+      return { ...state,navigation:payload }
     }
   },
 });

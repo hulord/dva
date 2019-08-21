@@ -3,7 +3,6 @@ import { connect } from 'dva';
 import { Layout,ConfigProvider } from 'antd';
 import { Switch, routerRedux } from 'dva/router';
 import NavBar2 from 'components/NavBar2';
-import NavBar from 'components/NavBar';
 import { LeftSideBar, RightSideBar } from 'components/SideBar';
 import TopBar from 'components/TopBar';
 import SkinToolbox from 'components/SkinToolbox';
@@ -192,8 +191,7 @@ export default class IndexLayout extends PureComponent {
       isMobile
     } = this.state;
     const { routerData, location, global } = this.props;
-    const { menu, flatMenu,navigation } = global;
-    console.log(navigation);
+    const { menu, flatMenu } = global;
     const { childRoutes } = routerData;
     const classnames = cx('basic-layout', 'full-layout', {
       "background-pink":true,
@@ -213,7 +211,7 @@ export default class IndexLayout extends PureComponent {
       <Layout className={classnames}>
         <Layout className="container">
         <Header>
-          { navigation=="2" ? (<NavBar2
+          <NavBar2
               collapsed={collapsedLeftSide}
               onCollapseLeftSide={this.onCollapseLeftSide}
               onExpandTopBar={this.onExpandTopBar}
@@ -221,16 +219,7 @@ export default class IndexLayout extends PureComponent {
               theme={theme.navbar}
               user={user}
               isMobile={isMobile}
-            />) : (<NavBar
-              collapsed={collapsedLeftSide}
-              onCollapseLeftSide={this.onCollapseLeftSide}
-              onExpandTopBar={this.onExpandTopBar}
-              toggleSidebarHeader={this.toggleSidebarHeader}
-              theme={theme.navbar}
-              user={user}
-              navigation={navigation}
-              isMobile={isMobile}
-            />)}
+            />
         </Header>      
         <Layout >
           <Content style={{ padding: '0 50px' }}>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Icon } from 'antd';
+import { Icon,type } from 'antd';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import './style/index.less';

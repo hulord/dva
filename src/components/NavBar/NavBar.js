@@ -120,7 +120,7 @@ class NavBar extends PureComponent {
             </li>
           )}
         </ul>
-        {isMobile ? null : (
+        {isMobile ? null : !navigator  && (
           <form className="navbar-form navbar-search clearfix">
             <div className="form-group">
               <input
@@ -132,6 +132,8 @@ class NavBar extends PureComponent {
             </div>
           </form>
         )}
+        { navigator != 2 ? (
+          <div>
         <ul className="nav navbar-nav navbar-right clearfix">
           <li>
             <a href="https://github.com/LANIF-UI/dva-boot-admin">
@@ -169,7 +171,7 @@ class NavBar extends PureComponent {
             </Popover>
           </li>
         </ul>
-        <SearchBox visible={openSearchBox} onClose={this.onCloseSearchBox} />
+        <SearchBox visible={openSearchBox} onClose={this.onCloseSearchBox} /></div>) : null} 
       </header>
     );
   }

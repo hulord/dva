@@ -33,9 +33,9 @@ import CSSAnimate from './UI/CSSAnimate';
 import Alerts from './UI/Alerts';
 import Button from './UI/Button';
 import CRUD from './Business/CRUD';
-/**首页 */
+/**前台 */
 import Home from './Index/Home';
-
+import Artical from './Index/Artical';
 /**
  *     主路由配置
  * 
@@ -55,15 +55,6 @@ const routesConfig = app => [
       Login(app),
       Register(app),
       NotFound()
-    ]
-  },
-  {
-    path: '/',
-    title: '前台页面',
-    indexRoute: '',
-    component: IndexLayout,
-    childRoutes: [
-      Home(app),
     ]
   },
   {
@@ -101,7 +92,27 @@ const routesConfig = app => [
       LevelRoute(app),
       NotFound()
     ]
-  }
+  },  
+  {
+    path: '/index',
+    title: '前台页面',
+    indexRoute: '/home',
+    component: IndexLayout,
+    childRoutes: [
+      Home(app),
+      Artical(app),
+    ]
+  },
+  {
+    path: '/index',
+    title: '前台页面',
+    indexRoute: '/home',
+    component: IndexLayout,
+    childRoutes: [
+      Artical(app),
+    ]
+  },
+
 ];
 
 export default app => createRoutes(app, routesConfig);
