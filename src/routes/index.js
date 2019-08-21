@@ -100,14 +100,13 @@ const routesConfig = app => [
     component: IndexLayout,
     childRoutes: [
       Home(app),
-      Artical(app),
     ]
   },
   {
     path: '/index',
     title: '前台页面',
-    indexRoute: '/home',
-    component: IndexLayout,
+    indexRoute: '/artical',
+    component: BasicLayout,
     childRoutes: [
       Artical(app),
     ]

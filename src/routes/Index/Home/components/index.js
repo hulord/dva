@@ -19,11 +19,13 @@ export default class Home extends BaseComponent {
   }
   static defaultProps = {
     user: {name:"name"},
-    listData:[{
-      name:"title",
-      image:"",
-      description:""
-    }]
+    listData:[
+      {title:"title1",image:"",description:""},
+    {title:"title2",image:"",description:""},
+    {title:"title3",image:"",description:""},
+    {title:"title4",image:"",description:""},
+    {title:"title5",image:"",description:""}
+  ]
   };
   render() {
     const { home,user,listData} = this.props;
@@ -33,7 +35,7 @@ export default class Home extends BaseComponent {
     const contentRight = cx("carousel-content-right");
     
     return (
-      <Layout className="full-layout page dashboard-page">
+      <Layout className="">
         <Content className="space0">
           <Col span={4}>
             <Layout className={contentLeft}>

@@ -193,9 +193,9 @@ export default class IndexLayout extends PureComponent {
     } = this.state;
     const { routerData, location, global } = this.props;
     const { menu, flatMenu,navigation } = global;
-    console.log(navigation);
+
     const { childRoutes } = routerData;
-    const classnames = cx('basic-layout', 'full-layout', {
+    const classnames = cx('full-layout', {
       "background-pink":true,
       fixed: theme.layout && theme.layout.indexOf('fixedSidebar') !== -1,
       'fixed-header':
@@ -210,10 +210,10 @@ export default class IndexLayout extends PureComponent {
       "carousel-index-content" :is_DIV,
     })
     return (
-      <Layout className={classnames}>
+      <Layout className={classnames}  style={{position:"unset!important"}}>
         <Layout className="container">
         <Header>
-          { navigation=="2" ? (<NavBar2
+          { navigation==1 ? (<NavBar2
               collapsed={collapsedLeftSide}
               onCollapseLeftSide={this.onCollapseLeftSide}
               onExpandTopBar={this.onExpandTopBar}
@@ -233,11 +233,11 @@ export default class IndexLayout extends PureComponent {
             />)}
         </Header>      
         <Layout >
-          <Content style={{ padding: '0 50px' }}>
+          <Content  style={{overflowX:"unset"}}>
             {theme.layout.indexOf('tabLayout') >= 0 ? (
               <TabsLayout childRoutes={childRoutes} location={location} />
             ) : (
-              <Layout className="full-layout">
+              <Layout >
                 <Content className={content_layout}>
                   <Switch>{childRoutes}</Switch>
                 </Content>
