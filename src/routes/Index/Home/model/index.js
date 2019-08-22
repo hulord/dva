@@ -1,11 +1,12 @@
 import modelEnhance from '@/utils/modelEnhance';
-
+import { getList } from '../service';
 export default modelEnhance({
   namespace: 'home',
   state: {
     bar1: [],
     bar2: [],
-    vhistory: []
+    vhistory: [],
+    listData:[],
   },
 
   subscriptions: {
@@ -17,33 +18,25 @@ export default modelEnhance({
              payload: pathname
            })
         };
-        if (pathname.indexOf('/dashboard') !== -1) {
-          dispatch({
-            type: '@request',
-            afterResponse: resp => resp.data,
-            payload: {
-              valueField: 'bar1',
-              url: '/charts/bar1',
-            }
-          });
-          dispatch({
-            type: '@request',
-            afterResponse: resp => resp.data,
-            payload: {
-              valueField: 'bar2',
-              url: '/charts/bar2',
-            }
-          });
-        }
+
       });
     }
   },
   effects: {
-
+    *getList({ payload }, { call, put }){
+      const response = yield call(getList, payload);
+      yield put({
+        type: 'getList2',
+        payload: response,
+      });
+    }
   },
   reducers:{
     addHistory(state,{ payload }){
       return {...state,vhistory:[payload]}
-    }
+    },
+    getList2(state,{ payload }){
+      return {...state,listData:payload.data}
+    } 
   },
 });

@@ -16,25 +16,31 @@ const { Content } = Layout;
 export default class Home extends BaseComponent {
   constructor(props) {
     super(props);
+    this.state = {
+      current:"1",
+      listData:[],
+    }
+    this.onChange(1);
+   
   }
-  static defaultProps = {
-    user: {name:"name"},
-    listData:[
-      {title:"title1",image:"",description:""},
-    {title:"title2",image:"",description:""},
-    {title:"title3",image:"",description:""},
-    {title:"title4",image:"",description:""},
-    {title:"title5",image:"",description:""}
-  ]
-  };
+  onChange = page =>{
+    this.props.dispatch({
+      type: 'home/getList',
+      payload: {
+        currentPage:page,
+        pageSize:10,
+      }
+    })
+  }
   render() {
-    const { home,user,listData} = this.props;
-    const { vhistory } = home;
+    const { home,user} = this.props;
+    const { vhistory,listData } = home;
 
     const contentLeft = cx("carousel-content-left");
     const contentRight = cx("carousel-content-right");
     
     return (
+     
       <Layout className="">
         <Content className="space0">
           <Col span={4}>
@@ -45,7 +51,7 @@ export default class Home extends BaseComponent {
           </Col>
           <Col span={20}>
             <Layout className={contentRight}>
-               <List search="ture" listType="ture" listData={listData}></List>
+               <List search="ture" listType="ture" onChange={this.onChange} listData={listData}></List>
             </Layout>
           </Col>
         </Content>

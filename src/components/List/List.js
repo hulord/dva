@@ -1,13 +1,24 @@
 import React,{Component} from "react";
-import {Card,Icon,type,Avatar,Button,Input, Row,Col} from "antd";
+import {Card,Icon,type,Avatar,Button,Input, Row,Col ,Pagination } from "antd";
 import './style/index.less';
+import { dispatch } from "rxjs/internal/observable/range";
 const { Search } = Input;
 const ButtonGroup = Button.Group;
 const Meta  = Card;
 class List extends Component {
+  //初始化
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      current: 1,
+      listData:[]
+    };
+  }
+
+
   render(){
-    console.log(this.props);
-    const {search,listType,listData} = this.props;
+    const {search,listType,listData,onChange} = this.props;
     return (<div className="list-content">
       <div className=""></div>
         { search||listType ? ( 
@@ -28,6 +39,7 @@ class List extends Component {
                 { listData.map((item, i) =>(
                   <Col key={i}  span={8} className="mgt15">
                       <Card 
+                        size="small"
                         bordered={false}
                         cover={
                           <img
@@ -52,6 +64,7 @@ class List extends Component {
                 ))}
              </Row>
         </div>
+        <Pagination current={this.state.current} defaultCurrent={6} onChange={onChange} total={500} />
     </div>)
   }
 }

@@ -5,6 +5,7 @@ import crud from './crud';
 import tree from './tree';
 import datatable from './datatable';
 import charts from './charts';
+import home from './home';
 import formData from './form';
 /**
  * 加载mock文件
@@ -17,4 +18,5 @@ packMock(
   datatable,
   charts,
   formData,
+  home
 );
