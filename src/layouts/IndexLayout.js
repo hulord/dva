@@ -39,7 +39,15 @@ export default class IndexLayout extends PureComponent {
         'fixedBreadcrumbs'
       ];
     }
-    
+
+
+    props.dispatch({
+      type: 'home/getWeather',
+      payload: {
+        
+      }
+    })
+
     this.state = {
       collapsedLeftSide: false, // 左边栏开关控制
       leftCollapsedWidth: 60, // 左边栏宽度

@@ -21,7 +21,6 @@ export default class Home extends BaseComponent {
       listData:[],
     }
     this.onChange(1);
-   
   }
   onChange = page =>{
     this.props.dispatch({
@@ -33,17 +32,16 @@ export default class Home extends BaseComponent {
     })
   }
   render() {
-    const { home,user} = this.props;
+    const { home,user } = this.props;
     const { vhistory,listData } = home;
 
     const contentLeft = cx("carousel-content-left");
     const contentRight = cx("carousel-content-right");
     
     return (
-     
-      <Layout className="">
-        <Content className="space0">
-          <Col span={4}>
+      <Layout className = "">
+        <Content className = "space0">
+          <Col span= {4}>
             <Layout className={contentLeft}>
               <User Userinfo={user}></User>
               <Vhistory visithis={vhistory}></Vhistory>

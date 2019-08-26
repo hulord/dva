@@ -1,5 +1,5 @@
 import modelEnhance from '@/utils/modelEnhance';
-import { getList } from '../service';
+import { getList,getWeather } from '../service';
 export default modelEnhance({
   namespace: 'home',
   state: {
@@ -29,6 +29,14 @@ export default modelEnhance({
         type: 'getList2',
         payload: response,
       });
+    },
+    *getWeather({payload},{call,put}){
+      const response = yield call(getWeather,payload);
+      console.log(response);
+      yield put({
+        type:'getWeather',
+        payload:response
+      })
     }
   },
   reducers:{

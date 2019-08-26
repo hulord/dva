@@ -15,7 +15,6 @@ class NavBar extends PureComponent {
   state = {
     openSearchBox: false
   };
-
   static defaultProps = {
     fixed: true,
     theme: '' //'bg-dark',
@@ -141,6 +140,9 @@ class NavBar extends PureComponent {
                   <h3>4</h3>
                 </div>
               </Carousel>
+          </Layout>
+          <Layout class="weather-box" style={{width:"30%"}}>
+              <div className="weather-header"><span></span></div>
           </Layout>
         </Layout>
         ):(
