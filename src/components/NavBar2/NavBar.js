@@ -1,19 +1,23 @@
 import React, { PureComponent } from 'react';
-import Icon from '../Icon';
-import { Popover, Badge, Avatar,Carousel, Layout} from 'antd';
+
+import { Popover, Badge, Avatar,Carousel,Layout,Cascader,Icon} from 'antd';
 import { Link } from 'dva/router';
 import cx from 'classnames';
 import './style/index.less';
 import logoImg from 'assets/images/logo.png';
 import SearchBox from './SearchBox';
 import Header from 'antd/lib/calendar/Header';
+import citys from '@/utils/citys.js';
 
 /**
  * 其本本局头部区域
  */
 class NavBar extends PureComponent {
   state = {
-    openSearchBox: false
+    openSearchBox: false,
+    citys:citys,
+    weatherUri:'http://t.weather.itboy.net/api/weather/city/',
+    city:false
   };
   static defaultProps = {
     fixed: true,
@@ -50,7 +54,6 @@ class NavBar extends PureComponent {
       }
     }
   }
-
   onCloseSearchBox = () => {
     this.setState({
       openSearchBox: false
@@ -63,8 +66,15 @@ class NavBar extends PureComponent {
     });
   };
 
+  //选取城市名称
+  onChangeCity = (value, selectedOptions) => {
+    this.setState({
+      city: selectedOptions.map(o => o.label).join(', '),
+    });
+  };
+
   render() {
-    const { openSearchBox } = this.state;
+    const { openSearchBox,citys } = this.state;
     const {
       fixed,
       theme,
@@ -85,7 +95,7 @@ class NavBar extends PureComponent {
     return (
       <header className={classnames}>
         {true? (
-        <Layout>
+        <div>
           <Layout className="absHeader position-abs3 display-block margin-left-80">
               <div className="navbar-branding">
                 <Link className="space0 navbar-brand" to="/">
@@ -125,7 +135,7 @@ class NavBar extends PureComponent {
                 )}
               </ul>
           </Layout>
-          <Layout style={{width:"70%"}}>
+          <div style={{width:"70%",float:"left"}}>
             <Carousel autoplay  dotPosition="bottom"> 
                 <div>
                   <h3>1</h3>
@@ -140,11 +150,17 @@ class NavBar extends PureComponent {
                   <h3>4</h3>
                 </div>
               </Carousel>
+          </div>
+          <Layout class="weather-box" style={{width:"30%",float:"left"}}>
+              <div className="weather-header">
+              <Icon type="appstore" theme="twoTone"  style={{ fontSize: '16px', color: '#08c' }}/>
+              <span className="h1">{this.state.city}</span>
+                <Cascader options={citys} onChange={this.onChangeCity}>
+                    <a  href="#">{this.state.city ? null : "请选择城市..."}<Icon type="environment" theme="twoTone" /></a>
+                </Cascader>
+              </div>  
           </Layout>
-          <Layout class="weather-box" style={{width:"30%"}}>
-              <div className="weather-header"><span></span></div>
-          </Layout>
-        </Layout>
+        </div>
         ):(
           <Layout>
             <div className="navbar-branding">

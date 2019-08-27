@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'dva';
-import { Layout,ConfigProvider } from 'antd';
+import { Layout,ConfigProvider  } from 'antd';
 import { Switch, routerRedux } from 'dva/router';
 import NavBar2 from 'components/NavBar2';
 import NavBar from 'components/NavBar';
@@ -57,7 +57,7 @@ export default class IndexLayout extends PureComponent {
       theme, // 皮肤设置
       user,
       currentMenu: {},
-      isMobile: false
+      isMobile: false,
     };
     props.dispatch({
       type: 'global/getMenu'
@@ -75,6 +75,8 @@ export default class IndexLayout extends PureComponent {
     });
   }
 
+
+  
   componentWillMount() {
     // 检查有户是否登录
     const user = $$.getStore('user');
