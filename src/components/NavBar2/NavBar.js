@@ -155,7 +155,19 @@ class NavBar extends PureComponent {
                 <Cascader options={citys} onChange={onChangeCity}>
                     <a  href="#">{city ? null : "请选择城市..."}<Icon type="environment" theme="twoTone" /></a>
                 </Cascader>
-              </div>  
+              </div> 
+              <div className="weather-content">
+                  <div className="weather-data">
+                      <div className="weather-today">
+                          <div className="wendu">
+
+                          </div>
+                      </div>
+                      <div className="weather-week">
+                      </div>
+                  </div>
+                  <div className="weather-notice"></div>
+              </div> 
           </Layout>
         </div>
         ):(
