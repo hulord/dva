@@ -8,7 +8,8 @@ export default modelEnhance({
     menu: [],
     flatMenu: [],
     vhistory:[],
-    navigation:1
+    navigation:1,
+    weather:[]
   },
   subscriptions: {
     setup({ history, dispatch }) {
@@ -37,13 +38,19 @@ export default modelEnhance({
           });
         }
         loopMenu(data);
-        
         yield put({
           type: 'getMenuSuccess',
           payload: data,
         });
       }
     },
+    *getWeather({payload},{call,put}){
+      const response = yield call(getWeather,payload);
+       yield put({
+         type:'setWeather',
+         payload:response
+       })
+   }
   },
 
   reducers: {
@@ -56,7 +63,10 @@ export default modelEnhance({
     },
     setNav(state,{ payload }){
       return { ...state,navigation:payload }
-    }
+    },
+    setWeather(state,{ payload }){
+      return {...state,weather:payload.data}
+    } 
   },
 });
 
@@ -73,4 +83,7 @@ export function getFlatMenu(menus) {
 
 export async function getMenu(payload) {
   return $$.post('/user/menu', payload);
+}
+export async function getWeather(payload) {
+  return $$.post('/home/getWeather',payload);
 }

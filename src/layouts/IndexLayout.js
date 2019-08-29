@@ -40,14 +40,6 @@ export default class IndexLayout extends PureComponent {
       ];
     }
 
-
-    props.dispatch({
-      type: 'home/getWeather',
-      payload: {
-        
-      }
-    })
-
     this.state = {
       collapsedLeftSide: false, // 左边栏开关控制
       leftCollapsedWidth: 60, // 左边栏宽度
@@ -58,6 +50,7 @@ export default class IndexLayout extends PureComponent {
       user,
       currentMenu: {},
       isMobile: false,
+      citye:"",
     };
     props.dispatch({
       type: 'global/getMenu'
@@ -189,6 +182,20 @@ export default class IndexLayout extends PureComponent {
     });
   };
 
+//选取城市名称
+onChangeCity = (value, selectedOptions) => {
+  let cityIndex = value.length;
+  let cityCode = value[cityIndex-1];
+
+  this.props.dispatch({
+    type: 'global/getWeather',
+    payload:cityCode
+  })
+  
+  this.setState({
+    city: selectedOptions.map(o => o.label).join(', '),
+  });
+};
   render() {
     const {
       collapsedLeftSide,
@@ -199,11 +206,11 @@ export default class IndexLayout extends PureComponent {
       theme,
       user,
       currentMenu,
-      isMobile
+      isMobile,
+      city
     } = this.state;
-    const { routerData, location, global } = this.props;
-    const { menu, flatMenu,navigation } = global;
-
+    const { routerData, location, global  } = this.props;
+    const { menu, flatMenu,navigation,weather } = global;
     const { childRoutes } = routerData;
     const classnames = cx('full-layout', {
       "background-pink":true,
@@ -228,9 +235,12 @@ export default class IndexLayout extends PureComponent {
               onCollapseLeftSide={this.onCollapseLeftSide}
               onExpandTopBar={this.onExpandTopBar}
               toggleSidebarHeader={this.toggleSidebarHeader}
+              onChangeCity = {this.onChangeCity}
+              city = {city}
               theme={theme.navbar}
               user={user}
               isMobile={isMobile}
+              weather = {weather}
             />) : (<NavBar
               collapsed={collapsedLeftSide}
               onCollapseLeftSide={this.onCollapseLeftSide}
@@ -240,6 +250,7 @@ export default class IndexLayout extends PureComponent {
               user={user}
               navigation={navigation}
               isMobile={isMobile}
+              weather = {weather}
             />)}
         </Header>      
         <Layout >

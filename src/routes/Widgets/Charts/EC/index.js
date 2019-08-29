@@ -1,7 +1,7 @@
 import { dynamicWrapper, createRoute } from '@/utils/core';
 
 const routesConfig = app => ({
-  path: '/charts/ec',
+  path: '/admin/charts/ec',
   title: 'ECharts',
   component: dynamicWrapper(app, [], () => import('./components'))
 });

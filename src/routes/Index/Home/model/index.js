@@ -7,6 +7,7 @@ export default modelEnhance({
     bar2: [],
     vhistory: [],
     listData:[],
+    weather:[],
   },
 
   subscriptions: {
@@ -18,7 +19,6 @@ export default modelEnhance({
              payload: pathname
            })
         };
-
       });
     }
   },
@@ -30,14 +30,7 @@ export default modelEnhance({
         payload: response,
       });
     },
-    *getWeather({payload},{call,put}){
-      const response = yield call(getWeather,payload);
-      console.log(response);
-      yield put({
-        type:'getWeather',
-        payload:response
-      })
-    }
+
   },
   reducers:{
     addHistory(state,{ payload }){
@@ -45,6 +38,6 @@ export default modelEnhance({
     },
     getList2(state,{ payload }){
       return {...state,listData:payload.data}
-    } 
+    },
   },
 });

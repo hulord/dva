@@ -13,15 +13,14 @@ import citys from '@/utils/citys.js';
  * 其本本局头部区域
  */
 class NavBar extends PureComponent {
-  state = {
+   state = {
     openSearchBox: false,
     citys:citys,
-    weatherUri:'http://t.weather.itboy.net/api/weather/city/',
-    city:false
   };
+
   static defaultProps = {
     fixed: true,
-    theme: '' //'bg-dark',
+    theme: '', //'bg-dark',
   };
   
   toggleFullScreen() {
@@ -66,15 +65,11 @@ class NavBar extends PureComponent {
     });
   };
 
-  //选取城市名称
-  onChangeCity = (value, selectedOptions) => {
-    this.setState({
-      city: selectedOptions.map(o => o.label).join(', '),
-    });
-  };
+
 
   render() {
     const { openSearchBox,citys } = this.state;
+    
     const {
       fixed,
       theme,
@@ -83,7 +78,10 @@ class NavBar extends PureComponent {
       onExpandTopBar,
       toggleSidebarHeader,
       user,
-      isMobile
+      onChangeCity,
+      isMobile,
+      city,
+      weather
     } = this.props;
     const classnames = cx('navbar','border0',{
       'is-index':true,
@@ -91,7 +89,6 @@ class NavBar extends PureComponent {
       'navbar-sm': isMobile ? true : collapsed,
       ['bg-' + theme]: !!theme
     });
-
     return (
       <header className={classnames}>
         {true? (
@@ -151,12 +148,12 @@ class NavBar extends PureComponent {
                 </div>
               </Carousel>
           </div>
-          <Layout class="weather-box" style={{width:"30%",float:"left"}}>
+          <Layout className="weather-box" style={{"background":"rgb(250, 203, 185,0.5)"}}>
               <div className="weather-header">
               <Icon type="appstore" theme="twoTone"  style={{ fontSize: '16px', color: '#08c' }}/>
-              <span className="h1">{this.state.city}</span>
-                <Cascader options={citys} onChange={this.onChangeCity}>
-                    <a  href="#">{this.state.city ? null : "请选择城市..."}<Icon type="environment" theme="twoTone" /></a>
+              <span className="h1">{city}</span>
+                <Cascader options={citys} onChange={onChangeCity}>
+                    <a  href="#">{city ? null : "请选择城市..."}<Icon type="environment" theme="twoTone" /></a>
                 </Cascader>
               </div>  
           </Layout>

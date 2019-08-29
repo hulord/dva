@@ -31,6 +31,8 @@ export default class Home extends BaseComponent {
       }
     })
   }
+
+
   render() {
     const { home,user } = this.props;
     const { vhistory,listData } = home;
