@@ -206,6 +206,8 @@ class NavBar extends PureComponent {
                       </Col>
                       <Col span={16} className="weather-week">
                           { weather ? (
+                            <div>
+                            <Col span={16}>
                               <Chart height={125} width={200} data={data} scale={cols} forceFit>
                               <Coord type="polar" innerRadius={0.5} transpose />
                               <Tooltip title="question" />
@@ -229,6 +231,13 @@ class NavBar extends PureComponent {
                               >
                               </Geom>
                             </Chart>
+                            </Col>
+                            <Col span={6}>
+                                <div className="">PM10</div>
+                                <div className="">PM25</div>
+                                <div className="">湿度</div>
+                            </Col>
+                            </div>
                           )
                           :null}
                       </Col>
