@@ -2,7 +2,7 @@ import React from 'react';
 import G2 from 'components/Charts/G2';
 import DataSet from '@antv/data-set';
 const { Chart, Axis, Geom, Tooltip, Legend, Coord } = G2;
-const { DataView } = DataSet;
+
 const data = [
   { item: 'Design', a: 70, b: 30 },
   { item: 'Development', a: 60, b: 70 },

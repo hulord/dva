@@ -47,7 +47,13 @@ export default class extends BaseComponent {
         icon: 'dashboard',
         key: 'Gauge',
         components: ['./Gauge']
-      }
+      },
+      {
+        title: '玉珏图 / Radialbar',
+        icon: 'Radialbar',
+        key: 'Radialbar',
+        components: ['./Radialbar']
+      }      
     ]
   };
 

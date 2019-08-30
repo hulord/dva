@@ -1,13 +1,49 @@
 import React, { PureComponent } from 'react';
 
-import { Popover, Badge, Avatar,Carousel,Layout,Cascader,Icon} from 'antd';
+import { Popover, Badge, Avatar,Carousel,Layout,Cascader,Icon, Col } from 'antd';
 import { Link } from 'dva/router';
 import cx from 'classnames';
 import './style/index.less';
 import logoImg from 'assets/images/logo.png';
+import weatherImg from 'assets/images/weather_sun.png';
 import SearchBox from './SearchBox';
 import Header from 'antd/lib/calendar/Header';
 import citys from '@/utils/citys.js';
+import G2 from 'components/Charts/G2';
+import DataSet from '@antv/data-set';
+const { Chart, Axis, Geom, Tooltip, Legend, Coord, Label, View, Guide, Shape, Facet, Util } = G2;
+const { Text } = Guide;
+const { DataView } = DataSet;
+const data = [
+  {
+    question: "问题 1",
+    percent: 0.7
+  },
+  {
+    question: "问题 2",
+    percent: 0.6
+  },
+  {
+    question: "问题 3",
+    percent: 0.8
+  }
+];
+
+const cols = {
+  percent: {
+    min: 0,
+    max: 1
+  }
+};
+
+const ds = new DataSet();
+const dv = ds.createView().source(data);
+dv.transform({
+  type: 'fold',
+  fields: ['a', 'b'], // 展开字段集
+  key: 'Radialbar', // key字段
+  value: 'Radialbar' // value字段
+});
 
 /**
  * 其本本局头部区域
@@ -89,6 +125,7 @@ class NavBar extends PureComponent {
       'navbar-sm': isMobile ? true : collapsed,
       ['bg-' + theme]: !!theme
     });
+
     return (
       <header className={classnames}>
         {true? (
@@ -157,15 +194,45 @@ class NavBar extends PureComponent {
                 </Cascader>
               </div> 
               <div className="weather-content">
-                  <div className="weather-data">
-                      <div className="weather-today">
-                          <div className="wendu">
-
-                          </div>
-                      </div>
-                      <div className="weather-week">
-                      </div>
-                  </div>
+                  <Col span={24} className="weather-data">
+                      <Col span={8} className="weather-today">
+                            { weather ? (
+                              <div className="dayWeather">
+                                  <img src={weatherImg} alt="logo" />
+                                  <span className="temperature">24°</span>
+                                  <span className="daytext">晴天</span>
+                              </div>
+                            ) : null }
+                      </Col>
+                      <Col span={16} className="weather-week">
+                          { weather ? (
+                              <Chart height={125} width={200} data={data} scale={cols} forceFit>
+                              <Coord type="polar" innerRadius={0.5} transpose />
+                              <Tooltip title="question" />
+                              <Geom
+                                type="interval"
+                                position="question*percent"
+                                color={["percent", "#c5211f-#dc9076-#de6627"]}
+                                tooltip={[
+                                  "percent",
+                                  val => {
+                                    return {
+                                      name: "占比",
+                                      value: val * 100 + "%"
+                                    };
+                                  }
+                                ]}
+                                style={{
+                                  lineWidth: 1,
+                                  stroke: "#fff"
+                                }}
+                              >
+                              </Geom>
+                            </Chart>
+                          )
+                          :null}
+                      </Col>
+                  </Col>
                   <div className="weather-notice"></div>
               </div> 
           </Layout>
@@ -174,7 +241,7 @@ class NavBar extends PureComponent {
           <Layout>
             <div className="navbar-branding">
             <Link className="navbar-brand" to="/">
-              <img src={logoImg} alt="logo" />
+              <img style={{width:"25px"}} src={logoImg} alt="logo" />
               <b>LANIF</b>
               Admin
             </Link>
