@@ -1,5 +1,6 @@
 import $$ from 'cmn-utils';
 import modelEnhance from '@/utils/modelEnhance';
+import functions from '@/utils/func.js';
 
 export default modelEnhance({
   namespace: 'global',
@@ -46,9 +47,15 @@ export default modelEnhance({
     },
     *getWeather({payload},{call,put}){
       const response = yield call(getWeather,payload);
+      console.log(response.data[0]);
+      const tem    = functions.getColumn(response.data[0].data,"tem");
+      const temTop = functions.getColumn(response.data[0].data,"tem1");
+      const temLow = functions.getColumn(response.data[0].data,"tem2");
+      const today  = response.data[0].data[0];
+      
        yield put({
          type:'setWeather',
-         payload:response
+         payload:{tem:tem,temTop:temTop,temLow:temLow,today:today}
        })
    }
   },
@@ -65,7 +72,7 @@ export default modelEnhance({
       return { ...state,navigation:payload }
     },
     setWeather(state,{ payload }){
-      return {...state,weather:payload.data}
+      return {...state,weather:payload}
     } 
   },
 });

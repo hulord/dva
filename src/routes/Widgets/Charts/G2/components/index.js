@@ -53,7 +53,13 @@ export default class extends BaseComponent {
         icon: 'Radialbar',
         key: 'Radialbar',
         components: ['./Radialbar']
-      }      
+      },
+      {
+        title: '面积图 / Area',
+        icon: 'Area-chart',
+        key: 'Area',
+        components: ['./Area']
+      },      
     ]
   };
 

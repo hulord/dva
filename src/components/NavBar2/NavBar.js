@@ -36,14 +36,23 @@ const cols = {
   }
 };
 
-const ds = new DataSet();
-const dv = ds.createView().source(data);
-dv.transform({
-  type: 'fold',
-  fields: ['a', 'b'], // 展开字段集
-  key: 'Radialbar', // key字段
-  value: 'Radialbar' // value字段
-});
+
+const areaCols = {
+  year: {
+    type: "linear",
+    tickInterval: 25
+  },
+  percent: {
+    formatter(value) {
+      value = value || 0;
+      value *= 100;
+      return parseInt(value);
+    },
+
+    alias: "percent(%)"
+  }
+};
+
 
 /**
  * 其本本局头部区域
@@ -119,6 +128,18 @@ class NavBar extends PureComponent {
       city,
       weather
     } = this.props;
+    //const ds = new DataSet();
+    console.log(weather);  
+    // const dv = ds.createView("tt");
+    // dv.source(data);
+    // dv.transform({
+    //   type: "percent",
+    //   field: "value",
+    //   dimension: "year",
+    //   groupBy: ["country"],
+    //   as: "percent"
+    // });
+
     const classnames = cx('navbar','border0',{
       'is-index':true,
       'navbar-fixed-top': !!fixed,
@@ -199,8 +220,9 @@ class NavBar extends PureComponent {
                             { weather ? (
                               <div className="dayWeather">
                                   <img src={weatherImg} alt="logo" />
-                                  <span className="temperature">24°</span>
+                                  <span className="interval">/</span>
                                   <span className="daytext">晴天</span>
+                                  <span className="temperature">24°</span>
                               </div>
                             ) : null }
                       </Col>
@@ -208,7 +230,7 @@ class NavBar extends PureComponent {
                           { weather ? (
                             <div>
                             <Col span={16}>
-                              <Chart height={125} width={200} data={data} scale={cols} forceFit>
+                              <Chart height={100} width={200} data={data} scale={cols} forceFit>
                               <Coord type="polar" innerRadius={0.5} transpose />
                               <Tooltip title="question" />
                               <Geom
@@ -236,6 +258,20 @@ class NavBar extends PureComponent {
                                 <div className="">PM10</div>
                                 <div className="">PM25</div>
                                 <div className="">湿度</div>
+                            </Col>
+                            <Col span={24} className="weather-line-chart">
+                                
+                            {/* <Chart height={125} data={dv} scale={cols} forceFit>
+                              <Axis name="year" />
+                              <Axis name="percent" />
+                              <Tooltip />
+                              <Geom
+                                type="area"
+                                adjustType="stack"
+                                position={"year*percent"}
+                                color={["country", ["#ffd54f", "#ef6c00", "#1976d2", "#64b5f6"]]}
+                              />
+                              </Chart> */}
                             </Col>
                             </div>
                           )
