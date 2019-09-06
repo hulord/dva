@@ -47,15 +47,18 @@ export default modelEnhance({
     },
     *getWeather({payload},{call,put}){
       const response = yield call(getWeather,payload);
-      console.log(response.data[0]);
-      const tem    = functions.getColumn(response.data[0].data,"tem");
-      const temTop = functions.getColumn(response.data[0].data,"tem1");
-      const temLow = functions.getColumn(response.data[0].data,"tem2");
-      const today  = response.data[0].data[0];
-      
+      const tem=[];const temTop=[];const temLow=[];
+      if(response){
+        let data = response.data[0].data;
+        data.map((item)=>{
+          tem.push({value:parseInt(item.tem),day:item.date,name:"当前温度"});
+          temTop.push({value:parseInt(item.tem1),day:item.date,name:"最高温度"});
+          temLow.push({value:parseInt(item.tem1),day:item.date,name:"最低温度"});
+        })
+      }
        yield put({
          type:'setWeather',
-         payload:{tem:tem,temTop:temTop,temLow:temLow,today:today}
+         payload:{areaChat:{tem,temTop,temLow}}
        })
    }
   },
