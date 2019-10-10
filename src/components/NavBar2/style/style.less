@@ -1,7 +1,7 @@
 .absHeader{height:50px;background:rgba(0,0,0,0);}
 .display-block {display:block}
 .weather-box {
-  padding:5px;
+  // padding:5px;
   width:30%;
   float:left;
   .weather-header {
@@ -13,17 +13,14 @@
     }
   }
   .weather-data {
-    padding:10px;
     .weather-today {
       border-right:1px solid #d15146;
-      padding:10px 15px; 
       text-align:center;
       float: left;
       .temperature{
         width: 100%;
         float: left;
-        font-size: 40px;
-        // margin-top:5px;
+        font-size: 25px;
         padding-left:12px;
         color:#d15146
       }
@@ -33,11 +30,20 @@
         margin:0 5px
       }
       .daytext  {
-        // width: 100%;
-        //float: right;
         margin-top:5px;
         color:white
       }
     }
+    .weather-week {
+      .bizChat-label {
+        font-size:10px;
+        font-weight: 500
+      }
+    }
+  }
+  .weather-notice {
+    background-color: #d15146;
+    min-height: 125px;
+    padding:20px 30px;
   }
 }

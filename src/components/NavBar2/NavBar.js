@@ -35,8 +35,40 @@ const cols = {
     max: 1
   }
 };
+var data2 = [
+  {
+    year: "1986",
+    ACME: 162,
+    Compitor: 42
+  },
+  {
+    year: "1987",
+    ACME: 134,
+    Compitor: 54
+  },
+  {
+    year: "1988",
+    ACME: 116,
+    Compitor: 26
+  },
+  {
+    year: "1989",
+    ACME: 122,
+    Compitor: 32
+  },
+  {
+    year: "1990",
+    ACME: 178,
+    Compitor: 68
+  },
+  {
+    year: "1991",
+    ACME: 144,
+    Compitor: 54
+  }
+];
 
-
+//图表1
 const areaCols = {
   year: {
     type: "linear",
@@ -52,7 +84,26 @@ const areaCols = {
     alias: "percent(%)"
   }
 };
+//图表2
+const scale = {
+  value: {
+    alias: "The Share Price in Dollars",
+    formatter: function(val) {
+      return "$" + val;
+    }
+  },
+  year: {
+    range: [0, 1]
+  }
+};
 
+var dv = new DataSet.View().source(data2);
+dv.transform({
+  type: "fold",
+  fields: ["ACME", "Compitor"],
+  key: "type",
+  value: "value"
+});
 
 /**
  * 其本本局头部区域
@@ -216,7 +267,7 @@ class NavBar extends PureComponent {
               </div> 
               <div className="weather-content">
                   <Col span={24} className="weather-data">
-                      <Col span={8} className="weather-today">
+                      <Col span={10} className="weather-today">
                             { weather ? (
                               <div className="dayWeather">
                                   <img src={weatherImg} alt="logo" />
@@ -226,11 +277,11 @@ class NavBar extends PureComponent {
                               </div>
                             ) : null }
                       </Col>
-                      <Col span={16} className="weather-week">
+                      <Col span={14} className="weather-week">
                           { weather ? (
                             <div>
                             <Col span={16}>
-                              <Chart height={100} width={200} data={data} scale={cols} forceFit>
+                              <Chart height={70} width={150} data={data} scale={cols} forceFit>
                               <Coord type="polar" innerRadius={0.5} transpose />
                               <Tooltip title="question" />
                               <Geom
@@ -255,30 +306,43 @@ class NavBar extends PureComponent {
                             </Chart>
                             </Col>
                             <Col span={6}>
-                                <div className="">PM10</div>
-                                <div className="">PM25</div>
-                                <div className="">湿度</div>
-                            </Col>
-                            <Col span={24} className="weather-line-chart">
-                                
-                            {/* <Chart height={125} data={dv} scale={cols} forceFit>
-                              <Axis name="year" />
-                              <Axis name="percent" />
-                              <Tooltip />
-                              <Geom
-                                type="area"
-                                adjustType="stack"
-                                position={"year*percent"}
-                                color={["country", ["#ffd54f", "#ef6c00", "#1976d2", "#64b5f6"]]}
-                              />
-                              </Chart> */}
+                                <div className="bizChat-label">PM10</div>
+                                <div className="bizChat-label">PM25</div>
+                                <div className="bizChat-label">湿度</div>
                             </Col>
                             </div>
                           )
                           :null}
                       </Col>
                   </Col>
-                  <div className="weather-notice"></div>
+                  <Col span={24} className="weather-line-chart">
+                    {<Chart
+                          height={100} 
+                          data={dv}
+                          padding={"auto"}
+                          scale={scale}
+                          forceFit
+                        >
+                        <Tooltip crosshairs />
+                        <Axis />
+
+                        <Geom type="area" position="year*value" color="type" shape="smooth" />
+                        <Geom
+                          type="line"
+                          position="year*value"
+                          color="type"
+                          shape="smooth"
+                          size={2}
+                        />
+                      </Chart>}
+                    </Col>
+                    <Col span={24} className="weather-notice">
+                      <Col span={10} className="weather-notice-photo">
+                      </Col>
+                      <Col span={14} className="weather-notice-text">
+                        请注意要做的事
+                      </Col>
+                    </Col>
               </div> 
           </Layout>
         </div>
