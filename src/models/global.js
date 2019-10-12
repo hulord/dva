@@ -49,16 +49,17 @@ export default modelEnhance({
       const response = yield call(getWeather,payload);
       const tem=[];const temTop=[];const temLow=[];
       if(response){
-        let data = response.data[0].data;
-        data.map((item)=>{
+        var week_data = response.data[0].data;
+        week_data.map((item)=>{
           tem.push({value:parseInt(item.tem),day:item.date,name:"当前温度"});
           temTop.push({value:parseInt(item.tem1),day:item.date,name:"最高温度"});
           temLow.push({value:parseInt(item.tem1),day:item.date,name:"最低温度"});
         })
       }
+      var today_data = week_data[0];
        yield put({
          type:'setWeather',
-         payload:{areaChat:{tem,temTop,temLow}}
+         payload:{today:{wea:today_data.wea,temperature:today_data.tem,air_tips:today_data.air_tips},areaChat:{tem,temTop,temLow}}
        })
    }
   },

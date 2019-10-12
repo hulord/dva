@@ -2,9 +2,11 @@ import React, { PureComponent } from 'react';
 
 import { Popover, Badge, Avatar,Carousel,Layout,Cascader,Icon, Col } from 'antd';
 import { Link } from 'dva/router';
+import IndexIcon from '../Icon';
 import cx from 'classnames';
 import './style/index.less';
 import logoImg from 'assets/images/logo.png';
+import photoImg from 'assets/images/photo.png';
 import weatherImg from 'assets/images/weather_sun.png';
 import SearchBox from './SearchBox';
 import Header from 'antd/lib/calendar/Header';
@@ -210,32 +212,32 @@ class NavBar extends PureComponent {
                   Admin
                 </Link>
                 <span className="toggle_sidemenu_l" onClick={onCollapseLeftSide}>
-                  <Icon type="lines" />
+                  <IndexIcon type="lines" />
                 </span>
               </div>
               <ul className="nav navbar-nav navbar-right clearfix">
                 {collapsed || isMobile ? null : (
                   <li>
                     <a className="sidebar-menu-toggle" onClick={toggleSidebarHeader}>
-                      <Icon type="ruby" />
+                      <IndexIcon type="ruby" />
                     </a>
                   </li>
                 )}
                 <li>
                   <a onClick={onExpandTopBar}>
-                    <Icon type="wand" />
+                    <IndexIcon type="wand" />
                   </a>
                 </li>
                 {isMobile ? (
                   <li className="mini-search" onClick={this.onOpenSearchBox}>
                     <a>
-                      <Icon type="search" antd />
+                      <IndexIcon type="search" antd />
                     </a>
                   </li>
                 ) : (
                   <li onClick={this.toggleFullScreen}>
                     <a className="request-fullscreen">
-                      <Icon type="screen-full" />
+                      <IndexIcon type="screen-full" />
                     </a>
                   </li>
                 )}
@@ -267,17 +269,17 @@ class NavBar extends PureComponent {
               </div> 
               <div className="weather-content">
                   <Col span={24} className="weather-data">
-                      <Col span={10} className="weather-today">
+                      <Col span={9} className="weather-today">
                             { weather ? (
                               <div className="dayWeather">
                                   <img src={weatherImg} alt="logo" />
                                   <span className="interval">/</span>
-                                  <span className="daytext">晴天</span>
-                                  <span className="temperature">24°</span>
+                                  <span className="daytext">{weather.today?weather.today.wea:""}</span>
+                                  <span className="temperature">{weather.today?weather.today.temperature:""}°</span>
                               </div>
                             ) : null }
                       </Col>
-                      <Col span={14} className="weather-week">
+                      <Col span={15} className="weather-week">
                           { weather ? (
                             <div>
                             <Col span={16}>
@@ -337,10 +339,12 @@ class NavBar extends PureComponent {
                       </Chart>}
                     </Col>
                     <Col span={24} className="weather-notice">
-                      <Col span={10} className="weather-notice-photo">
+                      <Col span={9} className="weather-notice-photo">
+                          <img src={photoImg} alt="notice" />
+                          <span className="weather-notice-title">每日建议</span>
                       </Col>
-                      <Col span={14} className="weather-notice-text">
-                        请注意要做的事
+                      <Col span={15} className="weather-notice-text">
+                          {weather.today?weather.today.air_tips:""}
                       </Col>
                     </Col>
               </div> 

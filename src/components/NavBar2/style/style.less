@@ -44,6 +44,24 @@
   .weather-notice {
     background-color: #d15146;
     min-height: 125px;
-    padding:20px 30px;
+    padding:20px 15px;
+    color:white;
+    .weather-notice-photo {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      border-right:1px solid white;
+      .weather-notice-title {
+        margin-top:5px
+      }
+    }
+    .weather-notice-text {
+      padding-left: 15px;
+      height: 75px;
+      display: flex;
+      align-items: center;
+      font-weight: 300
+    }
   }
 }
