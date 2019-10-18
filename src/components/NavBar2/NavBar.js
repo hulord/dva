@@ -243,23 +243,31 @@ class NavBar extends PureComponent {
                 )}
               </ul>
           </Layout>
-          <div style={{width:"70%",float:"left"}}>
-            <Carousel autoplay  dotPosition="bottom"> 
+          <div className="index-header">
+            <Carousel autoplay  dotPosition="bottom" class="pos-relative"> 
                 <div>
-                  <h3>1</h3>
+                <img alt="图片"
+                    src={require('assets/images/settings/bg_1.jpg')}
+                />
                 </div>
                 <div>
-                  <h3>2</h3>
+                <img alt="图片"
+                    src={require('assets/images/settings/bg_2.jpg')}
+                />
                 </div>
                 <div>
-                  <h3>3</h3>
+                <img alt="图片"
+                    src={require('assets/images/settings/bg_3.jpg')}
+                />
                 </div>
                 <div>
-                  <h3>4</h3>
+                <img alt="图片"
+                    src={require('assets/images/settings/bg_2.jpg')}
+                />
                 </div>
               </Carousel>
-          </div>
-          <Layout className="weather-box" style={{"background":"rgb(250, 203, 185,0.5)"}}>
+
+            <Layout className="weather-box" style={{"background":"rgb(250, 203, 185,0.1)"}}>
               <div className="weather-header">
               <Icon type="appstore" theme="twoTone"  style={{ fontSize: '16px', color: '#08c' }}/>
               <span className="h1">{city}</span>
@@ -349,6 +357,8 @@ class NavBar extends PureComponent {
                     </Col>
               </div> 
           </Layout>
+          <Layout className="weather-backgroud"></Layout>
+          </div>
         </div>
         ):(
           <Layout>

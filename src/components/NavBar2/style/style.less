@@ -1,67 +1,82 @@
 .absHeader{height:50px;background:rgba(0,0,0,0);}
 .display-block {display:block}
-.weather-box {
-  // padding:5px;
-  width:30%;
-  float:left;
-  .weather-header {
-    height:45px;
-    line-height: 45px;
-    padding:0 15px;
-    .h1 {
-      margin:0 5px;
-    }
+.index-header{
+  position: relative;
+  .weather-backgroud{
+    position: absolute;
+    top:0;
+    right: 0;
+    width: 25%;
+    background:rgba(255,255,255,0.8);
+    z-index:1;
+    height: 100%
   }
-  .weather-data {
-    .weather-today {
-      border-right:1px solid #d15146;
-      text-align:center;
-      float: left;
-      .temperature{
-        width: 100%;
+  .weather-box {
+    width:25%;
+    position: absolute;
+    right: 0px;
+    top:0px;
+    z-index:2;
+    .weather-header {
+      height:45px;
+      line-height: 45px;
+      padding:0 15px;
+      .h1 {
+        margin:0 5px;
+      }
+    }
+    .weather-data {
+      .weather-today {
+        border-right:1px solid #d15146;
+        text-align:center;
         float: left;
-        font-size: 25px;
-        padding-left:12px;
-        color:#d15146
+        .temperature{
+          width: 100%;
+          float: left;
+          font-size: 25px;
+          padding-left:12px;
+          color:#d15146
+        }
+        .interval {
+          line-height: 25px;
+          height: 25px;
+          margin:0 5px
+        }
+        .daytext  {
+          margin-top:5px;
+          color:white
+        }
       }
-      .interval {
-        line-height: 25px;
-        height: 25px;
-        margin:0 5px
-      }
-      .daytext  {
-        margin-top:5px;
-        color:white
-      }
-    }
-    .weather-week {
-      .bizChat-label {
-        font-size:10px;
-        font-weight: 500
-      }
-    }
-  }
-  .weather-notice {
-    background-color: #d15146;
-    min-height: 125px;
-    padding:20px 15px;
-    color:white;
-    .weather-notice-photo {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      border-right:1px solid white;
-      .weather-notice-title {
-        margin-top:5px
+      .weather-week {
+        .bizChat-label {
+          font-size:10px;
+          font-weight: 500
+        }
       }
     }
-    .weather-notice-text {
-      padding-left: 15px;
-      height: 75px;
-      display: flex;
-      align-items: center;
-      font-weight: 300
+    .weather-notice {
+      background-color: #d15146;
+      min-height: 128px;
+      padding:20px 15px;
+      color:white;
+      .weather-notice-photo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        border-right:1px solid white;
+        height: 80px;
+        .weather-notice-title {
+          margin-top:5px
+        }
+      }
+      .weather-notice-text {
+        padding-left: 15px;
+        height: 75px;
+        display: flex;
+        align-items: center;
+        font-weight: 300
+      }
     }
   }
 }

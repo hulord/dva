@@ -37,7 +37,7 @@ class List extends Component {
           <div className="content-container">
               <Row className="space0" gutter={16}>
                 { listData.map((item, i) =>(
-                  <Col key={i}  span={8} className="mgt15">
+                  <Col key={i}  span={6} className="mgt15">
                       <Card 
                         size="small"
                         bordered={false}
@@ -55,8 +55,8 @@ class List extends Component {
                       >
                         <Meta
                           avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
-                          title={item.title}
-                          description={item.description}
+                          title="这是我的标题"
+                          description="这些是备用防守打法"
                           bordered={false}
                         />
                       </Card>
