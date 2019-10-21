@@ -17,20 +17,26 @@ export default class Artical extends BaseComponent {
 
   render() {
     const { user } = this.props;
-    const contentLeft = cx("carousel-content-left");
-    const contentRight = cx("carousel-content-right");
+    const contentLeft = cx("artical-left");
+    const artical_catalogue = cx("artical-catalogue");
+    const contentRight = cx("artical-right");
     
     return (
       <Layout className="full-layout page dashboard-page">
         <Content className="space0">
           <Col span={4}>
             <Layout className={contentLeft}>
-
+              1111111111111111111111111
+            </Layout>
+          </Col>
+          <Col span={4}>
+            <Layout className={contentLeft}>
+              1111111111111111111111111
             </Layout>
           </Col>
           <Col span={20}>
             <Layout className={contentRight}>
-               
+                111111111111111111111111
             </Layout>
           </Col>
         </Content>

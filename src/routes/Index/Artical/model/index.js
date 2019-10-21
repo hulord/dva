@@ -5,7 +5,8 @@ export default modelEnhance({
   state: {
     bar1: [],
     bar2: [],
-    vhistory: []
+    vhistory: [],
+    OpenCatalogue:false
   },
 
   subscriptions: {
@@ -44,6 +45,9 @@ export default modelEnhance({
   reducers:{
     addHistory(state,{ payload }){
       return {...state,vhistory:[payload]}
+    },
+    OpenCatalogue(state,{ payload }){
+      return {...state,OpenCatalogue:ture}
     }
   },
 });
