@@ -179,10 +179,10 @@ class NavBar extends PureComponent {
       onChangeCity,
       isMobile,
       city,
-      weather
+      weather,
+      is_index
     } = this.props;
     //const ds = new DataSet();
-    console.log(weather);  
     // const dv = ds.createView("tt");
     // dv.source(data);
     // dv.transform({
@@ -194,15 +194,14 @@ class NavBar extends PureComponent {
     // });
 
     const classnames = cx('navbar','border0',{
-      'is-index':true,
+      'is-index':is_index==1?true:false,
       'navbar-fixed-top': !!fixed,
       'navbar-sm': isMobile ? true : collapsed,
-      ['bg-' + theme]: !!theme
+   
     });
 
     return (
       <header className={classnames}>
-        {true? (
         <div>
           <Layout className="absHeader position-abs3 display-block margin-left-80">
               <div className="navbar-branding">
@@ -243,23 +242,32 @@ class NavBar extends PureComponent {
                 )}
               </ul>
           </Layout>
-          <div style={{width:"70%",float:"left"}}>
-            <Carousel autoplay  dotPosition="bottom"> 
+          {is_index==1?(
+            <div className="index-header">
+            <Carousel autoplay  dotPosition="bottom" class="pos-relative"> 
                 <div>
-                  <h3>1</h3>
+                <img alt="图片"
+                    src={require('assets/images/settings/bg_1.jpg')}
+                />
                 </div>
                 <div>
-                  <h3>2</h3>
+                <img alt="图片"
+                    src={require('assets/images/settings/bg_2.jpg')}
+                />
                 </div>
                 <div>
-                  <h3>3</h3>
+                <img alt="图片"
+                    src={require('assets/images/settings/bg_3.jpg')}
+                />
                 </div>
                 <div>
-                  <h3>4</h3>
+                <img alt="图片"
+                    src={require('assets/images/settings/bg_2.jpg')}
+                />
                 </div>
               </Carousel>
-          </div>
-          <Layout className="weather-box" style={{"background":"rgb(250, 203, 185,0.5)"}}>
+
+            <Layout className="weather-box" style={{"background":"rgb(250, 203, 185,0.1)"}}>
               <div className="weather-header">
               <Icon type="appstore" theme="twoTone"  style={{ fontSize: '16px', color: '#08c' }}/>
               <span className="h1">{city}</span>
@@ -349,98 +357,10 @@ class NavBar extends PureComponent {
                     </Col>
               </div> 
           </Layout>
-        </div>
-        ):(
-          <Layout>
-            <div className="navbar-branding">
-            <Link className="navbar-brand" to="/">
-              <img style={{width:"25px"}} src={logoImg} alt="logo" />
-              <b>LANIF</b>
-              Admin
-            </Link>
-            <span className="toggle_sidemenu_l" onClick={onCollapseLeftSide}>
-              <Icon type="lines" />
-            </span>
+          <Layout className="weather-backgroud"></Layout>
           </div>
-          <ul className="nav navbar-nav navbar-left clearfix">
-            {collapsed || isMobile ? null : (
-              <li>
-                <a className="sidebar-menu-toggle" onClick={toggleSidebarHeader}>
-                  <Icon type="ruby" />
-                </a>
-              </li>
-            )}
-            <li>
-              <a onClick={onExpandTopBar}>
-                <Icon type="wand" />
-              </a>
-            </li>
-            {isMobile ? (
-              <li className="mini-search" onClick={this.onOpenSearchBox}>
-                <a>
-                  <Icon type="search" antd />
-                </a>
-              </li>
-            ) : (
-              <li onClick={this.toggleFullScreen}>
-                <a className="request-fullscreen">
-                  <Icon type="screen-full" />
-                </a>
-              </li>
-            )}
-          </ul>
-          {isMobile ? null : (
-            <form className="navbar-form navbar-search clearfix">
-              <div className="form-group">
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="全文检索"
-                  onClick={this.onOpenSearchBox}
-                />
-              </div>
-            </form>
-          )}
-          <ul className="nav navbar-nav navbar-right clearfix">
-            <li>
-              <a href="https://github.com/LANIF-UI/dva-boot-admin">
-                <Icon type="github" antd />
-              </a>
-            </li>
-            <li className="dropdown">
-              <Popover
-                placement="bottomRight"
-                title={'通知'}
-                overlayClassName={cx('navbar-popup', { [theme]: !!theme })}
-                content={''}
-                trigger="click"
-              >
-                <a className="dropdown-toggle">
-                  <Icon type="radio-tower" />
-                </a>
-              </Popover>
-            </li>
-            <li className="dropdown">
-              <Popover
-                placement="bottomRight"
-                title={`WELCOME ${user.userName}`}
-                overlayClassName={cx('navbar-popup', { [theme]: !!theme })}
-                content={<UserDropDown />}
-                trigger="click"
-              >
-                <a className="dropdown-toggle">
-                  <Badge dot>
-                    <Avatar src={require('assets/images/avatar.jpg')}>
-                      {user.userName}
-                    </Avatar>
-                  </Badge>
-                </a>
-              </Popover>
-            </li>
-          </ul>
-          <SearchBox visible={openSearchBox} onClose={this.onCloseSearchBox} />
-          </Layout>
-        )}
+          ):null}
+        </div>
       </header>
     );
   }

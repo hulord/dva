@@ -100,18 +100,9 @@ const routesConfig = app => [
     component: IndexLayout,
     childRoutes: [
       Home(app),
-    ]
-  },
-  {
-    path: '/index',
-    title: '前台页面',
-    indexRoute: '/artical',
-    component: BasicLayout,
-    childRoutes: [
       Artical(app),
     ]
-  },
-
+  }
 ];
 
 export default app => createRoutes(app, routesConfig);

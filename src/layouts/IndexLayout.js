@@ -120,10 +120,11 @@ export default class IndexLayout extends PureComponent {
     const collapsedRightSide =
       this.state.collapsedRightSide || !collapsedLeftSide;
 
+    $$.setStore('theme', theme);
     this.setState({
       collapsedLeftSide,
       collapsedRightSide,
-      leftCollapsedWidth: 120
+      leftCollapsedWidth: 120,
     });
   };
 
@@ -210,7 +211,7 @@ onChangeCity = (value, selectedOptions) => {
       city
     } = this.state;
     const { routerData, location, global  } = this.props;
-    const { menu, flatMenu,navigation,weather } = global;
+    const { menu, flatMenu,weather,is_index } = global;
     const { childRoutes } = routerData;
     const classnames = cx('full-layout', {
       "background-pink":true,
@@ -230,7 +231,7 @@ onChangeCity = (value, selectedOptions) => {
       <Layout className={classnames}  style={{position:"unset!important"}}>
         <Layout className="container">
         <Header>
-          { navigation==1 ? (<NavBar2
+            <NavBar2
               collapsed={collapsedLeftSide}
               onCollapseLeftSide={this.onCollapseLeftSide}
               onExpandTopBar={this.onExpandTopBar}
@@ -241,17 +242,8 @@ onChangeCity = (value, selectedOptions) => {
               user={user}
               isMobile={isMobile}
               weather = {weather}
-            />) : (<NavBar
-              collapsed={collapsedLeftSide}
-              onCollapseLeftSide={this.onCollapseLeftSide}
-              onExpandTopBar={this.onExpandTopBar}
-              toggleSidebarHeader={this.toggleSidebarHeader}
-              theme={theme.navbar}
-              user={user}
-              navigation={navigation}
-              isMobile={isMobile}
-              weather = {weather}
-            />)}
+              is_index = {is_index}
+            />
         </Header>      
         <Layout >
           <Content  style={{overflowX:"unset"}}>
@@ -271,7 +263,7 @@ onChangeCity = (value, selectedOptions) => {
             onCollapse={this.toggleRightSide}
           />
         </Layout>
-        <SkinToolbox onChangeTheme={this.onChangeTheme} theme={theme} />
+
         </Layout>
       </Layout>
     );

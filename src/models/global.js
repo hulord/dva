@@ -9,18 +9,21 @@ export default modelEnhance({
     menu: [],
     flatMenu: [],
     vhistory:[],
-    navigation:1,
+    is_index:1,
     weather:[]
   },
   subscriptions: {
     setup({ history, dispatch }) {
       return history.listen(({ pathname }) => {
-        if(pathname!="/index/home"){
-          dispatch({
-            type: 'setNav',
-            payload: 2
-          }) 
+        if(pathname=="/index/home"){
+           var  is_index = 1;
+        }else{
+          var  is_index = 2;
         };
+        dispatch({
+          type: 'setIndex',
+          payload:is_index
+        }) 
       });
     }
   },
@@ -72,8 +75,8 @@ export default modelEnhance({
         flatMenu: getFlatMenu(payload),
       };
     },
-    setNav(state,{ payload }){
-      return { ...state,navigation:payload }
+    setIndex(state,{ payload }){
+      return { ...state,is_index:payload }
     },
     setWeather(state,{ payload }){
       return {...state,weather:payload}

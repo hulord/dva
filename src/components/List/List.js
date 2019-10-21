@@ -2,14 +2,16 @@ import React,{Component} from "react";
 import {Card,Icon,type,Avatar,Button,Input, Row,Col ,Pagination } from "antd";
 import './style/index.less';
 import { dispatch } from "rxjs/internal/observable/range";
+import { Link } from "dva/router";
 const { Search } = Input;
 const ButtonGroup = Button.Group;
 const Meta  = Card;
+
+
 class List extends Component {
   //初始化
   constructor(props) {
     super(props);
-
     this.state = {
       current: 1,
       listData:[]
@@ -18,7 +20,7 @@ class List extends Component {
 
 
   render(){
-    const {search,listType,listData,onChange} = this.props;
+    const {search,listType,listData ,onChange ,history} = this.props;
     return (<div className="list-content">
       <div className=""></div>
         { search||listType ? ( 
@@ -37,7 +39,7 @@ class List extends Component {
           <div className="content-container">
               <Row className="space0" gutter={16}>
                 { listData.map((item, i) =>(
-                  <Col key={i}  span={8} className="mgt15">
+                  <Col key={i}  span={6} className="mgt15">
                       <Card 
                         size="small"
                         bordered={false}
@@ -48,15 +50,15 @@ class List extends Component {
                           />
                         }
                         actions={[
-                          <Icon type="setting" key="setting" />,
-                          <Icon type="edit" key="edit" />,
-                          <Icon type="ellipsis" key="ellipsis" />,
+                          <Link to="artical"><Icon type="setting" key="setting" /></Link>,
+                          <Link to="artical"><Icon type="edit" key="edit" /></Link>,
+                          <Icon type="ellipsis" key="ellipsis" url=""/>,
                         ]}
                       >
                         <Meta
                           avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
-                          title={item.title}
-                          description={item.description}
+                          title="这是我的标题"
+                          description="这些是备用防守打法"
                           bordered={false}
                         />
                       </Card>
