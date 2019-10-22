@@ -193,7 +193,7 @@ class NavBar extends PureComponent {
     //   as: "percent"
     // });
 
-    const classnames = cx('navbar','border0',{
+    const classnames = cx('navbar','background-ghost','border0',{
       'is-index':is_index==1?true:false,
       'navbar-fixed-top': !!fixed,
       'navbar-sm': isMobile ? true : collapsed,

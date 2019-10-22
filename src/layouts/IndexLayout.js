@@ -120,7 +120,6 @@ export default class IndexLayout extends PureComponent {
     const collapsedRightSide =
       this.state.collapsedRightSide || !collapsedLeftSide;
 
-    $$.setStore('theme', theme);
     this.setState({
       collapsedLeftSide,
       collapsedRightSide,
@@ -230,7 +229,6 @@ onChangeCity = (value, selectedOptions) => {
     return (
       <Layout className={classnames}  style={{position:"unset!important"}}>
         <Layout className="container">
-        <Header>
             <NavBar2
               collapsed={collapsedLeftSide}
               onCollapseLeftSide={this.onCollapseLeftSide}
@@ -243,8 +241,7 @@ onChangeCity = (value, selectedOptions) => {
               isMobile={isMobile}
               weather = {weather}
               is_index = {is_index}
-            />
-        </Header>      
+            />   
         <Layout >
           <Content  style={{overflowX:"unset"}}>
             {theme.layout.indexOf('tabLayout') >= 0 ? (
