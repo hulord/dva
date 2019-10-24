@@ -13,6 +13,7 @@ import zh_CN from 'antd/lib/locale-provider/zh_CN';
 import 'moment/locale/zh-cn';
 import { homepage } from '../package.json';
 import * as serviceWorker from './serviceWorker';
+const proxy = require('http-proxy-middleware');
 
 // -> 初始化
 const app = dva({
@@ -27,7 +28,7 @@ app.use({ onError: config.exception.global });
 request.config(config.request);
 
 // 使用mock数据
-require('./__mocks__');
+//require('./__mocks__');
 // -> Developer mock data
 // if (process.env.NODE_ENV === 'development') {
 //   require('./__mocks__');
@@ -54,6 +55,7 @@ export default {
   app,
   store: app._store,
   dispatch: app._store.dispatch
+  
 };
 
 // 如果想可以离线使用，请使用register()代替unregister()。可能会带来一些问题，如缓存等

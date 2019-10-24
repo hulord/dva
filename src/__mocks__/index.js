@@ -12,7 +12,6 @@ import formData from './form';
  * packMock(mock1[,mock2])
  */
 packMock(
-  user,
   crud,
   tree,
   datatable,

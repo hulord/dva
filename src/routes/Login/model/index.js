@@ -24,6 +24,7 @@ export default {
   effects: {
     *login({ payload }, { call, put }) {
       const { status, message, data } = yield call(login, payload);
+      console.log(status,message,data);
       if (status) {
         $$.setStore('user', data);
         yield put(routerRedux.replace('/'));
