@@ -25,9 +25,9 @@ export default {
     *login({ payload }, { call, put }) {
       const { status, message, data } = yield call(login, payload);
       console.log(status,message,data);
-      if (status) {
+      if (status==0) {
         $$.setStore('user', data);
-        yield put(routerRedux.replace('/'));
+        yield put(routerRedux.replace('/index/home'));
       } else {
         yield put({
           type: 'loginError',
