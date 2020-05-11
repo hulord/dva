@@ -244,11 +244,7 @@ onChangeCity = (value, selectedOptions) => {
             {theme.layout.indexOf('tabLayout') >= 0 ? (
               <TabsLayout childRoutes={childRoutes} location={location} />
             ) : (
-              <Layout >
-                <Content className={content_layout}>
                   <Switch>{childRoutes}</Switch>
-                </Content>
-              </Layout>
             )}
           </Content>
           <RightSideBar

@@ -22,25 +22,25 @@ export default class Artical extends BaseComponent {
     const contentRight = cx("artical-right");
     
     return (
-      <Layout className="full-layout page dashboard-page">
-        <Content className="space0">
+      <div>
+        <Row className="space0">
           <Col span={4}>
-            <Layout className={contentLeft}>
+            <Col className={contentLeft} className={"content-menu"} style={{backgroundColor:'#a1afc9',color:'white',fontSize:40,padding:"15px"}}>
               1111111111111111111111111
-            </Layout>
+            </Col>
+          </Col>
+          <Col span={16}>
+            <Col className={contentLeft} style={{backgroundColor:'',color:'white',fontSize:40,padding:"15px"}}>
+              1111111111111111111111111
+            </Col>
           </Col>
           <Col span={4}>
-            <Layout className={contentLeft}>
-              1111111111111111111111111
-            </Layout>
-          </Col>
-          <Col span={20}>
-            <Layout className={contentRight}>
+            <Col className={contentRight} style={{backgroundColor:'#3d3b4f',color:'white',fontSize:40,padding:"15px"}}>
                 111111111111111111111111
-            </Layout>
+            </Col>
           </Col>
-        </Content>
-      </Layout>
+        </Row>
+      </div>
     );
   }
 }

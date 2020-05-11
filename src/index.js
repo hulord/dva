@@ -13,7 +13,7 @@ import zh_CN from 'antd/lib/locale-provider/zh_CN';
 import 'moment/locale/zh-cn';
 import { homepage } from '../package.json';
 import * as serviceWorker from './serviceWorker';
-const proxy = require('http-proxy-middleware');
+// const proxy = require('http-proxy-middleware');
 
 // -> 初始化
 const app = dva({

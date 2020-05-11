@@ -22,7 +22,7 @@ export default {
 
   // 异步请求配置
   request: {
-    prefix: '/v1',
+    prefix: '/',
 
     // 每次请求头部都会带着这些参数
     withHeaders: () => ({
@@ -39,7 +39,7 @@ export default {
      */
     afterResponse: response => {
       const { status, message } = response;
-      if (status) {
+      if (status==0) {
         return response;
       } else {
         throw new Error(message);
