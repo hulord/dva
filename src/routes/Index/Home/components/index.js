@@ -17,25 +17,33 @@ export default class Home extends BaseComponent {
   constructor(props) {
     super(props);
     this.state = {
-      current:"1",
+      page:1,
       listData:[],
     }
-    this.onChange(1);
+    this.onChange(this.state.page);
   }
   onChange = page =>{
     this.props.dispatch({
-      type: 'home/getList',
+      type: 'home/getArtical',
       payload: {
-        currentPage:page,
+        page:page,
         pageSize:10,
       }
     })
   }
-
-
+  onSearch = keyword=>{
+    this.props.dispatch({
+      type: 'home/getArtical',
+      payload: {
+        page:1,
+        pageSize:10,
+        keyword:keyword
+      }
+    })
+  }
   render() {
     const { home,user } = this.props;
-    const { vhistory,listData } = home;
+    const { vhistory,listData,page,total,keyword } = home;
 
     const contentLeft = cx("carousel-content-left");
     const contentRight = cx("carousel-content-right");
@@ -51,7 +59,7 @@ export default class Home extends BaseComponent {
           </Col>
           <Col span={20}>
             <Layout className={contentRight}>
-               <List search="ture" listType="ture" onChange={this.onChange} listData={listData}></List>
+               <List search="ture" listType="ture" onSearch={this.onSearch} onChange={this.onChange} pageSize={10} page={page} keyword={keyword} total={total} listData={listData}></List>
             </Layout>
           </Col>
         </Content>

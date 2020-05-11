@@ -1,5 +1,5 @@
 import $$ from 'cmn-utils';
 
-export async function getList(payload) {
-  return $$.post('/home/getList', payload);
+export async function getArtical(payload) {
+  return $$.get('/artical/getall', payload);
 }

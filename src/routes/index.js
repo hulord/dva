@@ -49,7 +49,7 @@ const routesConfig = app => [
   {
     path: '/sign',
     title: '登录',
-    indexRoute: '/sign/login',
+    indexRoute: '/login',
     component: UserLayout,
     childRoutes: [
       Login(app),

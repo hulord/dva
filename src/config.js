@@ -22,7 +22,7 @@ export default {
 
   // 异步请求配置
   request: {
-    prefix: '/api',
+    prefix: '/v1',
 
     // 每次请求头部都会带着这些参数
     withHeaders: () => ({

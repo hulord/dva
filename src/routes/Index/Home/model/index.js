@@ -1,5 +1,5 @@
 import modelEnhance from '@/utils/modelEnhance';
-import { getList,getWeather } from '../service';
+import { getList,getWeather, getArtical } from '../service';
 export default modelEnhance({
   namespace: 'home',
   state: {
@@ -23,10 +23,10 @@ export default modelEnhance({
     }
   },
   effects: {
-    *getList({ payload }, { call, put }){
-      const response = yield call(getList, payload);
+    *getArtical({ payload }, { call, put }){
+      const response = yield call(getArtical, payload);
       yield put({
-        type: 'getList2',
+        type: 'setArtical',
         payload: response,
       });
     },
@@ -36,8 +36,13 @@ export default modelEnhance({
     addHistory(state,{ payload }){
       return {...state,vhistory:[payload]}
     },
-    getList2(state,{ payload }){
-      return {...state,listData:payload.data}
+    setArtical(state,{ payload }){
+      return {
+        ...state,
+        listData:payload.data.list,
+        page:payload.data.page,
+        total:payload.data.total
+      }
     },
   },
 });

@@ -9,24 +9,14 @@ const Meta  = Card;
 
 
 class List extends Component {
-  //初始化
-  constructor(props) {
-    super(props);
-    this.state = {
-      current: 1,
-      listData:[]
-    };
-  }
-
-
   render(){
-    const {search,listType,listData ,onChange ,history} = this.props;
+    const {search,listType,listData,total,page,onChange ,onSearch} = this.props;
     return (<div className="list-content">
       <div className=""></div>
         { search||listType ? ( 
               <Row className="list-assist">
                 <Col span={6}  className="list-search">
-                  <Search placeholder="请输入关键字" onSearch={value => console.log(value)} enterButton />
+                  <Search placeholder="请输入关键字" onSearch={onSearch} enterButton />
                 </Col>
                 <Col span={6} offset={12}  className="list-show">
                   <ButtonGroup>
@@ -38,14 +28,14 @@ class List extends Component {
             ) : null }
           <div className="content-container">
               <Row className="space0" gutter={16}>
-                { listData.map((item, i) =>(
+                { listData ?( listData.map((item, i) =>(
                   <Col key={i}  span={6} className="mgt15">
                       <Card 
                         size="small"
                         bordered={false}
                         cover={
                           <img
-                            alt="example"
+                            alt={item.title}
                             src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
                           />
                         }
@@ -57,16 +47,18 @@ class List extends Component {
                       >
                         <Meta
                           avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
-                          title="这是我的标题"
+                          title={item.title}
                           description="这些是备用防守打法"
                           bordered={false}
                         />
                       </Card>
                     </Col>
-                ))}
+                ))
+              ):null
+              }
              </Row>
         </div>
-        <Pagination current={this.state.current} defaultCurrent={6} onChange={onChange} total={500} />
+        <Pagination current={page} defaultCurrent={1} onChange={onChange} total={total} />
     </div>)
   }
 }
