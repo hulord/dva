@@ -40,8 +40,8 @@ class List extends Component {
                           />
                         }
                         actions={[
-                          <Link to="artical"><Icon type="setting" key="setting" /></Link>,
-                          <Link to="artical"><Icon type="edit" key="edit" /></Link>,
+                          <Link to={'artical/'+item.id}><Icon type="setting" key="setting" /></Link>,
+                          <Link to={'artical/'+item.id}><Icon type="edit" key="edit" /></Link>,
                           <Icon type="ellipsis" key="ellipsis" url=""/>,
                         ]}
                       >

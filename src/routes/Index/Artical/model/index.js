@@ -1,4 +1,5 @@
 import modelEnhance from '@/utils/modelEnhance';
+import { articalDetail } from '../service';
 
 export default modelEnhance({
   namespace: 'artical',
@@ -6,41 +7,34 @@ export default modelEnhance({
     bar1: [],
     bar2: [],
     vhistory: [],
-    OpenCatalogue:false
+    OpenCatalogue:false,
+    detail:{}
   },
 
   subscriptions: {
     setup({ history, dispatch }) {
-      return history.listen(({ pathname }) => {
-        if(pathname!="/"){
+       history.listen(( location ) => {
+        if(location.pathname!="/"){
            dispatch({
-             type: 'addHistory',
-             payload: pathname
+              type: 'addHistory',
+              payload: location.pathname
            })
         };
-        if (pathname.indexOf('/dashboard') !== -1) {
-          dispatch({
-            type: '@request',
-            afterResponse: resp => resp.data,
-            payload: {
-              valueField: 'bar1',
-              url: '/charts/bar1',
-            }
-          });
-          dispatch({
-            type: '@request',
-            afterResponse: resp => resp.data,
-            payload: {
-              valueField: 'bar2',
-              url: '/charts/bar2',
-            }
-          });
-        }
+        dispatch({
+          type: 'articalDetail',
+          payload: location.pathname
+       })
       });
     }
   },
   effects: {
-
+    *articalDetail({ payload }, { call, put }){
+      const response = yield call(articalDetail, payload);
+      yield put({
+        type: 'setDetail',
+        payload: response,
+      });
+    },
   },
   reducers:{
     addHistory(state,{ payload }){
@@ -48,6 +42,9 @@ export default modelEnhance({
     },
     OpenCatalogue(state,{ payload }){
       return {...state,OpenCatalogue:ture}
+    },
+    setDetail(state,{ payload }){
+      return {...state,detail:payload.data}
     }
   },
 });

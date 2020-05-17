@@ -94,7 +94,7 @@ const routesConfig = app => [
     ]
   },  
   {
-    path: '/index',
+    path: '',
     title: '前台页面',
     indexRoute: '/home',
     component: IndexLayout,

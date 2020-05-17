@@ -30,7 +30,6 @@ export default modelEnhance({
         payload: response,
       });
     },
-
   },
   reducers:{
     addHistory(state,{ payload }){
