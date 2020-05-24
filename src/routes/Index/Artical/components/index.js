@@ -1,10 +1,13 @@
 import React from 'react';
 import { connect } from 'dva';
+import $ from 'jquery'
 import { Layout, Col, Row, Breadcrumb, Divider, Tag } from 'antd';
 import BaseComponent from 'components/BaseComponent';
 import User from 'components/User';
 import cx from 'classnames';
 import './index.less';
+import Up from '../../../../utils/blogMenu-master/js/jquery.autoMenu.js';
+import '../../../../utils/blogMenu-master/css/jquery.autoMenu.css';
 
 const { Content } = Layout;
 
@@ -15,6 +18,13 @@ const { Content } = Layout;
 export default class Artical extends BaseComponent {
   constructor(props) {
     super(props);
+
+    //获取文章标签
+    //this.getArticalTags();
+    //获取相似文章
+    //this.getSimilarArtical();
+    //获取推荐文章
+    //this.getTopArtical();
   }
 
   //获取
@@ -22,11 +32,18 @@ export default class Artical extends BaseComponent {
     const { user,artical } = this.props;
     const contentLeft = cx("artical-left");
     const artical_catalogue = cx("artical-catalogue");
-    const contentRight = cx("artical-right");
-    
+    const contentRight = cx("artical-right"); 
+    $("#autoMenu").autoMenu({
+      levelOne : 'h3', //一级标题
+      levelTwo : 'h4',  //二级标题（暂不支持更多级）
+      width : 200, //容器宽度
+      height : 400, //容器高度
+      padding: 20, //内部间距
+      offTop : 100 //滚动切换导航时离顶部的距离
+  })
     return (
-      <div>
-        <Row className="space0">
+      <div >
+        <Row className="space0 vh100 ">
           <Col span={4}>
             <Col className={contentLeft} className={"content-menu"} style={{backgroundColor:'#262626',color:'white',padding:"15px"}}>
               <User Userinfo={user}></User>            
@@ -40,25 +57,32 @@ export default class Artical extends BaseComponent {
               <Breadcrumb.Item href="">语言</Breadcrumb.Item>
               <Breadcrumb.Item>php</Breadcrumb.Item>
             </Breadcrumb>
-              <h2 class="xltitle">
+              <h2 className="xltitle">
                 {artical.detail.title}
               </h2>
               <Divider />
-              <div class="infomation">
-              <div class="wt-container"><div class="wt-single-meta"> <span class="wt-info-model">发布于 2020-03-08</span> <span class="wt-info-model">字数 14543</span>  <span class="wt-info-model">浏览 4543</span> </div><Tag color="#2db7f5">#2db7f5</Tag><Tag color="#2db7f5">#2db7f5</Tag><Tag color="#2db7f5">#2db7f5</Tag></div>
+              <div className="infomation">
+              <div className="wt-container">
+                <div className="wt-single-meta"> <span className="wt-info-model">发布于 2020-03-08</span> <span className="wt-info-model">字数 14543</span>  <span className="wt-info-model">浏览 4543</span> </div>
+                <div className="tags mt10">
+                { artical.detail.Tags ?( artical.detail.Tags.map((item, i) =>(
+                  <Tag key={item.id+1} color="#2db7f5">{item.tag_name}</Tag>
+                ))):null}
+                </div>
+                </div>
               </div>
               <Divider />
-              <div dangerouslySetInnerHTML={{__html:artical.detail.content}}  ></div>
+              <div className="content"  dangerouslySetInnerHTML={{__html:artical.detail.content}}  ></div>
             </Col>
           </Col>
           <Col span={4}>
-            <Col className={contentRight} style={{backgroundColor:'#a1afc9',color:'white',padding:"15px"}}>
-                111111111111111111111111
-            </Col>
+          <Col className="autoMenu" id="autoMenu" data-automenu>
+          </Col>
           </Col>
         </Row>
       </div>
     );
   }
+ 
 }
 
