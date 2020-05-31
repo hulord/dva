@@ -3,12 +3,11 @@
  * 说明：自动根据标签（h3,h4）生成博客目录
  */
 import jQuery from 'jquery'
+import { node } from 'prop-types';
 
 (function ($) {
 
     var Menu = (function () {
-        console.log(1111111111111111111111111111111111111);
-
         /**
          * 插件实例化部分，初始化时调用的代码可以放这里
          * @param element 传入jq对象的选择器，如 $("#J_plugin").plugin() ,其中 $("#J_plugin") 即是 element
@@ -58,6 +57,7 @@ import jQuery from 'jquery'
                     if(_this.get(0).tagName == opts.levelOne.toUpperCase()){
                         _this.attr('id',num);
                         var nodetext = that.handleTxt(_this.html());
+                        console.log(nodetext);
                         html += '<li name="'+ num +'"><a href="#'+ num +'">'+ nodetext +'</a></li>';
                         num++;
                     }else if(_this.get(0).tagName == opts.levelTwo.toUpperCase()){

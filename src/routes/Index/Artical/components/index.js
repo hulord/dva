@@ -4,6 +4,7 @@ import $ from 'jquery'
 import { Layout, Col, Row, Breadcrumb, Divider, Tag } from 'antd';
 import BaseComponent from 'components/BaseComponent';
 import User from 'components/User';
+import AutoMenu from 'components/AutoMenu';
 import cx from 'classnames';
 import './index.less';
 import Up from '../../../../utils/blogMenu-master/js/jquery.autoMenu.js';
@@ -30,6 +31,8 @@ export default class Artical extends BaseComponent {
   //获取
   render() {
     const { user,artical } = this.props;
+    const { detail } = artical;
+    const { content } = detail;
     const contentLeft = cx("artical-left");
     const artical_catalogue = cx("artical-catalogue");
     const contentRight = cx("artical-right"); 
@@ -72,12 +75,12 @@ export default class Artical extends BaseComponent {
                 </div>
               </div>
               <Divider />
-              <div className="content"  dangerouslySetInnerHTML={{__html:artical.detail.content}}  ></div>
+              <div className="content"  dangerouslySetInnerHTML={{__html:content}}   ></div>
             </Col>
           </Col>
           <Col span={4}>
-          <Col className="autoMenu" id="autoMenu" data-automenu>
-          </Col>
+            <AutoMenu artical = {content}> </AutoMenu>
+          { /* <Col className="autoMenu" id="autoMenu" data-automenu></Col>*/}
           </Col>
         </Row>
       </div>
