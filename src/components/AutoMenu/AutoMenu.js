@@ -19,8 +19,11 @@ class AutoMenu extends Component {
       let html = "";
       if(a && a.length>0){
          a.map(item=>{
-          item.replace("<h[1-6]","/")
-            html += item;
+            if(item.indexOf("h3") != -1){
+              html += "<li name=\"0\" ><a href=\"#0\">"+item.replace(/<[^>]+>/g,"")+"</a></li>";
+            }else if(item.indexOf("h4") != -1){
+              html += "<li class=\"sub\" name=\"2\"><a href=\"#2\">"+item.replace(/<[^>]+>/g,"")+"</a></li>"
+            }
         })
       }
       this.state.menu = html;
