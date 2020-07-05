@@ -33,39 +33,18 @@ export default class Artical extends BaseComponent {
     }
   }
 
-  returnMenu = (content) => {
-    if(content){
-      let a = content.match(/<h([1-6]).*>(.*?)<\/h[1-6]>/g);   
-      let html = "";
-      if(a && a.length>0){
-         a.forEach((item,i)=>{
-            let h_content = item.replace(/<[^>]+>/g,"")
-            if(item.indexOf("h3") != -1){
-              content.replace(item,"<h3 id='"+"scroll"+i+"'>"+h_content+"</h3>")
-              html += "<li name=\"0\" ><a href=\"#0\">"+h_content+"</a></li>";
-            }else if(item.indexOf("h4") != -1){
-              content.replace(item,"<h4 id='"+"scroll"+i+"'>"+h_content+"</h4>")
-              html += "<li class=\"sub\" name=\"2\"><a href=\"#2\">"+h_content+"</a></li>"
-            }
-        })
-      }
-      this.state.menu = html;
-      this.state.content  = content;
-    }
-  }
 
   //获取
   render() {
     const { user,artical } = this.props;
     const { detail } = artical;
-    const { menu,content } = this.state;
+    const { content ,catalogue} = detail;
     const contentLeft = cx("artical-left");
     const artical_catalogue = cx("artical-catalogue");
     const contentRight = cx("artical-right"); 
 
     return (
       <div >
-        {this.returnMenu(detail.content)}
         <Row className="space0 vh100 ">
           <Col span={4}>
             <Col className={contentLeft} className={"content-menu"} style={{backgroundColor:'#262626',color:'white',padding:"15px"}}>
@@ -95,12 +74,11 @@ export default class Artical extends BaseComponent {
                 </div>
               </div>
               <Divider />
-              <div className="content"  dangerouslySetInnerHTML={{__html:detail.content}}   ></div>
+              <div className="content"  dangerouslySetInnerHTML={{__html:content}}   ></div>
             </Col>
           </Col>
           <Col span={4}>
-            <AutoMenu menu = {menu}> </AutoMenu>
-          { /* <Col className="autoMenu" id="autoMenu" data-automenu></Col>*/}
+            <AutoMenu menu = {catalogue} anchor={1}> </AutoMenu>
           </Col>
         </Row>
       </div>

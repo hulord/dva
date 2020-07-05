@@ -6,19 +6,22 @@ import './style/index.less';
 class AutoMenu extends Component {
   constructor(props){
     super(props);
-    this.state = {
-      topOne:"h3",
-      topTow:"h4",
-      menu:""
-    }
+
   }
 
-
+  Changeactive = (menu,anchor) => {
+    var reg = new RegExp('name=\"'+anchor+'\"',"g"); //创建正则RegExp对象    
+    var menu = menu.replace(reg,'name=\"'+anchor+'\" class="active"');
+    return  <div className="autoMenu"><ul style={{height:"400px",padding:"20px"}} dangerouslySetInnerHTML={{__html:menu}}></ul></div>;
+  }
 
   render(){
-    const { menu } = this.props;
+    const { menu ,anchor} = this.props;
+    console.log(anchor)
     return (<div>
-      {this.menu?(<div className="autoMenu"><ul style={{height:"400px",padding:"20px"}} dangerouslySetInnerHTML={{__html:this.menu}}></ul></div>):null}
+      {menu?(
+         this.Changeactive(menu,anchor) 
+      ):null}
     </div>)
   }
 }

@@ -30,6 +30,26 @@ export default modelEnhance({
   effects: {
     *articalDetail({ payload }, { call, put }){
       const response = yield call(articalDetail, payload);
+      const artical = "";
+      if(response.status==0){
+        const content = response.data.content;
+        var html = "";
+        const h = content.match(/<h([1-6]).*?>(.*?)<\/h[1-6]>/g);   
+        if(h && h.length>0){
+           h.forEach((item,i)=>{
+              let h_content = item.replace(/<[^>]+>/g,"");
+              if(item.indexOf("h3") != -1){
+                content.replace(item,"<h3 id='"+"scroll"+i+"' className={anchor=="+i+"?'active':''}>"+h_content+"</h3>")
+                html += "<li name=\""+i+"\" ><a href=\"#"+i+"\">"+h_content+"</a></li>";
+              }else if(item.indexOf("h4") != -1){
+                 content.replace(item,"<h4 id='"+"scroll"+i+"'>"+h_content+"</h4>")
+                 html += "<li class=\"sub\" name=\""+i+"\"><a href=\"#"+i+"\">"+h_content+"</a></li>"
+              }
+          })
+        }
+        response.data.content = content;
+        response.data.catalogue = html;
+      }
       yield put({
         type: 'setDetail',
         payload: response,
