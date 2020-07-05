@@ -36,14 +36,7 @@ export default class Artical extends BaseComponent {
     const contentLeft = cx("artical-left");
     const artical_catalogue = cx("artical-catalogue");
     const contentRight = cx("artical-right"); 
-    $("#autoMenu").autoMenu({
-      levelOne : 'h3', //一级标题
-      levelTwo : 'h4',  //二级标题（暂不支持更多级）
-      width : 200, //容器宽度
-      height : 400, //容器高度
-      padding: 20, //内部间距
-      offTop : 100 //滚动切换导航时离顶部的距离
-  })
+
     return (
       <div >
         <Row className="space0 vh100 ">

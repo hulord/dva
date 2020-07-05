@@ -15,7 +15,7 @@ export default modelEnhance({
   subscriptions: {
     setup({ history, dispatch }) {
       return history.listen(({ pathname }) => {
-        if(pathname=="/index/home"){
+        if(pathname=="/home"){
           var  is_index = 1;
         }else{
           var  is_index = 2;
