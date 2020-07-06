@@ -29,7 +29,25 @@ export default class Artical extends BaseComponent {
     this.state = {
       topOne:"h3",
       topTow:"h4",
-      menu:""
+      menu:"",
+      currentId:1
+    }
+
+  }
+  componentDidMount() {
+
+    window.addEventListener('scroll', this.handleScroll);
+  }
+
+  handleScroll=(event)=>{
+    let scrollTop  = document.documentElement.scrollTop;  //滚动条滚动高度
+    if(this.props.artical.detail.h){
+      this.props.artical.detail.h.forEach((item,i)=>{
+        var k = i*1+1*1;
+        if(document.getElementById(k) && document.getElementById(k).offsetTop<scrollTop){
+          this.setState({currentId: k});
+        }
+      })
     }
   }
 
@@ -40,9 +58,9 @@ export default class Artical extends BaseComponent {
     const { detail } = artical;
     const { content ,catalogue} = detail;
     const contentLeft = cx("artical-left");
+    const { currentId } = this.state;
     const artical_catalogue = cx("artical-catalogue");
     const contentRight = cx("artical-right"); 
-
     return (
       <div >
         <Row className="space0 vh100 ">
@@ -65,7 +83,7 @@ export default class Artical extends BaseComponent {
               <Divider />
               <div className="infomation">
               <div className="wt-container">
-                <div className="wt-single-meta"> <span className="wt-info-model">发布于 2020-03-08</span> <span className="wt-info-model">字数 14543</span>  <span className="wt-info-model">浏览 4543</span> </div>
+        <div className="wt-single-meta"> <span className="wt-info-model">发布于 2020-03-08</span> <span className="wt-info-model">字数 14543</span>  <span className="wt-info-model">浏览 4543</span> </div>
                 <div className="tags mt10">
                 { artical.detail.Tags ?( artical.detail.Tags.map((item, i) =>(
                   <Tag key={item.id+1} color="#2db7f5">{item.tag_name}</Tag>
@@ -78,7 +96,7 @@ export default class Artical extends BaseComponent {
             </Col>
           </Col>
           <Col span={4}>
-            <AutoMenu menu = {catalogue} anchor={1}> </AutoMenu>
+            <AutoMenu menu = {catalogue} anchor={this.state.currentId}> </AutoMenu>
           </Col>
         </Row>
       </div>

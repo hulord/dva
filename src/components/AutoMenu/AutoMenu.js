@@ -12,7 +12,7 @@ class AutoMenu extends Component {
   Changeactive = (menu,anchor) => {
     var reg = new RegExp('name=\"'+anchor+'\"',"g"); //创建正则RegExp对象    
     var menu = menu.replace(reg,'name=\"'+anchor+'\" class="active"');
-    return  <div className="autoMenu"><ul style={{height:"400px",padding:"20px"}} dangerouslySetInnerHTML={{__html:menu}}></ul></div>;
+    return  <div className="autoMenu"><ul style={{height:"500px",padding:"20px"}} dangerouslySetInnerHTML={{__html:menu}}></ul></div>;
   }
 
   render(){
