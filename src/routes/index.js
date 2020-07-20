@@ -12,7 +12,7 @@ import Result from './Widgets/Result';
 import LevelRoute from './Widgets/LevelRoute';
 import Login from './Login';
 import Register from './Register';
-import Dashboard from './Dashboard';
+import Dashboard from './Admin/Dashboard';
 import Blank from './Blank';
 import Toolbar from './Widgets/Toolbar';
 import BaseComponent from './Widgets/BaseComponent';

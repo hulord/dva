@@ -28,26 +28,26 @@ export default modelEnhance({
     }
   },
   effects: {
-    // *getMenu({ payload }, { call, put }) {
-    //   const { status, data } = yield call(getMenu, payload);
-    //   if (status) {
-    //     const loopMenu = (menu, pitem = {}) => {
-    //       menu.forEach(item => {
-    //         if (pitem.path) {
-    //           item.parentPath = pitem.parentPath ? pitem.parentPath.concat(pitem.path) : [pitem.path];
-    //         }
-    //         if (item.children && item.children.length) {
-    //           loopMenu(item.children, item);
-    //         }
-    //       });
-    //     }
-    //     loopMenu(data);
-    //     yield put({
-    //       type: 'getMenuSuccess',
-    //       payload: data,
-    //     });
-    //   }
-    // },
+    *getMenu({ payload }, { call, put }) {
+      const { status, data } = yield call(getMenu, payload);
+      if (status) {
+        const loopMenu = (menu, pitem = {}) => {
+          menu.forEach(item => {
+            if (pitem.path) {
+              item.parentPath = pitem.parentPath ? pitem.parentPath.concat(pitem.path) : [pitem.path];
+            }
+            if (item.children && item.children.length) {
+              loopMenu(item.children, item);
+            }
+          });
+        }
+        loopMenu(data);
+        yield put({
+          type: 'getMenuSuccess',
+          payload: data,
+        });
+      }
+    },
     *getWeather({payload},{call,put}){
       const response = yield call(getWeather,payload);
       const tem=[];const temTop=[];const temLow=[];
@@ -95,9 +95,10 @@ export function getFlatMenu(menus) {
   return menu;
 }
 
-// export async function getMenu(payload) {
-//   return $$.post('/user/menu', payload);
-// }
-export async function getWeather(payload) {
-  return $$.post('/home/getWeather',payload);
+export async function getMenu(payload) {
+  return $$.post('/v1/menu', payload);
 }
+export async function getWeather(payload) {
+  return $$.post('/v1/home/getWeather',payload);
+}
+

@@ -1,7 +1,7 @@
 import { routerRedux } from 'dva/router';
 import { login } from '../service';
 import $$ from 'cmn-utils';
-
+var jwt = require("jsonwebtoken");
 export default {
   namespace: 'login',
 
@@ -24,10 +24,11 @@ export default {
   effects: {
     *login({ payload }, { call, put }) {
       const { status, message, data } = yield call(login, payload);
-      console.log(status,message,data);
       if (status==0) {
-        $$.setStore('user', data);
-        yield put(routerRedux.replace('/index/home'));
+          const decodjwt =  jwt.decode(data);
+          yield put(routerRedux.replace('/admin/dashboard'));
+          $$.setStore('user', {"username":decodjwt['username'],"role":decodjwt["Role"]});
+          $$.setStore('Authorization', data);
       } else {
         yield put({
           type: 'loginError',
@@ -35,7 +36,9 @@ export default {
         });
       }
     },
-    *logout(_, { put }) {}
+    *logout(_, { put }) {
+      $$.removeStore("Authorization");
+    }
   },
 
   reducers: {

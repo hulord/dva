@@ -25,8 +25,9 @@ export default {
     prefix: '',
 
     // 每次请求头部都会带着这些参数
-    withHeaders: () => ({
-      token: store.getStore("token"),
+    withHeaders: () => (
+      {
+      Authorization:store.getStore('Authorization')?"Bearer:"+store.getStore('Authorization'):"",
     }),
 
     /**
