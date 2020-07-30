@@ -26,14 +26,14 @@ export default {
       const { status, message, data } = yield call(login, payload);
       if (status==0) {
           const decodjwt =  jwt.decode(data);
-          yield put(routerRedux.replace('/admin/dashboard'));
           $$.setStore('user', {"username":decodjwt['username'],"role":decodjwt["Role"]});
           $$.setStore('Authorization', data);
+          yield put(routerRedux.replace('/admin/dashboard'));
       } else {
-        yield put({
-          type: 'loginError',
-          payload: { message }
-        });
+          yield put({
+              type: 'loginError',
+              payload: { message }
+          });
       }
     },
     *logout(_, { put }) {

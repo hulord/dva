@@ -43,7 +43,7 @@ export default {
       if (status==0) {
         return response;
       } else {
-        throw new Error(message);
+          throw new Error(message);
       }
     },
     errorHandle: err => {
