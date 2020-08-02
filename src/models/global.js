@@ -30,7 +30,7 @@ export default modelEnhance({
   effects: {
     *getMenu({ payload }, { call, put }) {
       const { status, data } = yield call(getMenu, payload);
-      if (status) {
+      if (status==0) {
         const loopMenu = (menu, pitem = {}) => {
           menu.forEach(item => {
             if (pitem.path) {
@@ -42,6 +42,7 @@ export default modelEnhance({
           });
         }
         loopMenu(data);
+        console.log(data)
         yield put({
           type: 'getMenuSuccess',
           payload: data,
