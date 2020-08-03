@@ -36,6 +36,10 @@ import CRUD from './Business/CRUD';
 /**前台 */
 import Home from './Index/Home';
 import Artical from './Index/Artical';
+
+/**后台组件 */
+import Adminartical from './Admin/Artical';
+
 /**
  *     主路由配置
  * 
@@ -64,6 +68,7 @@ const routesConfig = app => [
     indexRoute: '/dashboard',
     childRoutes: [
       Dashboard(app),
+      Adminartical(app),
       Blank(app),
       Toolbar(app),
       Column(),
