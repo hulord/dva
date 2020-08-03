@@ -1,11 +1,12 @@
 import modelEnhance from '@/utils/modelEnhance';
+import PageHelper from '@/utils/pageHelper';
 
 export default modelEnhance({
-  namespace: 'dashboard',
+  namespace: 'artical',
 
   state: {
-    bar1: [],
-    bar2: [],
+    pageData: PageHelper.create(),
+    pageDataSort: PageHelper.create(),
   },
 
   subscriptions: {
