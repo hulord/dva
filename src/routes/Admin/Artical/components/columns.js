@@ -7,17 +7,22 @@ const Tip = DataTable.Tip;
 export const columns1 = [
   {
     title: '标题',
-    name: 'name',
+    name: 'title',
     tableItem: {}
   },
   {
-    title: '类目',
-    name: 'age',
+    title: '作者',
+    name: 'author',
     tableItem: {}
   },
   {
-    title: '内容',
-    name: 'address',
+    title: '阅读数',
+    name: 'view',
+    tableItem: {}
+  },
+  {
+    title: '创建时间',
+    name: 'createTime',
     tableItem: {}
   },
   {

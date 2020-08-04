@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'dva';
-import { Layout, Col, Row } from 'antd';
+import { Layout, Col, Row, Button, Radio  } from 'antd';
 import Icon from 'components/Icon';
 import BaseComponent from 'components/BaseComponent';
 import Panel from 'components/Panel';
@@ -29,20 +29,21 @@ for (let i = 0; i < 7; i += 1) {
 
 export default class Artical extends BaseComponent {
   componentDidMount (){
-    const { dispatch } = this.props;
-    dispatch({
-      type: 'home/getArtical',
-      payload: {
-        page:1,
-        pageSize:10,
-      }
-    })
-  }; 
-
+      const { dispatch, datatable, artical, loading } = this.props;
+      const { pageData, pageDataSort } = artical;
+      dispatch({
+        type: 'artical/@request',
+        payload: {
+          method:"get",
+          valueField: 'pageData',
+          url: '/v1/artical/getall',
+          pageInfo:  pageData.startPage(1, 10)
+        }
+      })
+  }
   render() {
     const { artical, loading } = this.props;
-    const { pageData, pageDataSort } = artical;
-
+    const { pageData, articalList} = artical;
     const dataTableProps1 = {
       loading,
       columns: columns1,
@@ -54,7 +55,10 @@ export default class Artical extends BaseComponent {
       <Layout className="full-layout page dashboard-page">
         <Content>
             <DataTable {...dataTableProps1} />
-            <div className="footer">
+            <div className="footer ptl">
+              <Button icon="plus" type="primary art_add" >
+                新增
+              </Button>
               <Pagination {...dataTableProps1} />
             </div>
         </Content>

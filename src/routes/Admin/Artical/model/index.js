@@ -7,6 +7,9 @@ export default modelEnhance({
   state: {
     pageData: PageHelper.create(),
     pageDataSort: PageHelper.create(),
+    dataList: {
+      list: []
+    },
   },
 
   subscriptions: {
@@ -33,4 +36,7 @@ export default modelEnhance({
     //   });
     // }
   },
+  effects: {
+
+  }
 });
