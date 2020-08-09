@@ -1,9 +1,9 @@
 import { dynamicWrapper, createRoute } from '@/utils/core';
 
 const routesConfig = app => ({
-  path: '/admin/alerts',
-  title: 'Alerts page',
-  component: dynamicWrapper(app, [], () => import('./components'))
+  path: '/admin/artical',
+  title: '文章管理',
+  component: dynamicWrapper(app, [import('../model')], () => import('./components'))
 });
 
 export default app => createRoute(app, routesConfig);

@@ -1,13 +1,13 @@
 import React from 'react';
 import { connect } from 'dva';
 import { Layout, Col, Row, Button, Radio  } from 'antd';
-import Icon from 'components/Icon';
+import { Link } from "dva/router";
 import BaseComponent from 'components/BaseComponent';
-import Panel from 'components/Panel';
 import G2 from 'components/Charts/G2';
 import DataSet from '@antv/data-set';
 import DataTable, { Editable } from 'components/DataTable';
-import { columns1, columns2, columns3, columns4, columns5 } from './columns';
+import { getPath } from '../../../../../utils/func'
+import { columns1 } from './columns';
 import './index.less';
 const { Content } = Layout;
 const { Chart, Axis, Geom, Tooltip, Legend, Coord, Label } = G2;
@@ -27,7 +27,8 @@ for (let i = 0; i < 7; i += 1) {
 }))
 
 
-export default class Artical extends BaseComponent {
+export default class list extends BaseComponent {
+
   componentDidMount (){
       const { dispatch, datatable, artical, loading } = this.props;
       const { pageData, pageDataSort } = artical;
@@ -56,9 +57,9 @@ export default class Artical extends BaseComponent {
         <Content>
             <DataTable {...dataTableProps1} />
             <div className="footer ptl">
-              <Button icon="plus" type="primary art_add" >
-                新增
-              </Button>
+            <Link to={getPath("/admin/createartical")}><Button icon="plus" type="primary art_add" >
+              新增
+              </Button></Link>
               <Pagination {...dataTableProps1} />
             </div>
         </Content>

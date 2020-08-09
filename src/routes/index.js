@@ -38,7 +38,8 @@ import Home from './Index/Home';
 import Artical from './Index/Artical';
 
 /**后台组件 */
-import Adminartical from './Admin/Artical';
+import Adminartical from './Admin/Artical/list';
+import Createartical from './Admin/Artical/create';
 
 /**
  *     主路由配置
@@ -69,6 +70,7 @@ const routesConfig = app => [
     childRoutes: [
       Dashboard(app),
       Adminartical(app),
+      Createartical(app),
       Blank(app),
       Toolbar(app),
       Column(),

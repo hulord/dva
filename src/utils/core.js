@@ -48,11 +48,19 @@ export const createRoute = (app, routesConfig) => {
   } = routesConfig(app);
   if (path && path !== '/') {
     window.dva_router_pathMap[path] = { path, title, ...otherProps };
+    // if(pathClass == 1){
+    //     window.dva_router_pathMap[otherProps.childRoutes.key] = {path:otherProps.childRoutes.key,title:"",otherProps:otherProps};
+    //     window.dva_router_pathMap[otherProps.childRoutes.key].parentPath = "/admin";
+    // }
     // 为子路由增加parentPath
-    if (otherProps.childRoutes && otherProps.childRoutes.length) {
+    if (otherProps.childRoutes && otherProps.childRoutes.length ) {
+      //const keys = Object.keys(window.dva_router_pathMap);
       otherProps.childRoutes.forEach(item => {
+        // if(keys.indexOf(item.key)<0){
+        //   otherProps.childRoutes.push(window.dva_router_pathMap["/admin/create"].otherProps.childRoutes);
+        // }
         if (window.dva_router_pathMap[item.key]) {
-          window.dva_router_pathMap[item.key].parentPath = path;
+            window.dva_router_pathMap[item.key].parentPath = path;
         }
       });
     }
@@ -81,6 +89,5 @@ export const createRoute = (app, routesConfig) => {
       <Route {...routeProps} />
     ];
   }
-
   return <Route {...routeProps} />;
 };

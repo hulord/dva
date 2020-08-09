@@ -1,5 +1,6 @@
 import modelEnhance from '@/utils/modelEnhance';
 import PageHelper from '@/utils/pageHelper';
+import create from  '../service'
 
 export default modelEnhance({
   namespace: 'artical',
@@ -13,30 +14,23 @@ export default modelEnhance({
   },
 
   subscriptions: {
-    // setup({ history, dispatch }) {
-    //   return history.listen(({ pathname }) => {
-    //     if (pathname.indexOf('/dashboard') !== -1) {
-    //       dispatch({
-    //         type: '@request',
-    //         afterResponse: resp => resp.data,
-    //         payload: {
-    //           valueField: 'bar1',
-    //           url: '/charts/bar1',
-    //         }
-    //       });
-    //       dispatch({
-    //         type: '@request',
-    //         afterResponse: resp => resp.data,
-    //         payload: {
-    //           valueField: 'bar2',
-    //           url: '/charts/bar2',
-    //         }
-    //       });
-    //     }
-    //   });
-    // }
+
   },
   effects: {
-
-  }
+    *create({ payload }, { call, put }) {
+      const response = yield call(create, payload);
+      yield put({
+        type: 'create',
+        payload: response,
+      });
+    },
+  },
+  reducers: {
+    create(state, { payload }) {
+      return {
+        ...state,
+        status: payload.status,
+      };
+    },
+  },
 });
