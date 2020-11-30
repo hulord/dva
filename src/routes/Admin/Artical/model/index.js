@@ -1,6 +1,6 @@
 import modelEnhance from '@/utils/modelEnhance';
 import PageHelper from '@/utils/pageHelper';
-import create from  '../service'
+import { create } from  '../service';
 
 export default modelEnhance({
   namespace: 'artical',

@@ -52,6 +52,7 @@ export default class IndexLayout extends PureComponent {
       isMobile: false,
       citye:"",
     };
+    console.log(111);
     props.dispatch({
       type: 'global/getMenu'
     });

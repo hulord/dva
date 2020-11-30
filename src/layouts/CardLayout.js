@@ -39,8 +39,7 @@ export default class CardLayout extends React.PureComponent {
       user,
       currentMenu: {}
     };
-
-    props.dispatch({
+      props.dispatch({
       type: 'global/getMenu'
     });
   }

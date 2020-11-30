@@ -12,6 +12,8 @@ const FormItem = Form.Item;
   loading: loading.models.login
 }))
 class Login extends Component {
+
+
   handleSubmit = e => {
     const { form, dispatch } = this.props;
     e.preventDefault();
@@ -22,7 +24,7 @@ class Login extends Component {
           payload: values
         });
       }
-    });
+    })
   };
 
   render() {

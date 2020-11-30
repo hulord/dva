@@ -95,10 +95,11 @@ export function getFlatMenu(menus) {
   });
   return menu;
 }
-
+//获取菜单
 export async function getMenu(payload) {
   return $$.post('/v1/menu', payload);
 }
+//获取天气信息
 export async function getWeather(payload) {
   return $$.post('/v1/home/getWeather',payload);
 }

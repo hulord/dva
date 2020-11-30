@@ -34,5 +34,5 @@ class Charts extends PureComponent {
   }
 }
 
-BizCharts.Chart = Charts;
+
 export default BizCharts;

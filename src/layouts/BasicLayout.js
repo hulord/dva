@@ -24,7 +24,7 @@ const { Content, Header } = Layout;
 export default class BasicLayout extends React.PureComponent {
   constructor(props) {
     super(props);
-    const user = $$.getStore('user', []);
+    const user = $$.getStore('user',[]);
     const theme = $$.getStore('theme', {
       leftSide: 'darkgrey', // 左边
       navbar: 'light' // 顶部
@@ -49,12 +49,10 @@ export default class BasicLayout extends React.PureComponent {
       currentMenu: {},
       isMobile: false
     };
-
+    const Authorization = $$.getStore('Authorization');
+    //初始化方法,验证菜单
     props.dispatch({
-      type: 'global/getMenu',
-      paylode:{
-        headers:"Authorization:123"
-      }
+      type: 'global/getMenu'
     });
   }
 

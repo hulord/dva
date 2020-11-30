@@ -27,7 +27,7 @@ export default {
     // 每次请求头部都会带着这些参数
     withHeaders: () => (
       {
-      Authorization:store.getStore('Authorization')?"Bearer:"+store.getStore('Authorization'):"",
+      Authorization:store.getStore('Authorization').data?"Bearer:"+store.getStore('Authorization').data:"",
     }),
 
     /**
@@ -40,7 +40,7 @@ export default {
      */
     afterResponse: response => {
       const { status, message } = response;
-      if (status==0) {
+      if (status==0 || status==1) {
         return response;
       } else {
           throw new Error(message);
