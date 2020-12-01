@@ -17,7 +17,6 @@ class AutoMenu extends Component {
 
   render(){
     const { menu ,anchor} = this.props;
-    console.log(anchor)
     return (<div>
       {menu?(
          this.Changeactive(menu,anchor) 

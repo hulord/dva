@@ -30,6 +30,7 @@ export default {
             type: 'loginSuccess',
             payload: { data }
           });
+          yield put(routerRedux.replace('/admin/dashboard'));
       } else {
           yield put({
               type: 'loginError',
@@ -46,7 +47,8 @@ export default {
     loginSuccess(state, { payload }) {
           const decodejwt =  jwt.decode(payload.data);
           $$.setStore('user', {"username":decodejwt['username'],"role":decodejwt["Role"]});
-          $$.setStore('Authorization', payload);
+          $$.setStore('Authorization', payload.data);
+
           return {
             ...state,
             loggedIn: true

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
 import { Link } from 'dva/router';
-import { Form, Layout, Button, Icon, Input, Checkbox, Spin } from 'antd';
+import {Form, Layout, Button, Icon, Input, Checkbox, Spin, message} from 'antd';
 import logoImg from 'assets/images/logo1.png';
 import './index.less';
 const { Content } = Layout;
@@ -12,8 +12,6 @@ const FormItem = Form.Item;
   loading: loading.models.login
 }))
 class Login extends Component {
-
-
   handleSubmit = e => {
     const { form, dispatch } = this.props;
     e.preventDefault();
@@ -28,11 +26,12 @@ class Login extends Component {
   };
 
   render() {
-    const { loading, form } = this.props;
+    const { loading, form, message } = this.props;
     const { getFieldDecorator } = form;
 
     return (
       <Layout className="full-layout login-page">
+        ({})
         <Content>
           <Spin tip="登录中..." spinning={!!loading}>
             <Form onSubmit={this.handleSubmit} className="login-form">

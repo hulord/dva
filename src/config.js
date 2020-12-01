@@ -27,7 +27,7 @@ export default {
     // 每次请求头部都会带着这些参数
     withHeaders: () => (
       {
-      Authorization:store.getStore('Authorization').data?"Bearer:"+store.getStore('Authorization').data:"",
+      Authorization:store.getStore('Authorization')?"Bearer:"+store.getStore('Authorization'):"",
     }),
 
     /**

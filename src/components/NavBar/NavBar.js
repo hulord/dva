@@ -1,11 +1,12 @@
 import React, { PureComponent } from 'react';
 import Icon from '../Icon';
-import { Popover, Badge, Avatar } from 'antd';
+import { Popover, Badge, Avatar, Layout } from 'antd';
 import { Link } from 'dva/router';
 import cx from 'classnames';
 import './style/index.less';
 import logoImg from 'assets/images/logo.png';
 import SearchBox from './SearchBox';
+import $$ from 'cmn-utils';
 
 /**
  * 其本本局头部区域
@@ -62,6 +63,12 @@ class NavBar extends PureComponent {
       openSearchBox: true
     });
   };
+
+  onUserLoginout = () =>{
+    $$.removeStore("Authorization");
+    $$.removeStore("user");
+    window.location.href="/sign/login";
+  }
 
   render() {
     const { openSearchBox } = this.state;
@@ -158,7 +165,7 @@ class NavBar extends PureComponent {
               placement="bottomRight"
               title={`WELCOME ${user.userName}`}
               overlayClassName={cx('navbar-popup', { [theme]: !!theme })}
-              content={<UserDropDown />}
+              content={<UserDropDown onUserLoginout = {this.onUserLoginout} />}
               trigger="click"
             >
               <a className="dropdown-toggle">
@@ -202,9 +209,9 @@ const UserDropDown = props => (
       </a>
     </li>
     <li className="list-group-item dropdown-footer">
-      <Link to="/sign/login">
+      <a onClick={() => props.onUserLoginout()}>
         <Icon type="poweroff" /> 退出
-      </Link>
+      </a>
     </li>
   </ul>
 );

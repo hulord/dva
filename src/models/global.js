@@ -10,6 +10,7 @@ export default modelEnhance({
     flatMenu: [],
     vhistory:[],
     is_index:1,
+      collapsed:250,
     weather:[]
   },
   subscriptions: {
@@ -42,7 +43,6 @@ export default modelEnhance({
           });
         }
         loopMenu(data);
-        console.log(data)
         yield put({
           type: 'getMenuSuccess',
           payload: data,
