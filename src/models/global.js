@@ -10,7 +10,7 @@ export default modelEnhance({
     flatMenu: [],
     vhistory:[],
     is_index:1,
-      collapsed:250,
+    collapsed:250,
     weather:[]
   },
   subscriptions: {

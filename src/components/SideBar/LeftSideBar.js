@@ -171,9 +171,9 @@ class LeftSideBar extends PureComponent {
     const {
       fixed,
       theme,
-      collapsed,
       onCollapse,
       onCollapseAll,
+      collapsed,
       leftCollapsedWidth,
       showHeader,
       menu,
@@ -247,7 +247,7 @@ class LeftSideBar extends PureComponent {
           </header>
           <Menu
             onClick={this.handleClick}
-            inlineCollapsed={collapsed}
+            // inlineCollapsed={collapsed}
             onOpenChange={this.handleOpenChange}
             mode="inline"
             theme={theme}

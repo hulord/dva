@@ -5,7 +5,6 @@ import BaseComponent from 'components/BaseComponent';
 import Editor from 'components/Editor';
 import { antdNotice } from 'components/Notification'
 import './index.less';
-import Success from '../../../../Register/components/Success';
 const { Content } = Layout;
 const FormItem = Form.Item;
 @connect(({ artical,loading }) => ({
@@ -25,7 +24,7 @@ export default class Createartical extends BaseComponent {
     e.preventDefault();
     const { form, dispatch } = this.props;
     form.validateFields({ force: true }, (err, values) => {
-      if(Empty(this.state.html)){
+      if(!this.state.html){
         antdNotice.error('文章内容不能为空!')
       }
       values.content = this.state.html;

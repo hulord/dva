@@ -2,7 +2,6 @@ import { routerRedux } from 'dva/router';
 import { login } from '../service';
 import $$ from 'cmn-utils';
 var jwt = require("jsonwebtoken");
-//var jwt_decode = require('jwt-decode');
 export default {
   namespace: 'login',
 
@@ -13,13 +12,6 @@ export default {
   },
 
   subscriptions: {
-    setup({ history, dispatch }) {
-      return history.listen(({ pathname }) => {
-        if (pathname.indexOf('/sign/login') !== -1) {
-          $$.removeStore('user');
-        }
-      });
-    }
   },
 
   effects: {
@@ -40,6 +32,12 @@ export default {
     },
     *logout(_, { put }) {
       $$.removeStore("Authorization");
+    },
+    *islogin(){
+      const token = $$.getStore("Authorization");
+      if(token){
+        $$.removeStore("Authorization");
+      }
     }
   },
 

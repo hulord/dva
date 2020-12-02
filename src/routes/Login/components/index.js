@@ -12,6 +12,13 @@ const FormItem = Form.Item;
   loading: loading.models.login
 }))
 class Login extends Component {
+  //组件第一次渲染之后执行
+  componentDidMount() {
+    const { dispatch } = this.props
+    dispatch({
+      type: 'login/islogin',
+    })
+  }
   handleSubmit = e => {
     const { form, dispatch } = this.props;
     e.preventDefault();
@@ -24,14 +31,12 @@ class Login extends Component {
       }
     })
   };
-
   render() {
     const { loading, form, message } = this.props;
     const { getFieldDecorator } = form;
 
     return (
       <Layout className="full-layout login-page">
-        ({})
         <Content>
           <Spin tip="登录中..." spinning={!!loading}>
             <Form onSubmit={this.handleSubmit} className="login-form">

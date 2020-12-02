@@ -40,8 +40,8 @@ import Home from './Index/Home';
 import Artical from './Index/Artical';
 
 /**后台组件 */
-import Adminartical from './Admin/Artical/list';
-import Createartical from './Admin/Artical/create';
+import Adminartical from './Admin/Artical/view/list';
+import Createartical from './Admin/Artical/view/create';
 
 /**
  *     主路由配置

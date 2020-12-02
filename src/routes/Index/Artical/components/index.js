@@ -34,8 +34,8 @@ export default class Artical extends BaseComponent {
     }
 
   }
+  //组件第一次渲染之后执行
   componentDidMount() {
-
     window.addEventListener('scroll', this.handleScroll);
   }
 

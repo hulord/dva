@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import Icon from '../Icon';
-import { Popover, Badge, Avatar, Layout } from 'antd';
+import { Popover, Badge, Avatar } from 'antd';
 import { Link } from 'dva/router';
 import cx from 'classnames';
 import './style/index.less';

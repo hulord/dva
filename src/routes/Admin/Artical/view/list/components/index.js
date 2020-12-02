@@ -6,7 +6,7 @@ import BaseComponent from 'components/BaseComponent';
 import G2 from 'components/Charts/G2';
 import DataSet from '@antv/data-set';
 import DataTable, { Editable } from 'components/DataTable';
-import { getPath } from '../../../../../utils/func'
+import { getPath } from '../../../../../../utils/func'
 import { columns1 } from './columns';
 import './index.less';
 const { Content } = Layout;
