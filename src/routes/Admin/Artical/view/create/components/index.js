@@ -1,14 +1,14 @@
 import React from 'react';
 import { connect } from 'dva';
-import { Layout, Col, Row, Button, Radio, Form, Input, Card, Empty   } from 'antd';
+import { Layout,  Button, Radio, Form, Input, Card, Empty, Tag, Select} from 'antd';
 import BaseComponent from 'components/BaseComponent';
 import Editor from 'components/Editor';
 import { antdNotice } from 'components/Notification'
 import './index.less';
-const { Content } = Layout;
-const FormItem = Form.Item;
-@connect(({ artical,loading }) => ({
-  artical,  submitting: loading.effects['register/submit']
+import {articalDetail} from "../../../../../Index/Artical/service";
+const options = [{ id:1,value: 'gold' }, {id:2, value: 'lime' }, { id:3,value: 'green' }, { id:4,value: 'cyan' }];
+@connect(({ create,loading }) => ({
+  create,  submitting: loading.effects['register/submit']
 }))
 @Form.create()
 export default class Createartical extends BaseComponent {
@@ -20,6 +20,11 @@ export default class Createartical extends BaseComponent {
       html
     });
   };
+  componentDidMount (){
+    const { dispatch,create } = this.props;
+    dispatch({type: 'create/getTags'})
+  }
+  //表单验证
   handleSubmit = e => {
     e.preventDefault();
     const { form, dispatch } = this.props;
@@ -44,9 +49,20 @@ export default class Createartical extends BaseComponent {
       }
     });
   };
+  //文章标签标签渲染
+  tagRender = (props) =>{
+    const { label, value, closable, onClose } = this.props;
+
+    return (
+        <Tag color={"gold"} closable={closable} onClose={onClose} style={{ marginRight: 3 }}>
+          gold
+        </Tag>
+    );
+  }
 
   render() {
-    const { form,submitting } = this.props;
+    const { form,submitting,create } = this.props;
+    const { defaultTags } = create
     const { getFieldDecorator } = form;
     const formItemLayout = {
       labelCol: {
@@ -60,7 +76,7 @@ export default class Createartical extends BaseComponent {
     };
     return (
       <Layout className="full-layout page dashboard-page">
-        <Content>
+        <Layout.Content>
           <Card>
           <Form 
             onSubmit={this.handleSubmit} 
@@ -68,7 +84,7 @@ export default class Createartical extends BaseComponent {
             layout="horizontal"
             {...formItemLayout}
             >
-            <FormItem
+            <Form.Item
               label="文章标题"
               name ="title" 
             >
@@ -81,27 +97,38 @@ export default class Createartical extends BaseComponent {
                 ]
               })(<Input size="large" placeholder="文章标题" />)}
 
-            </FormItem>
+            </Form.Item>
 
-            <FormItem
+            <Form.Item
               label="标签"
               name ="tags"
             >
-              {getFieldDecorator('tags')(<Input size="large" placeholder="标签" />)}
-            </FormItem>
-            <FormItem
+              {getFieldDecorator('tags', {
+                  initialValue:['gold', 'cyan'],
+              })(
+                  <Select
+                      mode="multiple"
+                      showArrow
+                      style={{ width: '100%' }}>
+                      { defaultTags && defaultTags.map((item)=>(
+                          <Select.Option value={item.name} key={item.id}>{item.name}</Select.Option>
+                      ))}
+                  </Select>
+              )}
+            </Form.Item>
+            <Form.Item
               label="内容"
             >
               <Editor onChange={this.onTextChange} value={this.state.newHtml} />
-            </FormItem>
-            <FormItem wrapperCol = {{span: 24}} style={{"textAlign":"center"}}>
+            </Form.Item>
+            <Form.Item wrapperCol = {{span: 24}} style={{"textAlign":"center"}}>
             <Button type="primary"   loading={submitting} htmlType="submit" className="register-form-button">
                 新增
             </Button>
-          </FormItem>
+          </Form.Item>
           </Form>
           </Card>
-        </Content>
+        </Layout.Content>
       </Layout>
     );
   }

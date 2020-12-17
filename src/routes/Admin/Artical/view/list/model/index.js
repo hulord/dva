@@ -18,10 +18,7 @@ export default modelEnhance({
   effects: {
     *create({ payload }, { call, put }) {
       const response = yield call(create, payload);
-      yield put({
-        type: 'create',
-        payload: response,
-      });
+      yield put({type: 'create'});
     },
   },
   reducers: {

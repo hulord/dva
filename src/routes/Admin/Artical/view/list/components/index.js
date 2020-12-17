@@ -28,7 +28,6 @@ for (let i = 0; i < 7; i += 1) {
 
 
 export default class list extends BaseComponent {
-
   componentDidMount (){
       const { dispatch, datatable, artical, loading } = this.props;
       const { pageData, pageDataSort } = artical;

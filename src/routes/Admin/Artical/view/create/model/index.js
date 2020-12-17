@@ -1,20 +1,14 @@
 import modelEnhance from '@/utils/modelEnhance';
-import PageHelper from '@/utils/pageHelper';
-import { create } from  '../service';
+import { create,getTags } from  '../../../service';
 
 export default modelEnhance({
-  namespace: 'artical',
+  namespace: 'create',
 
   state: {
-    pageData: PageHelper.create(),
-    pageDataSort: PageHelper.create(),
-    dataList: {
-      list: []
-    },
+    defaultTags:[]
   },
-  subscriptions: {
-
-  },
+  //页面监听
+  subscriptions: {},
   effects: {
     *create({ payload }, { call, put }) {
       const response = yield call(create, payload);
@@ -23,6 +17,10 @@ export default modelEnhance({
         payload: response,
       });
     },
+    *getTags({ payload },{ call,put }){
+      const response = yield call(getTags, payload);
+      yield put({type: 'setTags',payload: response});
+    }
   },
   reducers: {
     create(state, { payload }) {
@@ -31,5 +29,11 @@ export default modelEnhance({
         status: payload.status,
       };
     },
+    setTags(state,{ payload }){
+        return {
+          ...state,
+          defaultTags:payload.data
+        }
+    }
   },
 });
