@@ -5,8 +5,6 @@ import BaseComponent from 'components/BaseComponent';
 import Editor from 'components/Editor';
 import { antdNotice } from 'components/Notification'
 import './index.less';
-import {articalDetail} from "../../../../../Index/Artical/service";
-const options = [{ id:1,value: 'gold' }, {id:2, value: 'lime' }, { id:3,value: 'green' }, { id:4,value: 'cyan' }];
 @connect(({ create,loading }) => ({
   create,  submitting: loading.effects['register/submit']
 }))
@@ -15,9 +13,10 @@ export default class Createartical extends BaseComponent {
   state = {
     html: ''
   };
+
   onTextChange = html => {
     this.setState({
-      html
+        html
     });
   };
   componentDidMount (){
@@ -27,25 +26,31 @@ export default class Createartical extends BaseComponent {
   //表单验证
   handleSubmit = e => {
     e.preventDefault();
-    const { form, dispatch } = this.props;
+    const { form, dispatch, create } = this.props;
     form.validateFields({ force: true }, (err, values) => {
       if(!this.state.html){
         antdNotice.error('文章内容不能为空!')
       }
       values.content = this.state.html;
+      if(values.tags){
+        const new_tags = [];
+        values.tags.map((item)=>{
+            new_tags.push({"tag_name":item});
+        })
+        values.tags = new_tags;
+      }
       if (!err) {
-        dispatch({
-          type: 'artical/create',
-          payload: {
-            ...values,
-          },
-          success: resp => {
-            console.log(resp)
-          }, // 在dispatch结束后得到成功的回调，非必需
-          error: e => {
-            console.log(e)
-          }, // 在dispatch结束后得到失败的回调，非必需
-        });
+          dispatch({
+              type: 'create/create',
+              payload: {
+                ...values
+              }
+          }).then((res)=>{
+                antdNotice.error(res.message);
+                if(res.status == 0){
+                    window.location.href="/admin/artical/list";
+                }
+          });
       }
     });
   };

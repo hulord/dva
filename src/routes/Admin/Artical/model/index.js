@@ -1,6 +1,6 @@
 import modelEnhance from '@/utils/modelEnhance';
 import PageHelper from '@/utils/pageHelper';
-import { create } from  '../service';
+import { create,delArtical } from  '../service';
 
 export default modelEnhance({
   namespace: 'artical',
@@ -16,12 +16,11 @@ export default modelEnhance({
 
   },
   effects: {
-    *create({ payload }, { call, put }) {
-      const response = yield call(create, payload);
-      yield put({
-        type: 'create',
-        payload: response,
-      });
+    *delArtical({ payload }, { call, put }) {
+      const response = yield call(delArtical, payload);
+      //删除成功
+      if( response.status == 0 ){
+      }
     },
   },
   reducers: {

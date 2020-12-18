@@ -10,12 +10,8 @@ export default modelEnhance({
   //页面监听
   subscriptions: {},
   effects: {
-    *create({ payload }, { call, put }) {
-      const response = yield call(create, payload);
-      yield put({
-        type: 'create',
-        payload: response,
-      });
+    *create({ payload }, { call }) {
+      return yield call(create, payload);
     },
     *getTags({ payload },{ call,put }){
       const response = yield call(getTags, payload);
@@ -23,12 +19,6 @@ export default modelEnhance({
     }
   },
   reducers: {
-    create(state, { payload }) {
-      return {
-        ...state,
-        status: payload.status,
-      };
-    },
     setTags(state,{ payload }){
         return {
           ...state,
