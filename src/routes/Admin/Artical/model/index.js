@@ -16,11 +16,8 @@ export default modelEnhance({
 
   },
   effects: {
-    *delArtical({ payload }, { call, put }) {
-      const response = yield call(delArtical, payload);
-      //删除成功
-      if( response.status == 0 ){
-      }
+    *delete({ payload }, { call }) {
+      return yield call(delArtical, payload);
     },
   },
   reducers: {

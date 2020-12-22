@@ -19,8 +19,9 @@ export default class Createartical extends BaseComponent {
         html
     });
   };
+
   componentDidMount (){
-    const { dispatch,create } = this.props;
+    const { dispatch } = this.props;
     dispatch({type: 'create/getTags'})
   }
   //表单验证
@@ -47,9 +48,9 @@ export default class Createartical extends BaseComponent {
               }
           }).then((res)=>{
                 antdNotice.error(res.message);
-                if(res.status == 0){
-                    window.location.href="/admin/artical/list";
-                }
+                 if(res.status == 0){
+                     window.location.href="/admin/artical/list";
+                 }
           });
       }
     });

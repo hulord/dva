@@ -4,7 +4,7 @@ import Icon from 'components/Icon';
 import { Button } from 'antd';
 const Tip = DataTable.Tip;
 
-export const columns1 = [
+export const columns = (actions)  =>  [
   {
     title: '标题',
     name: 'title',
@@ -31,10 +31,12 @@ export const columns1 = [
       width: 180,
       render: (text, record) => (
         <DataTable.Oper>
-          <Button tooltip="修改">
-            <Icon type="edit" />
+          <Button tooltip="修改" >
+            <Icon type="edit"/>
           </Button>
-          <Button tooltip="删除">
+          <Button tooltip="删除" onClick={(e) => {
+                actions.delete(record.id)
+          }}>
             <Icon type="trash" />
           </Button>
         </DataTable.Oper>

@@ -4,10 +4,10 @@ import { Layout, Col, Row, Button, Radio  } from 'antd';
 import { Link } from "dva/router";
 import BaseComponent from 'components/BaseComponent';
 import G2 from 'components/Charts/G2';
-import DataSet from '@antv/data-set';
 import DataTable, { Editable } from 'components/DataTable';
 import { getPath } from '../../../../../../utils/func'
-import { columns1 } from './columns';
+import { columns } from './columns';
+import { antdNotice } from 'components/Notification'
 import './index.less';
 const { Content } = Layout;
 const { Chart, Axis, Geom, Tooltip, Legend, Coord, Label } = G2;
@@ -21,7 +21,6 @@ for (let i = 0; i < 7; i += 1) {
     total: 323234
   });
 }
-
 @connect(({ artical,loading }) => ({
   artical,  loading: loading.models.datatable
 }))
@@ -29,24 +28,42 @@ for (let i = 0; i < 7; i += 1) {
 
 export default class list extends BaseComponent {
   componentDidMount (){
-      const { dispatch, datatable, artical, loading } = this.props;
-      const { pageData, pageDataSort } = artical;
-      dispatch({
-        type: 'artical/@request',
-        payload: {
-          method:"get",
-          valueField: 'pageData',
-          url: '/v1/artical/getall',
-          pageInfo:  pageData.startPage(1, 10)
-        }
-      })
-  }
+        this.getList();
+    }
+    getList = () =>{
+        const { dispatch, datatable, artical, loading } = this.props;
+        const { pageData, pageDataSort } = artical;
+        dispatch({
+            type: 'artical/@request',
+            payload: {
+                method:"get",
+                valueField: 'pageData',
+                url: '/v1/artical/getall',
+                pageInfo:  pageData.startPage(1, 10)
+            }
+        })
+    }
+    delete = ( articalId ) => {
+        const { dispatch } = this.props;
+        dispatch({
+            type: 'artical/delete',
+            payload: {
+                id:articalId
+            }
+        }).then(res=>{
+            if(res.status == 0){
+                this.getList();
+            }else{
+                antdNotice.error(res.message);
+            }
+        });
+    }
   render() {
-    const { artical, loading } = this.props;
+    const { artical, loading, dispatch } = this.props;
     const { pageData, articalList} = artical;
     const dataTableProps1 = {
       loading,
-      columns: columns1,
+      columns: columns({delete:this.delete}),
       rowKey: 'id',
       dataItems: pageData,
       onChange: ({ pageNum, pageSize }) => {}
