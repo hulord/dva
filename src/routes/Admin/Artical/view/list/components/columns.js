@@ -1,9 +1,12 @@
 import React, { Fragment } from 'react';
 import DataTable, { EditableOper } from 'components/DataTable';
 import Icon from 'components/Icon';
-import { Button } from 'antd';
+import {
+  LeftSquareTwoTone
+} from '@ant-design/icons';
+import { Button, Tag } from 'antd';
+import { rTime } from '@/utils/func'
 const Tip = DataTable.Tip;
-
 export const columns = (actions)  =>  [
   {
     title: '标题',
@@ -18,12 +21,21 @@ export const columns = (actions)  =>  [
   {
     title: '阅读数',
     name: 'view',
-    tableItem: {}
+    tableItem: {
+      render: text => <Tag  icon={<LeftSquareTwoTone />} color="#108ee9">{
+        text
+      }</Tag>
+    }
   },
   {
     title: '创建时间',
-    name: 'createTime',
-    tableItem: {}
+    name: 'create_time',
+    tableItem: {
+      width: 200,
+      render: text => <Tip>{
+            rTime(text)
+      }</Tip>
+    }
   },
   {
     title: '操作',
