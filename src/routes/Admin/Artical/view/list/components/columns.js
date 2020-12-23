@@ -2,6 +2,8 @@ import React, { Fragment } from 'react';
 import DataTable, { EditableOper } from 'components/DataTable';
 import Icon from 'components/Icon';
 import { Button } from 'antd';
+import { getPath } from '../../../../../../utils/func'
+import {Link} from "dva/router";
 const Tip = DataTable.Tip;
 
 export const columns = (actions)  =>  [
@@ -31,7 +33,9 @@ export const columns = (actions)  =>  [
       width: 180,
       render: (text, record) => (
         <DataTable.Oper>
-          <Button tooltip="修改" >
+          <Button tooltip="修改" onClick={(e) => {
+                actions.edit(record.id)
+            }}>
             <Icon type="edit"/>
           </Button>
           <Button tooltip="删除" onClick={(e) => {

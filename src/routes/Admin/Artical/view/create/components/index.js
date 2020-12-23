@@ -58,7 +58,6 @@ export default class Createartical extends BaseComponent {
   //文章标签标签渲染
   tagRender = (props) =>{
     const { label, value, closable, onClose } = this.props;
-
     return (
         <Tag color={"gold"} closable={closable} onClose={onClose} style={{ marginRight: 3 }}>
           gold

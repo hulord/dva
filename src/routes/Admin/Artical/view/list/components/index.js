@@ -58,12 +58,21 @@ export default class list extends BaseComponent {
             }
         });
     }
+    edit = ( articalId ) => {
+        const { dispatch } = this.props;
+        dispatch({
+            type: 'artical/edit',
+            payload: {
+                id:articalId
+            }
+        })
+    }
   render() {
     const { artical, loading, dispatch } = this.props;
     const { pageData, articalList} = artical;
     const dataTableProps1 = {
       loading,
-      columns: columns({delete:this.delete}),
+      columns: columns({delete:this.delete,edit:this.edit}),
       rowKey: 'id',
       dataItems: pageData,
       onChange: ({ pageNum, pageSize }) => {}
@@ -73,7 +82,7 @@ export default class list extends BaseComponent {
         <Content>
             <DataTable {...dataTableProps1} />
             <div className="footer ptl">
-            <Link to={getPath("/admin/createartical")}><Button icon="plus" type="primary art_add" >
+            <Link to={getPath("/admin/artical_operate")}><Button icon="plus" type="primary art_add" >
               新增
               </Button></Link>
               <Pagination {...dataTableProps1} />

@@ -40,13 +40,12 @@ export default {
       }
     }
   },
-
   reducers: {
     loginSuccess(state, { payload }) {
           const decodejwt =  jwt.decode(payload.data);
+          console.log(decodejwt);
           $$.setStore('user', {"username":decodejwt['username'],"role":decodejwt["Role"]});
           $$.setStore('Authorization', payload.data);
-
           return {
             ...state,
             loggedIn: true

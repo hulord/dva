@@ -1,6 +1,5 @@
 import $$ from 'cmn-utils';
 import modelEnhance from '@/utils/modelEnhance';
-import functions from '@/utils/func.js';
 
 export default modelEnhance({
   namespace: 'global',
