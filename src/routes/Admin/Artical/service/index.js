@@ -8,6 +8,9 @@ export async function delArtical ( payload ) {
 export async function getTags(){
   return $$.get('/v1/artical/tags');
 }
-export async function editArtical(payload){
+export async function getArtical(payload){
   return $$.get('/v1/artical/'+payload.id);
+}
+export async function updateArtical(payload){
+  return $$.put('/v1/artical/'+payload.id,payload);
 }

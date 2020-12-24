@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'dva';
 import { Layout, Col, Row, Button, Radio  } from 'antd';
-import { Link } from "dva/router";
+import {Link, routerRedux} from "dva/router";
 import BaseComponent from 'components/BaseComponent';
 import G2 from 'components/Charts/G2';
 import DataTable, { Editable } from 'components/DataTable';
@@ -60,12 +60,7 @@ export default class list extends BaseComponent {
     }
     edit = ( articalId ) => {
         const { dispatch } = this.props;
-        dispatch({
-            type: 'artical/edit',
-            payload: {
-                id:articalId
-            }
-        })
+        this.props.dispatch(routerRedux.push('/admin/artical_operate/'+articalId));
     }
   render() {
     const { artical, loading, dispatch } = this.props;

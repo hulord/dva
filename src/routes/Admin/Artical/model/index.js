@@ -14,14 +14,10 @@ export default modelEnhance({
     },
   },
   subscriptions: {
-
   },
   effects: {
     *delete({ payload }, { call }) {
       return yield call(delArtical, payload);
-    },
-    *edit({ payload },{ put }){
-      yield put(routerRedux.push({pathname:"/admin/artical_operate", id:payload.id}));
     },
   },
   reducers: {

@@ -4,6 +4,7 @@ import { Layout,  Button, Radio, Form, Input, Card, Empty, Tag, Select} from 'an
 import BaseComponent from 'components/BaseComponent';
 import Editor from 'components/Editor';
 import { antdNotice } from 'components/Notification'
+import { getLastParams } from '@/utils/func'
 import './index.less';
 @connect(({ create,loading }) => ({
   create,  submitting: loading.effects['register/submit']
@@ -11,7 +12,8 @@ import './index.less';
 @Form.create()
 export default class Createartical extends BaseComponent {
   state = {
-    html: ''
+    html: '',
+      id: "",
   };
 
   onTextChange = html => {
@@ -21,8 +23,24 @@ export default class Createartical extends BaseComponent {
   };
 
   componentDidMount (){
-    const { dispatch } = this.props;
+    const { dispatch, location } = this.props;
     dispatch({type: 'create/getTags'})
+    const id = getLastParams(location.pathname)
+    if( id ){
+        this.setState({
+            id
+        });
+        dispatch({
+          type:"create/getone",
+          payload:{
+            id:id
+          }
+        }).then(res=>{
+          if (res && res.status == 1){
+              antdNotice.error(res.message)
+          }
+        })
+    }
   }
   //表单验证
   handleSubmit = e => {
@@ -41,34 +59,52 @@ export default class Createartical extends BaseComponent {
         values.tags = new_tags;
       }
       if (!err) {
-          dispatch({
-              type: 'create/create',
-              payload: {
-                ...values
-              }
-          }).then((res)=>{
-                antdNotice.error(res.message);
-                 if(res.status == 0){
-                     window.location.href="/admin/artical/list";
-                 }
-          });
+          //编辑
+          if(this.state.id){
+              values.id = this.state.id
+              dispatch({
+                  type: 'create/update',
+                  payload: {
+                      ...values
+                  }
+              }).then((res)=>{
+                  antdNotice.error(res.message);
+                  if(res.status == 0){
+                      window.location.href="/admin/artical/list";
+                  }
+              });
+              //新增
+          }else{
+              dispatch({
+                  type: 'create/create',
+                  payload: {
+                      ...values
+                  }
+              }).then((res)=>{
+                  antdNotice.error(res.message);
+                  if(res.status == 0){
+                      window.location.href="/admin/artical/list";
+                  }
+              });
+          }
       }
     });
   };
+
   //文章标签标签渲染
   tagRender = (props) =>{
-    const { label, value, closable, onClose } = this.props;
-    return (
-        <Tag color={"gold"} closable={closable} onClose={onClose} style={{ marginRight: 3 }}>
-          gold
-        </Tag>
-    );
+    return ["fdsaf","aabb"]
   }
 
   render() {
     const { form,submitting,create } = this.props;
-    const { defaultTags } = create
+    const { defaultTags, articalInfo } = create
     const { getFieldDecorator } = form;
+    var  tags = [];
+    { articalInfo && articalInfo.Tags.map(item=>{
+        tags.push(item.tag_name)
+        })
+    }
     const formItemLayout = {
       labelCol: {
         xs: { span: 24 },
@@ -78,7 +114,7 @@ export default class Createartical extends BaseComponent {
         xs: { span: 24 },
         sm: { span: 18 },
       },
-    };
+    }
     return (
       <Layout className="full-layout page dashboard-page">
         <Layout.Content>
@@ -94,11 +130,12 @@ export default class Createartical extends BaseComponent {
               name ="title" 
             >
               {getFieldDecorator('title', {
-                rules: [
-                  {
-                    required: true,
-                    message: '文章标题不能为空!'
-                  }
+                  initialValue:articalInfo && articalInfo.title,
+                  rules: [
+                      {
+                        required: true,
+                        message: '文章标题不能为空!'
+                      }
                 ]
               })(<Input size="large" placeholder="文章标题" />)}
 
@@ -109,7 +146,7 @@ export default class Createartical extends BaseComponent {
               name ="tags"
             >
               {getFieldDecorator('tags', {
-                  initialValue:['gold', 'cyan'],
+                  initialValue:tags,
               })(
                   <Select
                       mode="multiple"
@@ -124,7 +161,7 @@ export default class Createartical extends BaseComponent {
             <Form.Item
               label="内容"
             >
-              <Editor onChange={this.onTextChange} value={this.state.newHtml} />
+                <Editor onChange={this.onTextChange} value={articalInfo && articalInfo.content} />
             </Form.Item>
             <Form.Item wrapperCol = {{span: 24}} style={{"textAlign":"center"}}>
             <Button type="primary"   loading={submitting} htmlType="submit" className="register-form-button">

@@ -1,5 +1,5 @@
 import modelEnhance from '@/utils/modelEnhance';
-import { create,getTags, editArtical } from  '../../../service';
+import { create,getTags, updateArtical, getArtical } from  '../../../service';
 
 export default modelEnhance({
   namespace: 'create',
@@ -8,26 +8,21 @@ export default modelEnhance({
       defaultTags:[]
   },
   //页面监听
-  subscriptions: {
-    setup({ history, dispatch }) {
-        return history.listen(({ pathname }) => {
-            if(history.location.pathname == "/admin/artical_operate" && history.location.id ){
-                dispatch({
-                    type: 'edit',
-                    payload: {id:history.location.id}
-                })
-            };
-        });
-    }
-  },
+  subscriptions: {},
   effects: {
     *create({ payload }, { call }) {
       return yield call(create, payload);
     },
-      *edit({ payload }, { call }) {
-        console.log(1231);
-          return yield call(editArtical, payload);
+      *update({ payload }, { call }) {
+          return yield call(updateArtical, payload);
       },
+    *getone({ payload }, { call, put }) {
+       const response = yield call(getArtical, payload);
+       if(response.status == 1){
+         return response;
+       }
+       yield  put({type:'setArticalInfo',payload:response.data})
+    },
     *getTags({ payload },{ call,put }){
       const response = yield call(getTags, payload);
       yield put({type: 'setTags',payload: response});
@@ -39,6 +34,12 @@ export default modelEnhance({
           ...state,
           defaultTags:payload.data
         }
+    },
+    setArticalInfo(state,{ payload }){
+      return {
+        ...state,
+        articalInfo:payload
+      }
     }
   },
 });

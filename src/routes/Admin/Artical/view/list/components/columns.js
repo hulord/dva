@@ -1,9 +1,6 @@
 import React, { Fragment } from 'react';
 import DataTable, { EditableOper } from 'components/DataTable';
 import Icon from 'components/Icon';
-import {
-  LeftSquareTwoTone
-} from '@ant-design/icons';
 import { Button, Tag } from 'antd';
 import { rTime } from '@/utils/func'
 import { getPath } from '../../../../../../utils/func'
@@ -24,7 +21,7 @@ export const columns = (actions)  =>  [
     title: '阅读数',
     name: 'view',
     tableItem: {
-      render: text => <Tag  icon={<LeftSquareTwoTone />} color="#108ee9">{
+      render: text => <Tag  color="#108ee9">{
         text
       }</Tag>
     }
