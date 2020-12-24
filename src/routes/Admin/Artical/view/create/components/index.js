@@ -26,7 +26,7 @@ export default class Createartical extends BaseComponent {
     const { dispatch, location } = this.props;
     dispatch({type: 'create/getTags'})
     const id = getLastParams(location.pathname)
-    if( id ){
+      if( id ){
         this.setState({
             id
         });
@@ -61,7 +61,8 @@ export default class Createartical extends BaseComponent {
       if (!err) {
           //编辑
           if(this.state.id){
-              values.id = this.state.id
+              values.id = parseInt(this.state.id)
+              console.log(values);
               dispatch({
                   type: 'create/update',
                   payload: {
@@ -91,10 +92,6 @@ export default class Createartical extends BaseComponent {
     });
   };
 
-  //文章标签标签渲染
-  tagRender = (props) =>{
-    return ["fdsaf","aabb"]
-  }
 
   render() {
     const { form,submitting,create } = this.props;

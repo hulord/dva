@@ -34,7 +34,11 @@ export const getLastParams = ( url ) =>{
         return "";
     }
     var index  = url.lastIndexOf("\/");
-    return url.substring(index + 1, url.length)
+    var id = url.substring(index + 1, url.length)
+    if (isNaN(parseInt(id)) == false){
+        return id
+    }
+    return ""
 }
 
 
