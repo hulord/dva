@@ -22,23 +22,24 @@ export default class Home extends BaseComponent {
     }
     this.onChange(this.state.page);
   }
+
   onChange = page =>{
-    this.props.dispatch({
-      type: 'home/getArtical',
-      payload: {
-        page:page,
-        pageSize:10,
-      }
-    })
+    this.getArticalList(null,page)
   }
   onSearch = keyword=>{
+    this.getArticalList(keyword,1)
+  }
+  getArticalList = (keyword,page)=>{
+    const payload =  {
+        page:page,
+        pageSize:10
+    }
+    if(keyword){
+      payload.keyword = keyword
+    }
     this.props.dispatch({
-      type: 'home/getArtical',
-      payload: {
-        page:1,
-        pageSize:10,
-        keyword:keyword
-      }
+      type: '/home/getArtical',
+      payload:payload
     })
   }
   render() {

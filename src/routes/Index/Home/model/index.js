@@ -15,8 +15,8 @@ export default modelEnhance({
       return history.listen(({ pathname }) => {
         if(pathname!="/"){
            dispatch({
-             type: 'addHistory',
-             payload: pathname
+               type: 'addHistory',
+               payload: pathname
            })
         };
       });

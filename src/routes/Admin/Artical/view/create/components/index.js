@@ -162,7 +162,7 @@ export default class Createartical extends BaseComponent {
             </Form.Item>
             <Form.Item wrapperCol = {{span: 24}} style={{"textAlign":"center"}}>
             <Button type="primary"   loading={submitting} htmlType="submit" className="register-form-button">
-                新增
+                {articalInfo?"修改":"新增"}
             </Button>
           </Form.Item>
           </Form>
