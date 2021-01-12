@@ -1,5 +1,5 @@
 import modelEnhance from '@/utils/modelEnhance';
-import { getList,getWeather, getArtical } from '../service';
+import { getWeather, getArtical } from '../service';
 export default modelEnhance({
   namespace: 'home',
   state: {
@@ -38,9 +38,9 @@ export default modelEnhance({
     setArtical(state,{ payload }){
       return {
         ...state,
-        listData:payload.data.list,
-        page:payload.data.page,
-        total:payload.data.total
+        listData:payload.data.dataList,
+        page:payload.data.currentPage+1,
+        total:payload.data.totalResult
       }
     },
   },

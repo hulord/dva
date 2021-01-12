@@ -22,7 +22,6 @@ export default class Home extends BaseComponent {
     }
     this.onChange(this.state.page);
   }
-
   onChange = page =>{
     this.getArticalList(null,page)
   }
@@ -38,14 +37,13 @@ export default class Home extends BaseComponent {
       payload.keyword = keyword
     }
     this.props.dispatch({
-      type: '/home/getArtical',
+      type: 'home/getArtical',
       payload:payload
     })
   }
   render() {
     const { home,user } = this.props;
     const { vhistory,listData,page,total,keyword } = home;
-
     const contentLeft = cx("carousel-content-left");
     const contentRight = cx("carousel-content-right");
     

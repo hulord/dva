@@ -1,7 +1,6 @@
 import React,{Component} from "react";
 import {Card,Icon,type,Avatar,Button,Input, Row,Col ,Pagination } from "antd";
 import './style/index.less';
-import { dispatch } from "rxjs/internal/observable/range";
 import { Link } from "dva/router";
 const { Search } = Input;
 const ButtonGroup = Button.Group;
