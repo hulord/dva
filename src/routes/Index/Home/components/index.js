@@ -4,6 +4,7 @@ import { Layout, Col, Row } from 'antd';
 import BaseComponent from 'components/BaseComponent';
 import User from 'components/User';
 import Vhistory from 'components/Vhistory';
+import ArticalList from 'components/ArticalList';
 import List from 'components/List';
 import cx from 'classnames';
 import './index.less';
@@ -43,7 +44,7 @@ export default class Home extends BaseComponent {
   }
   render() {
     const { home,user } = this.props;
-    const { vhistory,listData,page,total,keyword } = home;
+    const { vhistory,TopList, NewsList,listData,page,total,keyword } = home;
     const contentLeft = cx("carousel-content-left");
     const contentRight = cx("carousel-content-right");
     
@@ -54,6 +55,8 @@ export default class Home extends BaseComponent {
             <Layout className={contentLeft}>
               <User Userinfo={user}></User>
               <Vhistory visithis={vhistory}></Vhistory>
+              <ArticalList list = {TopList} title = {"最新文章"}></ArticalList>
+              <ArticalList list = {NewsList} title = {"热门文章"}></ArticalList>
             </Layout>
           </Col>
           <Col span={20}>

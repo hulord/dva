@@ -38,7 +38,6 @@ export default modelEnhance({
         if(h && h.length>0){
            h.forEach((item,i)=>{
               let h_content = item.replace(/<[^>]+>/g,"");
-              console.log(h_content);
               const k = i*1+1*1;
               var reg = new RegExp(item,"g"); //创建正则RegExp对象  
               if(item.indexOf("h3") != -1){

@@ -2,6 +2,7 @@ import React from 'react';
 import PageLoading from 'components/Loading/PageLoading';
 import { normal } from 'components/Notification';
 import store from 'cmn-utils/lib/store';
+import $$ from "cmn-utils";
 
 // 系统通知, 定义使用什么风格的通知，normal或antdNotice
 const notice = normal;
@@ -40,8 +41,14 @@ export default {
      */
     afterResponse: response => {
       const { status, message } = response;
-      if (status==0 || status==1) {
-        return response;
+      if (status==0 ) {
+          return response;
+      } else if(status==1){
+          const token = $$.getStore("Authorization");
+          if(token){
+            $$.removeStore("Authorization");
+          }
+          return response;
       } else {
           throw new Error(message);
       }

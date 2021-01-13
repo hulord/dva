@@ -6,6 +6,8 @@ export default modelEnhance({
     bar1: [],
     bar2: [],
     vhistory: [],
+    TopList:[],
+    NewList:[],
     listData:[],
     weather:[],
   },
@@ -13,12 +15,14 @@ export default modelEnhance({
   subscriptions: {
     setup({ history, dispatch }) {
       return history.listen(({ pathname }) => {
-        if(pathname!="/"){
-           dispatch({
-               type: 'addHistory',
-               payload: pathname
-           })
-        };
+        if(pathname.indexOf("artical")!=-1){
+          if(pathname!="/"){
+            dispatch({
+              type: 'addHistory',
+              payload: pathname
+            })
+          };
+        }
       });
     }
   },
@@ -33,7 +37,18 @@ export default modelEnhance({
   },
   reducers:{
     addHistory(state,{ payload }){
-      return {...state,vhistory:[payload]}
+      let historyKey =  state.vhistory.indexOf(payload)
+      if( historyKey==-1){
+        state.vhistory.push(payload)
+        if(state.vhistory.length > 5){
+          state.vhistory.splice(5,1)
+        }
+      }else{
+        console.log(historyKey)
+        state.vhistory.splice(0,0,payload)
+        state.vhistory.splice(historyKey,1)
+      }
+      return state
     },
     setArtical(state,{ payload }){
       return {
