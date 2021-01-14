@@ -1,5 +1,5 @@
 import modelEnhance from '@/utils/modelEnhance';
-import { getWeather, getArtical } from '../service';
+import { getWeather, getArtical ,getTopAndNewList } from '../service';
 export default modelEnhance({
   namespace: 'home',
   state: {
@@ -34,6 +34,10 @@ export default modelEnhance({
         payload: response,
       });
     },
+    *getTopAndNewList({ payload },{ call,put }){
+      const  response = yield  call(getTopAndNewList, payload);
+      console.log(response)
+    }
   },
   reducers:{
     addHistory(state,{ payload }){

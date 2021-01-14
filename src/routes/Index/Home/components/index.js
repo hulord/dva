@@ -22,12 +22,19 @@ export default class Home extends BaseComponent {
       listData:[],
     }
     this.onChange(this.state.page);
+    this.getTopAndNewList(5);
   }
   onChange = page =>{
     this.getArticalList(null,page)
   }
   onSearch = keyword=>{
     this.getArticalList(keyword,1)
+  }
+  getTopAndNewList = size =>{
+    this.props.dispatch({
+      type:'home/getTopAndNewList',
+      payload:size
+    })
   }
   getArticalList = (keyword,page)=>{
     const payload =  {

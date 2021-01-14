@@ -6,7 +6,7 @@ import  titleImg from 'assets/images/logo/heading_logo.png'
 class ArticalList extends Component {
   render(){
     const { articalList,title } = this.props;
-    return (<div className="site-list-box">
+    return (<div className="site-list-box-home">
         <img src={titleImg} alt="logo" />
         <b>{title}</b>
         <ul>
