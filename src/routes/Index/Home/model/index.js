@@ -35,8 +35,13 @@ export default modelEnhance({
       });
     },
     *getTopAndNewList({ payload },{ call,put }){
-      const  response = yield  call(getTopAndNewList, payload);
-      console.log(response)
+      const  { status, data, message} = yield  call(getTopAndNewList, payload);
+      if( status == 0 ) {
+        yield  put({
+          type: 'setTopAndNew',
+          payload: data
+        })
+      }
     }
   },
   reducers:{
@@ -53,6 +58,13 @@ export default modelEnhance({
         state.vhistory.splice(historyKey,1)
       }
       return state
+    },
+    setTopAndNew( state, { payload }){
+      return {
+        ...state,
+        NewList:payload.NewList,
+        TopList:payload.TopList,
+      }
     },
     setArtical(state,{ payload }){
       return {

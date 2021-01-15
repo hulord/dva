@@ -20,9 +20,13 @@ export const getPath = (path = "",ask = 0) => {
  * toJSON() 方法可以将 Date 对象转换为字符串，并格式化为 JSON 数据格式。
  * 格式化unix时间
  */
-export const rTime = ( date ) =>{
+export const rTime = ( date ,format) =>{
     var json_date = new Date(date).toJSON();
-    return new Date(new Date(json_date) + 8 * 3600 * 1000).toISOString().replace(/T/g, ' ').replace(/\.[\d]{3}Z/, '')
+    var rtime = new Date(new Date(json_date) + 8 * 3600 * 1000).toISOString().replace(/T/g, ' ').replace(/\.[\d]{3}Z/, '')
+    if(format == "Y-m-d"){
+        rtime = rtime.substr(0,10)
+    }
+    return rtime;
 }
 
 /**

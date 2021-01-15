@@ -51,22 +51,22 @@ export default class Home extends BaseComponent {
   }
   render() {
     const { home,user } = this.props;
-    const { vhistory,TopList, NewsList,listData,page,total,keyword } = home;
+    const { vhistory,TopList, NewList,listData,page,total,keyword } = home;
     const contentLeft = cx("carousel-content-left");
     const contentRight = cx("carousel-content-right");
-    
+
     return (
       <Layout className = "">
         <Content className = "space0">
-          <Col span= {4}>
+          <Col span= {5}>
             <Layout className={contentLeft}>
               <User Userinfo={user}></User>
               <Vhistory visithis={vhistory}></Vhistory>
               <ArticalList list = {TopList} title = {"最新文章"}></ArticalList>
-              <ArticalList list = {NewsList} title = {"热门文章"}></ArticalList>
+              <ArticalList list = {NewList} title = {"热门文章"}></ArticalList>
             </Layout>
           </Col>
-          <Col span={20}>
+          <Col span={19}>
             <Layout className={contentRight}>
                <List search="ture" listType="ture" onSearch={this.onSearch} onChange={this.onChange} pageSize={10} page={page} keyword={keyword} total={total} listData={listData}></List>
             </Layout>
