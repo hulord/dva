@@ -28,8 +28,8 @@ export default {
     // 每次请求头部都会带着这些参数
     withHeaders: () => (
       {
-      Authorization:store.getStore('Authorization')?"Bearer:"+store.getStore('Authorization'):"",
-    }),
+        Authorization:store.getStore('Authorization')?"Bearer:"+store.getStore('Authorization'):"",
+      }),
 
     /**
      * 因为modelEnhance需要知道服务器反回的数据，
@@ -41,11 +41,11 @@ export default {
      */
     afterResponse: response => {
       const { status, message } = response;
-      if (status==0 ) {
+      if ( status == 0 ) {
           return response;
-      } else if(status==1){
+      } else if( status == 1 ){
           const token = $$.getStore("Authorization");
-          if(token){
+          if( token ){
             $$.removeStore("Authorization");
           }
           return response;

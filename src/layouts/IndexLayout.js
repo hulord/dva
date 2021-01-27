@@ -50,12 +50,12 @@ export default class IndexLayout extends PureComponent {
       user,
       currentMenu: {},
       isMobile: false,
-      citye:"",
+      city:["福建省","福州市"],
     };
-    console.log(111);
     props.dispatch({
       type: 'global/getMenu'
     });
+    this.onChangeCity()
   }
 
   componentDidMount() {
@@ -90,8 +90,12 @@ export default class IndexLayout extends PureComponent {
   componentWillUnmount() {
     // 清理监听
     this.unregisterEnquire();
-  }
 
+  }
+  //获取默认城市
+  getDefaultCity(){
+
+  }
   getCurrentMenu(props) {
     const {
       location: { pathname },
@@ -180,20 +184,25 @@ export default class IndexLayout extends PureComponent {
     });
   };
 
-//选取城市名称
-onChangeCity = (value, selectedOptions) => {
-  let cityIndex = value.length;
-  let cityCode = value[cityIndex-1];
+  //选取城市名称
+  onChangeCity = (value, selectedOptions) => {
+    var cityCode
+    if(value){
+       let cityIndex = value.length;
+       cityCode = value[cityIndex-1];
+      this.setState({
+        city: selectedOptions.map(o => o.label).join(', '),
+      });
+    }else{
+        cityCode = 101230101;
+    }
+    this.props.dispatch({
+      type: 'global/getWeather',
+      payload:cityCode
+    })
 
-  this.props.dispatch({
-    type: 'global/getWeather',
-    payload:cityCode
-  })
-  
-  this.setState({
-    city: selectedOptions.map(o => o.label).join(', '),
-  });
-};
+
+  };
   render() {
     const {
       collapsedLeftSide,
@@ -226,6 +235,7 @@ onChangeCity = (value, selectedOptions) => {
     })
     return (
       <Layout className={classnames}  style={{position:"unset!important"}}>
+
         <Layout className="container">
             <NavBar2
               collapsed={collapsedLeftSide}
@@ -239,7 +249,7 @@ onChangeCity = (value, selectedOptions) => {
               isMobile={isMobile}
               weather = {weather}
               is_index = {is_index}
-            />   
+            />
         <Layout >
           <Content  style={{overflowX:"unset"}}>
             {theme.layout.indexOf('tabLayout') >= 0 ? (

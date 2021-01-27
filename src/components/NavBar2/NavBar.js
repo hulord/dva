@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 
-import { Popover, Badge, Avatar,Carousel,Layout,Cascader,Icon, Col } from 'antd';
+import { Popover, Badge, Avatar,Carousel,Layout,Cascader,Icon, Col, Slidebai } from 'antd';
 import { Link } from 'dva/router';
 import IndexIcon from '../Icon';
 import cx from 'classnames';
@@ -167,7 +167,6 @@ class NavBar extends PureComponent {
 
   render() {
     const { openSearchBox,citys } = this.state;
-    
     const {
       fixed,
       theme,
@@ -192,14 +191,13 @@ class NavBar extends PureComponent {
     //   groupBy: ["country"],
     //   as: "percent"
     // });
-
     const classnames = cx('navbar','background-ghost','border0',{
       'is-index':is_index==1?true:false,
       'navbar-fixed-top': !!fixed,
       'navbar-sm': isMobile ? true : collapsed,
    
     });
-
+    console.log(weather)
     return (
       <header className={classnames}>
         <div>
@@ -271,10 +269,13 @@ class NavBar extends PureComponent {
               <div className="weather-header">
               <Icon type="appstore" theme="twoTone"  style={{ fontSize: '16px', color: '#08c' }}/>
               <span className="h1">{city}</span>
-                <Cascader options={citys} onChange={onChangeCity}>
-                    <a  href="#">{city ? null : "请选择城市..."}<Icon type="environment" theme="twoTone" /></a>
+                <Cascader
+                    options={citys}
+                    onChange={onChangeCity}
+                    >
+                  <a  href="#"><Icon type="environment" theme="twoTone" /></a>
                 </Cascader>
-              </div> 
+              </div>
               <div className="weather-content">
                   <Col span={24} className="weather-data">
                       <Col span={9} className="weather-today">
@@ -290,36 +291,22 @@ class NavBar extends PureComponent {
                       <Col span={15} className="weather-week">
                           { weather ? (
                             <div>
-                            <Col span={16}>
-                              <Chart height={70} width={150} data={data} scale={cols} forceFit>
-                              <Coord type="polar" innerRadius={0.5} transpose />
-                              <Tooltip title="question" />
-                              <Geom
-                                type="interval"
-                                position="question*percent"
-                                color={["percent", "#c5211f-#dc9076-#de6627"]}
-                                tooltip={[
-                                  "percent",
-                                  val => {
-                                    return {
-                                      name: "占比",
-                                      value: val * 100 + "%"
-                                    };
-                                  }
-                                ]}
-                                style={{
-                                  lineWidth: 1,
-                                  stroke: "#fff"
-                                }}
-                              >
-                              </Geom>
-                            </Chart>
-                            </Col>
-                            <Col span={6}>
-                                <div className="bizChat-label">PM10</div>
-                                <div className="bizChat-label">PM25</div>
-                                <div className="bizChat-label">湿度</div>
-                            </Col>
+                              <Col span={24} className="weather-intval">
+                                <Col span={10} className="weather-intval-title">
+                                    PM10
+                                </Col>
+                                <Col span={12} className="weather-intval-val">
+                                  <Slider defaultValue={30} disabled={disabled} />
+                                </Col>
+                              </Col>
+                            {/*<Col span={16}>*/}
+                            {/*  <div className="bizChat-label size-large">PM10</div>*/}
+                            {/*  <div className="bizChat-label size-large">PM25</div>*/}
+                            {/*</Col>*/}
+                            {/*<Col span={6}>*/}
+                            {/*    <div className="bizChat-value">PM10</div>*/}
+                            {/*    <div className="bizChat-value">PM25</div>*/}
+                            {/*</Col>*/}
                             </div>
                           )
                           :null}

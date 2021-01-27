@@ -8,7 +8,7 @@ import request from 'cmn-utils/lib/request';
 import createRoutes from '@/routes';
 import 'assets/styles/index.less';
 import config from './config';
-import { ConfigProvider } from 'antd';
+import {ConfigProvider, Layout} from 'antd';
 import zh_CN from 'antd/lib/locale-provider/zh_CN';
 import 'moment/locale/zh-cn';
 import { homepage } from '../package.json';

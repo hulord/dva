@@ -1,5 +1,5 @@
 import React,{Component} from "react";
-import {Avatar,Icon,type,Button } from "antd";
+import {Avatar,Icon,type,Button, Divider } from "antd";
 import './style/index.less';
 import  titleImg from 'assets/images/logo/heading_logo.png'
 import { rTime } from '@/utils/func'
@@ -13,16 +13,11 @@ class ArticalList extends Component {
         <ul>
         {list && list.map((item, i) => {
           return <li key={i}>
-                    <div className="side-list-left">
-                        <span>{item.Title}</span>
-                        <span>
-                            <Icon type="calendar" ></Icon>
-                            <Button type="link" icon="calendar"></Button>{rTime(item.CreateTime,"Y-m-d")}
-                            <Button  type="link" icon="eye" ></Button>{item.View}</span>
-                    </div>
-                    <div className="side-list-righ">
-                        {/*<span> <Button type="link" icon="fullscreen"  href={}></Button  ></span>*/}
-                        {/*<span> <Button type="link" icon="close"  onClick={()=>this.delhis(i)}></Button  ></span>*/}
+                    <div  className="side-list-left">
+                        <a  href={"/artical/"+item.Id}>
+                        {item.Title.length>20?  item.Title.substr(0,20)+"..." :item.Title}&nbsp;&nbsp;
+                        <Icon type="eye"  style={{ fontSize: '14px', color: '#1890ff' }}></Icon>&nbsp;{item.View}
+                        </a>
                     </div>
                   </li>
         })}

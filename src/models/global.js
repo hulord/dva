@@ -49,20 +49,20 @@ export default modelEnhance({
       }
     },
     *getWeather({payload},{call,put}){
-      const response = yield call(getWeather,payload);
+      const { data, message, status} = yield call(getWeather,payload);
       const tem=[];const temTop=[];const temLow=[];
-      if(response){
-        var week_data = response.data[0].data;
+      if( status == 0 ){
+        var week_data = data.data.forecast;
         week_data.map((item)=>{
-          tem.push({value:parseInt(item.tem),day:item.date,name:"当前温度"});
-          temTop.push({value:parseInt(item.tem1),day:item.date,name:"最高温度"});
-          temLow.push({value:parseInt(item.tem1),day:item.date,name:"最低温度"});
+          tem.push({value:parseInt(item.high),day:item.date,name:"当前温度"});
+          temTop.push({value:parseInt(item.high),day:item.date,name:"最高温度"});
+          temLow.push({value:parseInt(item.low),day:item.date,name:"最低温度"});
         })
       }
-      var today_data = week_data[0];
+      var today_data = data.data;
        yield put({
          type:'setWeather',
-         payload:{today:{wea:today_data.wea,temperature:today_data.tem,air_tips:today_data.air_tips},areaChat:{tem,temTop,temLow}}
+         payload:{today:{wea:today_data.shidu,temperature:today_data.wendu,air_tips:today_data.ganmao,pm10:today_data.pm10,pm25:today_data.pm25},areaChat:{tem,temTop,temLow}}
        })
    }
   },
@@ -100,6 +100,6 @@ export async function getMenu(payload) {
 }
 //获取天气信息
 export async function getWeather(payload) {
-  return $$.post('/v1/home/getWeather',payload);
+  return $$.get('/v1/common/getWeather/'+payload);
 }
 

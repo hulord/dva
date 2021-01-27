@@ -7,6 +7,8 @@ import Vhistory from 'components/Vhistory';
 import ArticalList from 'components/ArticalList';
 import List from 'components/List';
 import cx from 'classnames';
+
+
 import './index.less';
 const { Content } = Layout;
 
@@ -57,6 +59,7 @@ export default class Home extends BaseComponent {
 
     return (
       <Layout className = "">
+
         <Content className = "space0">
           <Col span= {5}>
             <Layout className={contentLeft}>

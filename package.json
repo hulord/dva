@@ -34,6 +34,7 @@
     "object.omit": "^3.0.0",
     "path-to-regexp": "^2.2.1",
     "react": "^16.2.1",
+    "react-bmap": "^1.0.121",
     "react-document-title": "^2.0.3",
     "react-dom": "^16.2.1",
     "react-fast-compare": "^2.0.0",
