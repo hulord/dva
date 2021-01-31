@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 
-import { Popover, Badge, Avatar,Carousel,Layout,Cascader,Icon, Col, Slidebai } from 'antd';
+import { Popover, Badge, Avatar,Carousel,Layout,Cascader,Icon, Col, Slider } from 'antd';
 import { Link } from 'dva/router';
 import IndexIcon from '../Icon';
 import cx from 'classnames';
@@ -296,17 +296,17 @@ class NavBar extends PureComponent {
                                     PM10
                                 </Col>
                                 <Col span={12} className="weather-intval-val">
-                                  <Slider defaultValue={30} disabled={disabled} />
+                                  <Slider defaultValue={30} disabled={true} />
                                 </Col>
                               </Col>
-                            {/*<Col span={16}>*/}
-                            {/*  <div className="bizChat-label size-large">PM10</div>*/}
-                            {/*  <div className="bizChat-label size-large">PM25</div>*/}
-                            {/*</Col>*/}
-                            {/*<Col span={6}>*/}
-                            {/*    <div className="bizChat-value">PM10</div>*/}
-                            {/*    <div className="bizChat-value">PM25</div>*/}
-                            {/*</Col>*/}
+                              <Col span={24} className="weather-intval">
+                                <Col span={10} className="weather-intval-title">
+                                  PM20
+                                </Col>
+                                <Col span={12} className="weather-intval-val">
+                                  <Slider defaultValue={40} disabled={true} />
+                                </Col>
+                              </Col>
                             </div>
                           )
                           :null}

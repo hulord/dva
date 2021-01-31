@@ -1,4 +1,7 @@
-.search-box {
+.weather-intval-title {
+  text-align: center;
+}
+.weather-intval-val.search-box {
   padding-top: 45px;
   background: linear-gradient(to bottom, rgba(0,0,0,0.95) 20%, rgba(0,0,0,0.75) 60%, transparent) !important;
   .search-box-input {
@@ -48,5 +51,19 @@
       font-size: 15px;
       color: #999;
     }
+  }
+}
+.weather-intval-val{
+  .ant-slider {
+    margin:5px 6px 10px;
+  }
+  .ant-slider-handle {
+    width:8px;
+    height: 8px;
+    margin-top: -2px;
+    border-color:rgb(255 127 0) !important;
+  }
+  .ant-slider-disabled .ant-slider-track {
+    background-color: rgb(255 127 0) !important;
   }
 }
