@@ -54,15 +54,28 @@ export default modelEnhance({
       if( status == 0 ){
         var week_data = data.data.forecast;
         week_data.map((item)=>{
-          tem.push({value:parseInt(item.high),day:item.date,name:"当前温度"});
-          temTop.push({value:parseInt(item.high),day:item.date,name:"最高温度"});
-          temLow.push({value:parseInt(item.low),day:item.date,name:"最低温度"});
+          tem.push(
+              {
+                "day":item.date+"日",
+                "最高气温":item.high.replace(/[^0-9]/ig,""),
+                "最低气温":item.low.replace(/[^0-9]/ig,"")
+              });
         })
       }
+
       var today_data = data.data;
        yield put({
          type:'setWeather',
-         payload:{today:{wea:today_data.shidu,temperature:today_data.wendu,air_tips:today_data.ganmao,pm10:today_data.pm10,pm25:today_data.pm25},areaChat:{tem,temTop,temLow}}
+         payload:{
+           today:{
+             wea:today_data.shidu,
+             temperature:today_data.wendu,
+             air_tips:today_data.ganmao,
+             pm10:today_data.pm10,
+             pm25:today_data.pm25
+           },
+           areaChat:tem.slice(0,7)
+         }
        })
    }
   },

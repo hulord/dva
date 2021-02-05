@@ -8,104 +8,21 @@ import './style/index.less';
 import logoImg from 'assets/images/logo.png';
 import photoImg from 'assets/images/photo.png';
 import weatherImg from 'assets/images/weather_sun.png';
-import SearchBox from './SearchBox';
-import Header from 'antd/lib/calendar/Header';
 import citys from '@/utils/citys.js';
 import G2 from 'components/Charts/G2';
 import DataSet from '@antv/data-set';
-const { Chart, Axis, Geom, Tooltip, Legend, Coord, Label, View, Guide, Shape, Facet, Util } = G2;
-const { Text } = Guide;
-const { DataView } = DataSet;
-const data = [
-  {
-    question: "问题 1",
-    percent: 0.7
-  },
-  {
-    question: "问题 2",
-    percent: 0.6
-  },
-  {
-    question: "问题 3",
-    percent: 0.8
-  }
-];
+const { Chart, Axis, Geom, Tooltip } = G2;
 
-const cols = {
-  percent: {
-    min: 0,
-    max: 1
-  }
-};
 var data2 = [
   {
-    year: "1986",
-    ACME: 162,
-    Compitor: 42
-  },
-  {
-    year: "1987",
-    ACME: 134,
-    Compitor: 54
-  },
-  {
-    year: "1988",
-    ACME: 116,
-    Compitor: 26
-  },
-  {
-    year: "1989",
-    ACME: 122,
-    Compitor: 32
-  },
-  {
-    year: "1990",
-    ACME: 178,
-    Compitor: 68
-  },
-  {
-    year: "1991",
-    ACME: 144,
-    Compitor: 54
+    day: "1986",
+    Height: 18,
+    Low: 10
   }
 ];
 
-//图表1
-const areaCols = {
-  year: {
-    type: "linear",
-    tickInterval: 25
-  },
-  percent: {
-    formatter(value) {
-      value = value || 0;
-      value *= 100;
-      return parseInt(value);
-    },
 
-    alias: "percent(%)"
-  }
-};
-//图表2
-const scale = {
-  value: {
-    alias: "The Share Price in Dollars",
-    formatter: function(val) {
-      return "$" + val;
-    }
-  },
-  year: {
-    range: [0, 1]
-  }
-};
 
-var dv = new DataSet.View().source(data2);
-dv.transform({
-  type: "fold",
-  fields: ["ACME", "Compitor"],
-  key: "type",
-  value: "value"
-});
 
 /**
  * 其本本局头部区域
@@ -181,23 +98,31 @@ class NavBar extends PureComponent {
       weather,
       is_index
     } = this.props;
-    //const ds = new DataSet();
-    // const dv = ds.createView("tt");
-    // dv.source(data);
-    // dv.transform({
-    //   type: "percent",
-    //   field: "value",
-    //   dimension: "year",
-    //   groupBy: ["country"],
-    //   as: "percent"
-    // });
+    //图表2
+    const scale = {
+      value: {
+        alias: "气温",
+        formatter: function(val) {
+          return  val+"℃";
+        }
+      },
+      day: {
+        range: [0, 1]
+      }
+    };
+    var dv = new DataSet.View().source(weather.areaChat||data2);
+    dv.transform({
+      type: "fold",
+      fields: ["最高气温", "最低气温"],
+      key: "type",
+      value: "value"
+    });
     const classnames = cx('navbar','background-ghost','border0',{
       'is-index':is_index==1?true:false,
       'navbar-fixed-top': !!fixed,
       'navbar-sm': isMobile ? true : collapsed,
    
     });
-    console.log(weather)
     return (
       <header className={classnames}>
         <div>
@@ -314,7 +239,7 @@ class NavBar extends PureComponent {
                   </Col>
                   <Col span={24} className="weather-line-chart">
                     {<Chart
-                          height={100} 
+                          height={125}
                           data={dv}
                           padding={"auto"}
                           scale={scale}
@@ -323,10 +248,10 @@ class NavBar extends PureComponent {
                         <Tooltip crosshairs />
                         <Axis />
 
-                        <Geom type="area" position="year*value" color="type" shape="smooth" />
+                        <Geom type="area" position="day*value" color="type" shape="smooth" />
                         <Geom
                           type="line"
-                          position="year*value"
+                          position="day*value"
                           color="type"
                           shape="smooth"
                           size={2}

@@ -2,9 +2,11 @@ import React,{Component} from "react";
 import {Card,Icon,type,Avatar,Button,Input, Row,Col ,Pagination } from "antd";
 import './style/index.less';
 import { Link } from "dva/router";
+import { rTime } from '@/utils/func';
 const { Search } = Input;
 const ButtonGroup = Button.Group;
 const Meta  = Card;
+
 
 
 class List extends Component {
@@ -17,39 +19,24 @@ class List extends Component {
                 <Col span={6}  className="list-search">
                   <Search placeholder="请输入关键字" onSearch={onSearch} enterButton />
                 </Col>
-                <Col span={6} offset={12}  className="list-show">
-                  <ButtonGroup>
-                    <Button type="primary" icon="cloud" />
-                    <Button type="primary" icon="cloud-download" />
-                  </ButtonGroup>
-                </Col>
+                {/*<Col span={6} offset={12}  className="list-show">*/}
+                {/*  <ButtonGroup>*/}
+                {/*    <Button type="primary" icon="cloud" />*/}
+                {/*    <Button type="primary" icon="cloud-download" />*/}
+                {/*  </ButtonGroup>*/}
+                {/*</Col>*/}
               </Row>
             ) : null }
           <div className="content-container">
               <Row className="space0" gutter={16}>
                 { listData ?( listData.map((item, i) =>(
                   <Col key={i}  span={6} className="mgt15">
-                      <Card 
-                        size="small"
-                        bordered={false}
-                        cover={
-                          <img
-                            alt={item.title}
-                            src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
-                          />
-                        }
-                        actions={[
-                          <Link to={'artical/'+item.id}><Icon type="setting" key="setting" /></Link>,
-                          <Link to={'artical/'+item.id}><Icon type="edit" key="edit" /></Link>,
-                          <Icon type="ellipsis" key="ellipsis" url=""/>,
-                        ]}
+                      <Card
+                          hoverable
+                          style={{ width: 240 }}
+                          cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}
                       >
-                        <Meta
-                          avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
-                          title={item.title}
-                          description="这些是备用防守打法"
-                          bordered={false}
-                        />
+                          <Meta title="Europe Street beat" description="www.instagram.com" />
                       </Card>
                     </Col>
                 ))
