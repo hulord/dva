@@ -8,7 +8,6 @@ const ButtonGroup = Button.Group;
 const Meta  = Card;
 
 
-
 class List extends Component {
   render(){
     const {search,listType,listData,total,page,onChange ,onSearch} = this.props;
@@ -31,13 +30,20 @@ class List extends Component {
               <Row className="space0" gutter={16}>
                 { listData ?( listData.map((item, i) =>(
                   <Col key={i}  span={6} className="mgt15">
+                   <a  href={"/artical/"+item.id}>
                       <Card
                           hoverable
-                          style={{ width: 240 }}
                           cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}
                       >
-                          <Meta title="Europe Street beat" description="www.instagram.com" />
+                          <Meta 
+                          bordered={false} 
+                          title={item.title} 
+                          description={item.title}
+                           >
+                            {item.title.substr(0,20)}
+                           </Meta>
                       </Card>
+                      </a>
                     </Col>
                 ))
               ):null

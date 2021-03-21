@@ -65,8 +65,8 @@ export default class Home extends BaseComponent {
             <Layout className={contentLeft}>
               <User Userinfo={user}></User>
               <Vhistory visithis={vhistory}></Vhistory>
-              <ArticalList list = {TopList} title = {"最新文章"}></ArticalList>
-              <ArticalList list = {NewList} title = {"热门文章"}></ArticalList>
+              <ArticalList list = {TopList} character = {"date"} title = {"最新文章"}></ArticalList>
+              <ArticalList list = {NewList} character = {"view"}  title = {"热门文章"}></ArticalList>
             </Layout>
           </Col>
           <Col span={19}>
