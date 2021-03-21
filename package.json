@@ -29,7 +29,7 @@
     "enquire.js": "^2.1.6",
     "jquery": "^3.5.1",
     "jsonwebtoken": "^8.5.1",
-    "lazysizes": "^4.0.4",
+    "lazysizes": "^5.2.1",
     "masonry-layout": "^4.2.1",
     "object.omit": "^3.0.0",
     "path-to-regexp": "^2.2.1",
