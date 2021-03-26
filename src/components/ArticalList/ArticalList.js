@@ -21,7 +21,7 @@ class ArticalList extends Component {
         <b>{title}</b>
         <ul>
         {list && list.map((item, i) => {
-          return <a  href={"/artical/"+item.Id}><li key={i}>
+          return <a  href={"/artical/"+item.Id} key={i}><li >
                     <div  className="side-list-left">
                         {item.Title.length>16?item.Title.substr(0,16)+"..." :item.Title}
                         {this.showArtical(character,item)}

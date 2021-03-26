@@ -6,12 +6,12 @@ import BaseComponent from 'components/BaseComponent';
 import User from 'components/User';
 import AutoMenu from 'components/AutoMenu';
 import cx from 'classnames';
-import './index.less';
+import ArticalList from 'components/ArticalList';
 import Up from '../../../../utils/blogMenu-master/js/jquery.autoMenu.js';
+import './index.less';
 import '../../../../utils/blogMenu-master/css/jquery.autoMenu.css';
-
+import { callbackify } from 'util';
 const { Content } = Layout;
-
 @connect(({ artical,global }) => ({
   artical,global
 }))
@@ -25,20 +25,24 @@ export default class Artical extends BaseComponent {
     //获取相似文章
     //this.getSimilarArtical();
     //获取推荐文章
-    //this.getTopArtical();
+    this.getTopAndNewList(5);
     this.state = {
       topOne:"h3",
       topTow:"h4",
       menu:"",
       currentId:1
     }
-
   }
   //组件第一次渲染之后执行
   componentDidMount() {
     window.addEventListener('scroll', this.handleScroll);
   }
-
+  getTopAndNewList = size =>{
+    this.props.dispatch({
+      type:'global/getTopAndNewList',
+      payload:size
+    })
+  }
   handleScroll=(event)=>{
     let scrollTop  = document.documentElement.scrollTop;  //滚动条滚动高度
     if(this.props.artical.detail.h){
@@ -54,7 +58,8 @@ export default class Artical extends BaseComponent {
 
   //获取
   render() {
-    const { user,artical } = this.props;
+    const { user,artical,global } = this.props;
+    const { TopList,NewList } = global
     const { detail } = artical;
     const { content ,catalogue} = detail;
     const contentLeft = cx("artical-left");
@@ -63,13 +68,15 @@ export default class Artical extends BaseComponent {
     const contentRight = cx("artical-right"); 
     return (
       <div >
-        <Row className="space0 vh100 ">
-          <Col span={4}>
-            <Col className={contentLeft} className={"content-menu"} style={{backgroundColor:'#262626',color:'white',padding:"15px"}}>
-              <User Userinfo={user}></User>            
+        <Row className="space0">
+          <Col span={5}>
+            <Col className={contentLeft} className={"content-menu "} style={{backgroundColor:'#262626',color:'white'}}>
+              <User Userinfo={user}></User>     
+              <ArticalList  list = {TopList} character = {"date"} title = {"最新文章"}></ArticalList>
+              <ArticalList  list = {NewList} character = {"view"}  title = {"热门文章"}></ArticalList>
             </Col>
           </Col>
-          <Col span={16}>
+          <Col span={15}>
             <Col className={contentLeft} style={{backgroundColor:'',color:'#4D4F53',padding:"15px"}}>
             <Breadcrumb separator=">">
               <Breadcrumb.Item>首页</Breadcrumb.Item>

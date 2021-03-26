@@ -29,8 +29,8 @@ a:focus{outline:none;}
 /*-------main---------*/
 .autoMenu{
 	position: fixed;
-	bottom: 10%;
-	right: 5%;
+	bottom: 30%;
+	right: 8%;
 	z-index: 1;
 	text-align: left;
 }

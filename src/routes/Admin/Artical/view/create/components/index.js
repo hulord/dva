@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'dva';
-import { Layout,  Button, Radio, Form, Input, Card, Empty, Tag, Select} from 'antd';
+import { Layout,  Button, Radio, Form, Input, Card, Empty, Tag, Select, Upload, Modal} from 'antd';
+import Icon from 'components/Icon';
+
 import BaseComponent from 'components/BaseComponent';
 import Editor from 'components/Editor';
 import { antdNotice } from 'components/Notification'
@@ -12,9 +14,30 @@ import './index.less';
 @Form.create()
 export default class Createartical extends BaseComponent {
   state = {
-    html: '',
-      id: "",
+          html: '',
+            id: "",
+      loading: false,
   };
+
+  getBase64 = (img, callback) => {
+    const reader = new FileReader();
+    reader.addEventListener('load', () => callback(reader.result));
+    reader.readAsDataURL(img);
+  }
+  
+  beforeUpload =  (file) =>{
+    const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
+    if (!isJpgOrPng) {
+      message.error('You can only upload JPG/PNG file!');
+    }
+    const isLt2M = file.size / 1024 / 1024 < 2;
+    if (!isLt2M) {
+      message.error('Image must smaller than 2MB!');
+    }
+    return isJpgOrPng && isLt2M;
+  }
+
+
 
   onTextChange = html => {
     this.setState({
@@ -97,6 +120,13 @@ export default class Createartical extends BaseComponent {
     const { form,submitting,create } = this.props;
     const { defaultTags, articalInfo } = create
     const { getFieldDecorator } = form;
+    const { loading, imageUrl } = this.state;
+    const uploadButton = (
+      <div>
+        {loading ? <Icon type="loading" font="iconfont" spin /> :  <Icon type="add" font="iconfont" spin /> }
+        <div style={{ marginTop: 8 }}><Icon type="loading" font="iconfont" spin /></div>
+      </div>
+    );
     var  tags = [];
     { articalInfo && articalInfo.Tags.map(item=>{
         tags.push(item.tag_name)
@@ -115,6 +145,7 @@ export default class Createartical extends BaseComponent {
     return (
       <Layout className="full-layout page dashboard-page">
         <Layout.Content>
+        <Icon type="loading" font="iconfont" spin />
           <Card>
           <Form 
             onSubmit={this.handleSubmit} 
@@ -138,6 +169,19 @@ export default class Createartical extends BaseComponent {
 
             </Form.Item>
 
+            <Form.Item label="封面" name="cover_image">
+                  <Upload
+                  name="avatar"
+                  listType="picture-card"
+                  className="avatar-uploader"
+                  showUploadList={false}
+                  action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                  beforeUpload={this.beforeUpload}
+                  onChange={this.handleChange}
+                >
+                  {imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '100%' }} /> : uploadButton}
+                </Upload>
+            </Form.Item>
             <Form.Item
               label="标签"
               name ="tags"

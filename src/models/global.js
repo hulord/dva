@@ -10,7 +10,9 @@ export default modelEnhance({
     vhistory:[],
     is_index:1,
     collapsed:250,
-    weather:[]
+    weather:[],
+    TopList:[],
+    NewList:[]
   },
   subscriptions: {
     setup({ history, dispatch }) {
@@ -62,7 +64,6 @@ export default modelEnhance({
               });
         })
       }
-
       var today_data = data.data;
        yield put({
          type:'setWeather',
@@ -77,9 +78,14 @@ export default modelEnhance({
            areaChat:tem.slice(0,7)
          }
        })
-   }
+   },
+   *getTopAndNewList({ payload },{ call,put }){
+      const  { status, data} = yield  call(getTopAndNewList, payload);
+      if( status == 0 ) {
+          yield put({type: "setTopAndNew",payload: data})
+      }
+    }
   },
-
   reducers: {
     getMenuSuccess(state, { payload }) {
       return {
@@ -93,7 +99,14 @@ export default modelEnhance({
     },
     setWeather(state,{ payload }){
       return {...state,weather:payload}
-    } 
+    }, 
+    setTopAndNew( state, { payload }){
+      return {
+        ...state,
+        NewList:payload.NewList,
+        TopList:payload.TopList,
+      }
+    },
   },
 });
 
@@ -114,5 +127,9 @@ export async function getMenu(payload) {
 //获取天气信息
 export async function getWeather(payload) {
   return $$.get('/v1/common/getWeather/'+payload);
+}
+//获取文章信息
+export async function getTopAndNewList(payload) {
+  return $$.get('/v1/artical/GetTopAndNewList/'+payload);
 }
 

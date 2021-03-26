@@ -10,6 +10,7 @@ import cx from 'classnames';
 
 
 import './index.less';
+import { go } from 'react-router-redux';
 const { Content } = Layout;
 
 @connect(({ home,global }) => ({
@@ -23,8 +24,8 @@ export default class Home extends BaseComponent {
       page:1,
       listData:[],
     }
-    this.onChange(this.state.page);
     this.getTopAndNewList(5);
+    this.onChange(this.state.page);
   }
   onChange = page =>{
     this.getArticalList(null,page)
@@ -34,7 +35,7 @@ export default class Home extends BaseComponent {
   }
   getTopAndNewList = size =>{
     this.props.dispatch({
-      type:'home/getTopAndNewList',
+      type:'global/getTopAndNewList',
       payload:size
     })
   }
@@ -52,8 +53,10 @@ export default class Home extends BaseComponent {
     })
   }
   render() {
-    const { home,user } = this.props;
-    const { vhistory,TopList, NewList,listData,page,total,keyword } = home;
+    const { home,user,global } = this.props;
+    const { vhistory,listData,page,total,keyword } = home;
+    const { TopList, NewList } = global;
+
     const contentLeft = cx("carousel-content-left");
     const contentRight = cx("carousel-content-right");
 
@@ -66,7 +69,7 @@ export default class Home extends BaseComponent {
               <User Userinfo={user}></User>
               <Vhistory visithis={vhistory}></Vhistory>
               <ArticalList list = {TopList} character = {"date"} title = {"最新文章"}></ArticalList>
-              <ArticalList list = {NewList} character = {"view"}  title = {"热门文章"}></ArticalList>
+              <ArticalList list = {NewList} character = {"view"}  title = {"热门文章"}></ArticalList>    
             </Layout>
           </Col>
           <Col span={19}>

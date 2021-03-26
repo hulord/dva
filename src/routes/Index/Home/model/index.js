@@ -38,7 +38,7 @@ export default modelEnhance({
       const  { status, data, message} = yield  call(getTopAndNewList, payload);
       if( status == 0 ) {
         yield  put({
-          type: 'setTopAndNew',
+          type: '2',
           payload: data
         })
       }
@@ -53,7 +53,6 @@ export default modelEnhance({
           state.vhistory.splice(5,1)
         }
       }else{
-        console.log(historyKey)
         state.vhistory.splice(0,0,payload)
         state.vhistory.splice(historyKey,1)
       }
