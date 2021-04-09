@@ -1,11 +1,12 @@
 import React from 'react';
 import { connect } from 'dva';
-import { Layout,  Button, Radio, Form, Input, Card, Empty, Tag, Select, Upload, Modal} from 'antd';
+import { Layout,  Button, Radio, Form, Input, Card, Empty, Tag, Select, Modal, Upload} from 'antd';
 import Icon from 'components/Icon';
 
 import BaseComponent from 'components/BaseComponent';
 import Editor from 'components/Editor';
 import { antdNotice } from 'components/Notification'
+
 import { getLastParams } from '@/utils/func'
 import './index.less';
 @connect(({ create,loading }) => ({
@@ -14,16 +15,18 @@ import './index.less';
 @Form.create()
 export default class Createartical extends BaseComponent {
   state = {
-          html: '',
-            id: "",
+      html: '',
+      id: "",
       loading: false,
+      imageUrl:"https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
+      fileList:[{
+          uid: '-1',
+          name: 'image.png',
+          status: 'done',
+          url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+      }],
   };
 
-  getBase64 = (img, callback) => {
-    const reader = new FileReader();
-    reader.addEventListener('load', () => callback(reader.result));
-    reader.readAsDataURL(img);
-  }
   
   beforeUpload =  (file) =>{
     const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
@@ -85,7 +88,6 @@ export default class Createartical extends BaseComponent {
           //编辑
           if(this.state.id){
               values.id = parseInt(this.state.id)
-              console.log(values);
               dispatch({
                   type: 'create/update',
                   payload: {
@@ -115,16 +117,38 @@ export default class Createartical extends BaseComponent {
     });
   };
 
+  
+
+
+  //图片删除
+  onRemove = (file)=>{
+      this.setState({fileList:[]})
+  }
+  
+  onChange =  (info) => {
+    console.log(info)
+    this.setState({ fileList: info.fileList });
+    if (info.file.status === 'uploading') {
+      this.setState({ loading: true });
+      return;
+    }
+    if (info.file.status === 'done') {
+      // Get this url from response in real world.
+      var imageUrl = "http://localhost:8080"+info.file.response.data;
+      info.fileList["url"] = imageUrl;
+      this.setState({fileList:info.fileList});
+    }
+  }
 
   render() {
     const { form,submitting,create } = this.props;
     const { defaultTags, articalInfo } = create
     const { getFieldDecorator } = form;
-    const { loading, imageUrl } = this.state;
+    const { loading, imageUrl, fileList } = this.state;
     const uploadButton = (
       <div>
         {loading ? <Icon type="loading" font="iconfont" spin /> :  <Icon type="add" font="iconfont" spin /> }
-        <div style={{ marginTop: 8 }}><Icon type="loading" font="iconfont" spin /></div>
+        <div style={{ marginTop: 8 }}>上传</div>
       </div>
     );
     var  tags = [];
@@ -170,17 +194,16 @@ export default class Createartical extends BaseComponent {
             </Form.Item>
 
             <Form.Item label="封面" name="cover_image">
-                  <Upload
-                  name="avatar"
-                  listType="picture-card"
-                  className="avatar-uploader"
-                  showUploadList={false}
-                  action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                  beforeUpload={this.beforeUpload}
-                  onChange={this.handleChange}
-                >
-                  {imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '100%' }} /> : uploadButton}
+                <Upload
+                    action="/v1/artical/Upload"
+                    listType="picture-card"
+                    fileList={fileList}
+                    onChange = {this.onChange}
+                    onRemove = {this.onRemove}
+                  >
+                  {fileList.length >= 1 ? null : uploadButton}
                 </Upload>
+                <Input type="hidden" value=""/>
             </Form.Item>
             <Form.Item
               label="标签"
