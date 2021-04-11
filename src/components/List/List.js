@@ -33,7 +33,7 @@ class List extends Component {
                    <a  href={"/artical/"+item.id}>
                       <Card
                           hoverable
-                          cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}
+                          cover={<img alt="example" style={{height:"166.74px"}} src={item.images.url} />}
                       >
                           <Meta 
                           bordered={false} 

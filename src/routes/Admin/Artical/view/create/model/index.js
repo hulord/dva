@@ -18,10 +18,10 @@ export default modelEnhance({
       },
     *getone({ payload }, { call, put }) {
        const response = yield call(getArtical, payload);
-       if(response.status == 1){
-         return response;
+       if(response.status == 0){
+          yield  put({type:'setArticalInfo',payload:response.data})
        }
-       yield  put({type:'setArticalInfo',payload:response.data})
+       return response;
     },
     *getTags({ payload },{ call,put }){
       const response = yield call(getTags, payload);

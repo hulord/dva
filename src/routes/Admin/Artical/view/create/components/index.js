@@ -48,7 +48,7 @@ export default class Createartical extends BaseComponent {
     });
   };
 
-  componentDidMount (){
+  componentWillMount (){
     const { dispatch, location } = this.props;
     dispatch({type: 'create/getTags'})
     const id = getLastParams(location.pathname)
@@ -64,6 +64,8 @@ export default class Createartical extends BaseComponent {
         }).then(res=>{
           if (res && res.status == 1){
               antdNotice.error(res.message)
+          }else{
+              this.setState({fileList:[res.data.images]});
           }
         })
     }
@@ -71,7 +73,7 @@ export default class Createartical extends BaseComponent {
   //表单验证
   handleSubmit = e => {
     e.preventDefault();
-    const { form, dispatch, create } = this.props;
+    const { form, dispatch } = this.props;
     form.validateFields({ force: true }, (err, values) => {
       if(!this.state.html){
         antdNotice.error('文章内容不能为空!')
@@ -88,6 +90,7 @@ export default class Createartical extends BaseComponent {
           //编辑
           if(this.state.id){
               values.id = parseInt(this.state.id)
+              values.images = this.state.fileList[0]
               dispatch({
                   type: 'create/update',
                   payload: {
@@ -119,24 +122,23 @@ export default class Createartical extends BaseComponent {
 
   
 
-
   //图片删除
   onRemove = (file)=>{
       this.setState({fileList:[]})
   }
   
   onChange =  (info) => {
-    console.log(info)
-    this.setState({ fileList: info.fileList });
+    this.setState({ fileList: info.fileList});
     if (info.file.status === 'uploading') {
       this.setState({ loading: true });
       return;
     }
     if (info.file.status === 'done') {
-      // Get this url from response in real world.
-      var imageUrl = "http://localhost:8080"+info.file.response.data;
-      info.fileList["url"] = imageUrl;
-      this.setState({fileList:info.fileList});
+      // Get this url from response in real world.\
+      this.setState({fileList:[info.fileList[0].response.data]});
+    }
+    if(info.file.status === 'removed'){
+      this.setState({fileList:[]});
     }
   }
 
@@ -144,7 +146,7 @@ export default class Createartical extends BaseComponent {
     const { form,submitting,create } = this.props;
     const { defaultTags, articalInfo } = create
     const { getFieldDecorator } = form;
-    const { loading, imageUrl, fileList } = this.state;
+    const { loading, imageUrl,  fileList} = this.state;
     const uploadButton = (
       <div>
         {loading ? <Icon type="loading" font="iconfont" spin /> :  <Icon type="add" font="iconfont" spin /> }
@@ -195,7 +197,7 @@ export default class Createartical extends BaseComponent {
 
             <Form.Item label="封面" name="cover_image">
                 <Upload
-                    action="/v1/artical/Upload"
+                    action="/v1/image/Upload?type=artical"
                     listType="picture-card"
                     fileList={fileList}
                     onChange = {this.onChange}
