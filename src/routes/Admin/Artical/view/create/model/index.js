@@ -1,5 +1,5 @@
 import modelEnhance from '@/utils/modelEnhance';
-import { create,getTags, updateArtical, getArtical } from  '../../../service';
+import { create,getTags, updateArtical, getArtical, deleteImg } from  '../../../service';
 
 export default modelEnhance({
   namespace: 'create',
@@ -13,9 +13,9 @@ export default modelEnhance({
     *create({ payload }, { call }) {
       return yield call(create, payload);
     },
-      *update({ payload }, { call }) {
-          return yield call(updateArtical, payload);
-      },
+    *update({ payload }, { call }) {
+        return yield call(updateArtical, payload);
+    },
     *getone({ payload }, { call, put }) {
        const response = yield call(getArtical, payload);
        if(response.status == 0){
@@ -26,6 +26,10 @@ export default modelEnhance({
     *getTags({ payload },{ call,put }){
       const response = yield call(getTags, payload);
       yield put({type: 'setTags',payload: response});
+    },
+    *deleteImg({ payload },{ call }){
+      const response = yield call(deleteImg, payload);
+      return response;
     }
   },
   reducers: {

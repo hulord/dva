@@ -19,12 +19,7 @@ export default class Createartical extends BaseComponent {
       id: "",
       loading: false,
       imageUrl:"https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
-      fileList:[{
-          uid: '-1',
-          name: 'image.png',
-          status: 'done',
-          url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-      }],
+      fileList:[],
   };
 
   
@@ -86,11 +81,11 @@ export default class Createartical extends BaseComponent {
         })
         values.tags = new_tags;
       }
+      values.images = this.state.fileList[0]
       if (!err) {
           //编辑
           if(this.state.id){
               values.id = parseInt(this.state.id)
-              values.images = this.state.fileList[0]
               dispatch({
                   type: 'create/update',
                   payload: {
@@ -124,7 +119,19 @@ export default class Createartical extends BaseComponent {
 
   //图片删除
   onRemove = (file)=>{
-      this.setState({fileList:[]})
+    const { dispatch } = this.props;
+        dispatch({
+          type: 'create/deleteImg',
+          payload: {
+              ...this.state.fileList[0]
+          }
+      }).then((res)=>{
+          
+          if(res.status == 0){
+              this.setState({fileList:[]})
+              antdNotice.error(res.message);
+          }
+      });
   }
   
   onChange =  (info) => {
