@@ -14,3 +14,6 @@ export async function getArtical(payload){
 export async function updateArtical(payload){
   return $$.put('/v1/artical/'+payload.id,payload);
 }
+export async function deleteImg(payload){
+  return $$.del('/v1/image/'+payload.uid,payload);
+}
