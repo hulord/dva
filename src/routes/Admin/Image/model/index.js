@@ -1,10 +1,10 @@
 import modelEnhance from '@/utils/modelEnhance';
 import PageHelper from '@/utils/pageHelper';
-import { create,delArtical } from  '../service';
+import { getAll } from  '../service';
 import { routerRedux } from 'dva/router';
 
 export default modelEnhance({
-  namespace: 'artical',
+  namespace: 'image',
 
   state: {
     pageData: PageHelper.create(),
