@@ -9,17 +9,17 @@ const Tip = DataTable.Tip;
 export const columns = (actions)  =>  [
   {
     title: '标题',
-    name: 'title',
+    name: 'name',
     tableItem: {}
   },
   {
-    title: '作者',
-    name: 'author',
+    title: '类型',
+    name: 'type',
     tableItem: {}
   },
   {
-    title: '阅读数',
-    name: 'view',
+    title: '缩略图',
+    name: 'url',
     tableItem: {
       render: text => <Tag  color="#108ee9">{
         text
@@ -42,11 +42,6 @@ export const columns = (actions)  =>  [
       width: 180,
       render: (text, record) => (
         <DataTable.Oper>
-          <Button tooltip="修改" onClick={(e) => {
-                actions.edit(record.id)
-            }}>
-            <Icon type="edit"/>
-          </Button>
           <Button tooltip="删除" onClick={(e) => {
                 actions.delete(record.id)
           }}>

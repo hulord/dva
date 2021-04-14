@@ -43,27 +43,11 @@ export default class Createartical extends BaseComponent {
     });
   };
 
+
+
   componentWillMount (){
     const { dispatch, location } = this.props;
     dispatch({type: 'create/getTags'})
-    const id = getLastParams(location.pathname)
-      if( id ){
-        this.setState({
-            id
-        });
-        dispatch({
-          type:"create/getone",
-          payload:{
-            id:id
-          }
-        }).then(res=>{
-          if (res && res.status == 1){
-              antdNotice.error(res.message)
-          }else{
-              this.setState({fileList:[res.data.images]});
-          }
-        })
-    }
   }
   //表单验证
   handleSubmit = e => {
@@ -83,24 +67,8 @@ export default class Createartical extends BaseComponent {
       }
       values.images = this.state.fileList[0]
       if (!err) {
-          //编辑
-          if(this.state.id){
-              values.id = parseInt(this.state.id)
               dispatch({
-                  type: 'create/update',
-                  payload: {
-                      ...values
-                  }
-              }).then((res)=>{
-                  antdNotice.error(res.message);
-                  if(res.status == 0){
-                      window.location.href="/admin/artical/list";
-                  }
-              });
-              //新增
-          }else{
-              dispatch({
-                  type: 'create/create',
+                  type: 'image/create',
                   payload: {
                       ...values
                   }
@@ -111,11 +79,8 @@ export default class Createartical extends BaseComponent {
                   }
               });
           }
-      }
     });
   };
-
-  
 
   //图片删除
   onRemove = (file)=>{
@@ -187,7 +152,7 @@ export default class Createartical extends BaseComponent {
             {...formItemLayout}
             >
             <Form.Item
-              label="文章标题"
+              label="图片标题"
               name ="title" 
             >
               {getFieldDecorator('title', {
@@ -195,10 +160,10 @@ export default class Createartical extends BaseComponent {
                   rules: [
                       {
                         required: true,
-                        message: '文章标题不能为空!'
+                        message: '图片标题不能为空!'
                       }
                 ]
-              })(<Input size="large" placeholder="文章标题" />)}
+              })(<Input size="large" placeholder="图片标题" />)}
 
             </Form.Item>
 
@@ -215,10 +180,10 @@ export default class Createartical extends BaseComponent {
                 <Input type="hidden" value=""/>
             </Form.Item>
             <Form.Item
-              label="标签"
-              name ="tags"
+              label="类型"
+              name ="type"
             >
-              {getFieldDecorator('tags', {
+              {getFieldDecorator('type', {
                   initialValue:tags,
               })(
                   <Select
