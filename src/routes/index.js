@@ -42,6 +42,12 @@ import Artical from './Index/Artical';
 /**后台组件 */
 import Adminartical from './Admin/Artical/view/list';
 import Createartical from './Admin/Artical/view/create';
+import DepartmentList from './Admin/Department/view/list';
+import UserList from './Admin/User/view/list';
+import AttendanceList from './Admin/Attendance/view/list';
+import ApplyReview from './Admin/Attendance/view/review';
+import ApplyCreate from './Admin/Attendance/view/create';
+
 
 /**
  *     主路由配置
@@ -71,8 +77,19 @@ const routesConfig = app => [
     indexRoute: '/dashboard',
     childRoutes: [
       Dashboard(app),
+      //文章管理
       Adminartical(app),
       Createartical(app),
+      //部门管理
+      DepartmentList(app),
+      //用户管理
+      UserList(app),
+      //考勤管理
+      AttendanceList(app),
+      //请假审核
+      ApplyReview(app),
+      //请假工单创建
+      ApplyCreate(app),
       Blank(app),
       Toolbar(app),
       Column(),

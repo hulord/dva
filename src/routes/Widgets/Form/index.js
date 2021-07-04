@@ -1,7 +1,7 @@
 import { dynamicWrapper, createRoute } from '@/utils/core';
 
 const routesConfig = app => ({
-  path: '/form',
+  path: '/admin/form',
   title: '表单',
   component: dynamicWrapper(app, [import('./model')], () => import('./components'))
 });

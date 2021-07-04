@@ -65,6 +65,7 @@ export default class list extends BaseComponent {
   render() {
     const { artical, loading, dispatch } = this.props;
     const { pageData, articalList} = artical;
+    console.log(pageData)
     const dataTableProps1 = {
       loading,
       columns: columns({delete:this.delete,edit:this.edit}),

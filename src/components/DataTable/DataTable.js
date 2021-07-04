@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Table, Pagination, Tooltip } from 'antd';
+import { Table, Pagination, Tooltip, template} from 'antd';
 import objectAssign from 'object-assign';
 import isEqual from 'react-fast-compare';
 import { EditableCell } from './Editable';
@@ -282,7 +282,7 @@ class DataTable extends Component {
                 })
               : () => {}
           }
-          scroll={isScroll ? objectAssign({ x: true }) : {}}
+          scroll={isScroll ? objectAssign({ x:1800 }) : {}}
           bodyStyle={{ overflowX: 'auto' }}
           columns={cols}
           pagination={pagination ? paging : false}
