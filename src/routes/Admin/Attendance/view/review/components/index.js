@@ -80,9 +80,6 @@ export default class review extends BaseComponent {
         <Content>
             <DataTable {...dataTableProps1} />
             <div className="footer ptl">
-            <Link to={getPath("/admin/image_operate")}><Button icon="plus" type="primary art_add" >
-              导入
-              </Button></Link>
               <Pagination {...dataTableProps1} />
             </div>
         </Content>

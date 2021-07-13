@@ -9,7 +9,7 @@ const Tip = DataTable.Tip;
 export const columns = (actions)  =>  [
   {
     title: '部门编号',
-    name: 'value',
+    name: 'id',
     tableItem: {}
   },
   {

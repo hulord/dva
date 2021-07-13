@@ -3,6 +3,8 @@ import PageLoading from 'components/Loading/PageLoading';
 import { normal } from 'components/Notification';
 import store from 'cmn-utils/lib/store';
 import $$ from "cmn-utils";
+import localStorage from "localStorage";
+
 
 // 系统通知, 定义使用什么风格的通知，normal或antdNotice
 const notice = normal;
@@ -28,7 +30,7 @@ export default {
     // 每次请求头部都会带着这些参数
     withHeaders: () => (
       {
-        Authorization:store.getStore('Authorization')?"Bearer:"+store.getStore('Authorization'):"",
+        Authorization:localStorage.getItem("Authorization")?"Bearer:" + localStorage.getItem("Authorization"):"",
       }),
 
     /**
@@ -44,9 +46,11 @@ export default {
       if ( status == 0 ) {
           return response;
       } else if( status == 1 ){
-          const token = $$.getStore("Authorization");
+          //const token = $$.getStore("Authorization");
+          const token = localStorage.getItem("Authorization")
           if( token ){
-            $$.removeStore("Authorization");
+            //$$.removeStore("Authorization");
+            localStorage.removeItem("Authorization")
           }
           return response;
       } else {

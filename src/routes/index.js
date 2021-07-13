@@ -74,11 +74,11 @@ const routesConfig = app => [
     path: '/admin',
     title: '系统中心',
     component: BasicLayout,
-    indexRoute: '/dashboard',
+    indexRoute: '/department/list',
     childRoutes: [
+      Adminartical(app),
       Dashboard(app),
       //文章管理
-      Adminartical(app),
       Createartical(app),
       //部门管理
       DepartmentList(app),
@@ -117,16 +117,6 @@ const routesConfig = app => [
       Banner(app),
       LevelRoute(app),
       NotFound()
-    ]
-  },  
-  {
-    path: '',
-    title: '前台页面',
-    indexRoute: '/home',
-    component: IndexLayout,
-    childRoutes: [
-      Home(app),
-      Artical(app),
     ]
   }
 ];

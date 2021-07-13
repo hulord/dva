@@ -7,6 +7,7 @@ import './style/index.less';
 import logoImg from 'assets/images/logo.png';
 import SearchBox from './SearchBox';
 import $$ from 'cmn-utils';
+import localStorage from "localStorage";
 
 /**
  * 其本本局头部区域
@@ -163,7 +164,7 @@ class NavBar extends PureComponent {
           <li className="dropdown">
             <Popover
               placement="bottomRight"
-              title={`WELCOME ${user.userName}`}
+              title={`WELCOME ${localStorage.getItem("user")}`}
               overlayClassName={cx('navbar-popup', { [theme]: !!theme })}
               content={<UserDropDown onUserLoginout = {this.onUserLoginout} />}
               trigger="click"
@@ -171,7 +172,7 @@ class NavBar extends PureComponent {
               <a className="dropdown-toggle">
                 <Badge dot>
                   <Avatar src={require('assets/images/avatar.jpg')}>
-                    {user.userName}
+                    {localStorage.getItem("user")}
                   </Avatar>
                 </Badge>
               </a>
@@ -186,7 +187,7 @@ class NavBar extends PureComponent {
 
 const UserDropDown = props => (
   <ul className="dropdown-menu list-group dropdown-persist">
-    <li className="list-group-item">
+    {/* <li className="list-group-item">
       <a className="animated animated-short fadeInUp">
         <Icon type="mail" /> 信息
         <Badge count={5} className="label" />
@@ -207,7 +208,7 @@ const UserDropDown = props => (
       <a className="animated animated-short fadeInUp">
         <Icon type="ring" /> 通知
       </a>
-    </li>
+    </li> */}
     <li className="list-group-item dropdown-footer">
       <a onClick={() => props.onUserLoginout()}>
         <Icon type="poweroff" /> 退出

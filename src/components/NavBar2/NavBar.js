@@ -143,7 +143,7 @@ class NavBar extends PureComponent {
                     <a className="sidebar-menu-toggle" onClick={toggleSidebarHeader}>
                       <IndexIcon type="ruby" />
                     </a>
-                  </li>
+                      </li>
                 )}
                 <li>
                   <a onClick={onExpandTopBar}>

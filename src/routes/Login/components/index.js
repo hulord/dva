@@ -86,9 +86,9 @@ class Login extends Component {
                 >
                   登录
                 </Button>
-                <div className="new-user">
+                {/* <div className="new-user">
                   新用户？<Link to="/sign/register">现在注册</Link>
-                </div>
+                </div> */}
               </FormItem>
             </Form>
           </Spin>

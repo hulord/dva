@@ -85,7 +85,7 @@ export default class applyCreate extends BaseComponent {
                 }
             }).then((res)=>{
                 if(res.status == 0){
-                    window.location.href="/admin/artical/list";
+                    window.location.href="review";
                 }else{
                     antdNotice.error(res.message);
                 }

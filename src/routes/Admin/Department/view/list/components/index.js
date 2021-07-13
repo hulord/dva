@@ -64,6 +64,7 @@ export default class departmentList extends BaseComponent {
       return;
     }
     if (info.file.status === 'done') {
+      this.getList(1,10);
       // Get this url from response in real world.\
       this.setState({fileList:[info.fileList[0].response.data]});
     }
@@ -95,8 +96,8 @@ export default class departmentList extends BaseComponent {
               onChange = {this.onChange}
               onRemove = {this.onRemove}
                   >
-            <Button >导入</Button>
-            </Upload>
+          <Button icon="plus" type="primary">导入</Button>            
+          </Upload>
               <Pagination {...dataTableProps1} />
             </div>
         </Content>

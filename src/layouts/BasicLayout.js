@@ -12,6 +12,7 @@ import TabsLayout from './TabsLayout';
 import './styles/basic.less';
 import $$ from 'cmn-utils';
 import cx from 'classnames';
+import cookie from 'react-cookies'
 const { Content, Header } = Layout;
 
 /**
@@ -49,10 +50,9 @@ export default class BasicLayout extends React.PureComponent {
       currentMenu: {},
       isMobile: false
     };
-    const Authorization = $$.getStore('Authorization');
     //初始化方法,验证菜单
     props.dispatch({
-      type: 'global/getMenu'
+      type: 'global/getMenu',
     });
   }
 
@@ -69,7 +69,7 @@ export default class BasicLayout extends React.PureComponent {
 
   componentWillMount() {
     // 检查有户是否登录
-    const user = $$.getStore('user');
+    const user = cookie.load('user');
     if (!user) {
       this.props.dispatch(routerRedux.replace('/sign/login'));
     }

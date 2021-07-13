@@ -99,7 +99,7 @@ export default class attendance extends BaseComponent {
               onChange = {this.onChange}
               onRemove = {this.onRemove}
                   >
-            <Button >导入</Button>
+            <Button  icon="plus" type="primary">导入</Button>
           </Upload>
               <Pagination {...dataTableProps1} />
             </div>
